@@ -5,20 +5,23 @@
         <v-toolbar-title>AMS</v-toolbar-title>
       </v-app-bar>
       <v-main>
-        <HelloWorld/>
+       <!-- <HelloWorld/> -->
+       <Student/>
       </v-main>
     </div>    
   </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld';
+//import HelloWorld'./components/HelloWorld';
+import Student from './components/Student';
 
 export default {
   name: 'App',
 
   components: {
-    HelloWorld,
+    //HelloWorld,
+    Student,
   },
 
   data: () => ({
