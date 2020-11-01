@@ -12,11 +12,10 @@
     <v-btn
       class="mx-2"
       fab
-      dark
       small
       color="primary"
     >
-      <v-icon dark>
+      <v-icon >
         mdi-android-messages
       </v-icon>
     </v-btn>
@@ -24,11 +23,10 @@
     <v-btn
       class="mx-2"
       fab
-      dark
       small
       color="primary"
     >
-      <v-icon dark>
+      <v-icon >
         mdi-bell
       </v-icon>
     </v-btn>
