@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Courses from './pages/Courses.vue'
-import Medical from './pages/Medical.vue'
-import Timetable from './pages/Timetable.vue'
+import Courses from './views/Courses.vue'
+import Medical from './views/Medical.vue'
+import Timetable from './views/Timetable.vue'
 
 Vue.use(Router)
 
@@ -24,7 +24,7 @@ export default new Router({
       path: '/Timetable',
       name: 'timetable',
      
-      component: () => import('./pages/Timetable.vue')
+      component: () => import('./views/Timetable.vue')
     }
   ]
 })
