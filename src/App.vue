@@ -1,28 +1,25 @@
 <template>
-  <v-app>
-    <div>
-      <v-app-bar dense>
-        <v-toolbar-title>AMS</v-toolbar-title>
-      </v-app-bar>
-      <v-main>
-        <HelloWorld/>
-      </v-main>
-    </div>    
+  <v-app class="grey lighten-4">
+    <Navbar />
+
+    <v-content class="mx-4 mb-4">
+      <router-view></router-view>
+    </v-content>
+    <Footer />
   </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld';
+import Navbar from './components/Navbar'
+import Footer from './components/Footer'
 
 export default {
+  components: { Navbar, Footer },
   name: 'App',
-
-  components: {
-    HelloWorld,
-  },
-
-  data: () => ({
-    //
-  }),
-};
+  data () {
+    return {
+      
+    }
+  }
+}
 </script>
