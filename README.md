@@ -1,4 +1,4 @@
-# todo-ninja
+# Guide
 
 ## Project setup
 ```
