@@ -1,7 +1,7 @@
 <template>
   <nav>
 
-    <v-toolbar flat app>
+    <!-- <v-toolbar flat app>
       <v-toolbar-side-icon @click="drawer = !drawer" class="grey--text"></v-toolbar-side-icon>
       <v-toolbar-title class="text-uppercase grey--text">
         <span class="font-weight-light">face</span>
@@ -58,7 +58,7 @@
           </v-list-tile-content>
         </v-list-tile>
       </v-list>
-    </v-navigation-drawer>
+    </v-navigation-drawer> -->
 
   </nav>
 </template>
