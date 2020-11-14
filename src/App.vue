@@ -2,19 +2,17 @@
   <v-app class="grey lighten-4">
     <Navbar></Navbar>
 
-    <v-main class="mx-4 mb-4">
+    <v-content>
       <router-view></router-view>
-    </v-main>
+    </v-content>
 
     <v-footer
       absolute
-      class="font-weight-medium"
-    >
+      class="font-weight-medium">
       <v-col
         class="text-center"
-        cols="12"
-      >
-        {{ new Date().getFullYear() }} — <strong>Group 3</strong>
+        cols="12">
+        <strong>@{{ new Date().getFullYear() }} All rights reserved | Design by Group 3</strong>
       </v-col>
     </v-footer>
   </v-app>

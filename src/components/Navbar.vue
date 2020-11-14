@@ -1,54 +1,27 @@
 <template>
   <nav>
-    <v-app-bar>
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+    <v-app-bar flat app dark class="primary">
+      <v-app-bar-nav-icon @click.stop="drawer=!drawer"></v-app-bar-nav-icon>      
       <v-toolbar-title>
-        <!-- add logo here -->
         Attendance Management System
       </v-toolbar-title>
        <v-spacer></v-spacer>
-      <div>
-        <v-btn
-          class="mx-2"
-          fab
-          small
-          color="primary"
-        >
-          <v-icon >mdi-android-messages</v-icon>
+        <v-btn class="mx-2" color="#DBB2FF" fab small>
+          <v-icon small color="black">mdi-android-messages</v-icon>
         </v-btn>
-        <v-btn
-          class="mx-2"
-          fab
-          small
-          color="primary"
-        >
-          <v-icon >mdi-bell</v-icon>
+        <v-btn color="#DBB2FF">
+          <span class="black--text">Sign Out</span>
+          <v-icon color="black" right>mdi-logout-variant</v-icon>
         </v-btn>
-        <v-avatar
-          color="primary"
-          size="49"
-        >
-          <span class="white--text headline">SC</span>
-        </v-avatar>
-      </div>
     </v-app-bar>
-      <v-spacer></v-spacer>
-
-      <v-navigation-drawer 
-        v-model="drawer"
-        absolute
-        temporary
-      >
-        <v-list
-          nav
-          dense
-        >
+      <v-navigation-drawer app clipped v-model="drawer">
+        <v-img src="../assets/logo.png"></v-img>
+        <v-list nav dense>
           <v-list-item
             v-for="item in items"
             v-bind:key="item.title"
             link
-            v-show="item.access=='all' || item.access.includes('lecturer')"
-          >
+            v-show="item.access=='all' || item.access.includes('lecturer')">
               <v-list-item-icon>
                 <v-icon>{{ item.icon }}</v-icon>
               </v-list-item-icon>
