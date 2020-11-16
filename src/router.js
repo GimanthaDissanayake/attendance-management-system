@@ -7,6 +7,7 @@ import ViewAttendance from './views/ViewAttendance.vue'
 import ViewMahapolaEligibility from './views/ViewMahapolaEligibility.vue'
 import ViewDetailedAttendance from './views/ViewDetailedAttendance.vue'
 import ViewAlerts from "./views/ViewAlerts.vue"
+import MarkAttendance from "./views/MarkAttendance.vue"
 
 Vue.use(Router)
 
@@ -48,6 +49,11 @@ export default new Router({
       path: '/ViewAlerts',
       name: 'viewalerts',
       component: ViewAlerts
+    },
+    {
+      path: '/MarkAttendance',
+      name: 'markattendance',
+      component: MarkAttendance
     },
   ]
 })
