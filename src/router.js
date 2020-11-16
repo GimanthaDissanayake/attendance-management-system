@@ -5,6 +5,7 @@ import Medical from './views/Medical.vue'
 import Timetable from './views/Timetable.vue'
 import ViewAttendance from './views/ViewAttendance.vue'
 import ViewMahapolaEligibility from './views/ViewMahapolaEligibility.vue'
+import ViewDetailedAttendance from './views/ViewDetailedAttendance.vue'
 
 Vue.use(Router)
 
@@ -36,6 +37,11 @@ export default new Router({
       path: '/MahapolaEligibility',
       name: 'mahapolaeligibility',
       component: ViewMahapolaEligibility
+    },
+    {
+      path: '/DetailedAttendance',
+      name: 'detailedattendance',
+      component: ViewDetailedAttendance
     },
   ]
 })
