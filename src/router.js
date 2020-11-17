@@ -10,6 +10,7 @@ import ViewDetailedCourse from './views/ViewDetailedCourse.vue'
 import ViewRegisteredStudents from './views/ViewRegisteredStudents.vue'
 import ViewAlerts from "./views/ViewAlerts.vue"
 import MarkAttendance from "./views/MarkAttendance.vue"
+import RegisterUsers from "./views/RegisterUsers.vue"
 
 Vue.use(Router)
 
@@ -66,6 +67,11 @@ export default new Router({
       path: '/MarkAttendance',
       name: 'markattendance',
       component: MarkAttendance
+    },
+    {
+      path: '/RegisterUsers',
+      name: 'registerusers',
+      component: RegisterUsers
     },
   ]
 })
