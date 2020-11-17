@@ -7,6 +7,7 @@ import ViewAttendance from './views/ViewAttendance.vue'
 import ViewMahapolaEligibility from './views/ViewMahapolaEligibility.vue'
 import ViewDetailedAttendance from './views/ViewDetailedAttendance.vue'
 import ViewDetailedCourse from './views/ViewDetailedCourse.vue'
+import ViewRegisteredStudents from './views/ViewRegisteredStudents.vue'
 import ViewAlerts from "./views/ViewAlerts.vue"
 import MarkAttendance from "./views/MarkAttendance.vue"
 
@@ -50,6 +51,11 @@ export default new Router({
       path: '/DetailedCourse',
       name: 'detailedcourse',
       component: ViewDetailedCourse
+    },
+    {
+      path: '/RegisteredStudents',
+      name: 'registeredstudents',
+      component: ViewRegisteredStudents
     },
     {
       path: '/ViewAlerts',
