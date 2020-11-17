@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Courses from './views/Courses.vue'
+import ViewCourses from './views/ViewCourses.vue'
 import Medical from './views/Medical.vue'
 import Timetable from './views/Timetable.vue'
 import ViewAttendance from './views/ViewAttendance.vue'
@@ -14,9 +14,9 @@ export default new Router({
   base: process.env.BASE_URL,
   routes: [
     {
-      path: '/Courses',
-      name: '',
-      component: Courses
+      path: '/ViewCourses',
+      name: 'viewcourses',
+      component: ViewCourses
     },
     {
       path: '/Medical',
