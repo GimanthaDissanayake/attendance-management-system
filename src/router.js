@@ -13,6 +13,8 @@ import MarkAttendance from "./views/MarkAttendance.vue"
 import RegisterUsers from "./views/RegisterUsers.vue"
 import SetMRAP from "./views/SetMRAP.vue"
 import SetMahapolaDuration from "./views/SetMahapolaDuration.vue"
+import ViewMentorGroups from "./views/ViewMentorGroups.vue"
+
 
 Vue.use(Router)
 
@@ -84,6 +86,11 @@ export default new Router({
       path: '/SetMahapolaDuration',
       name: 'setmahapoladuration',
       component: SetMahapolaDuration
+    },
+    {
+      path: '/ViewMentorGroups',
+      name: 'viewmentorgroups',
+      component: ViewMentorGroups
     },
   ]
 })
