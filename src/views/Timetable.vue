@@ -6,35 +6,70 @@
         <p>Week No : 12 </p>
         </v-layout>
 
-              <template>
-  <v-simple-table>
-    <template v-slot:default>
-      <thead>
-        <tr>
-          <th>Time</th>
-          <th>Monday</th>
-           <th>Tuesday</th>
-           <th>Wednesday</th>
-           <th>Thursday</th>
-           <th>Friday</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr
-          v-for="item in tabledata"
-          :key="item.name"
-        >
-          <td>{{ item.Time }}</td>
-          <td>{{ item.Monday }}</td>
-          <td>{{ item.Tuesday }}</td>
-          <td>{{ item.Wednesday }}</td>
-          <td>{{ item.Thursday }}</td>
-          <td>{{ item.Friday }}</td>
-        </tr>
-      </tbody>
+          <template>
+  <v-data-table
+    :headers="headers"
+    :items="item"
+    class="elevation-1"
+    hide-default-footer
+  >
+    <template v-slot:item.Monday="{ item }">
+      <v-btn
+      block
+        depressed
+        large
+        :color="getColor(item.Monday)"
+        dark
+      >
+        {{ item.Monday }}
+      </v-btn>
     </template>
-  </v-simple-table>
- </template>
+    <template v-slot:item.Tuesday="{ item }">
+      <v-btn
+      block
+        depressed
+        large
+        :color="getColor(item.Tuesday)"
+        dark
+      >
+        {{ item.Tuesday }}
+      </v-btn>
+    </template>
+    <template v-slot:item.Wednesday="{ item }">
+      <v-btn
+      block
+        depressed
+        large
+        :color="getColor(item.Wednesday)"
+        dark
+      >
+        {{ item.Wednesday }}
+      </v-btn>
+    </template>
+    <template v-slot:item.Thursday="{ item }">
+      <v-btn
+      block
+        depressed
+        large
+        :color="getColor(item.Thursday)"
+        dark
+      >
+        {{ item.Thursday }}
+      </v-btn>
+    </template>
+    <template v-slot:item.Friday="{ item }">
+      <v-btn
+      block
+        depressed
+        large
+        :color="getColor(item.Friday)"
+        dark
+      >
+        {{ item.Friday }}
+      </v-btn>
+    </template>
+ </v-data-table>
+</template>
         
 </div>
 </template>
@@ -43,35 +78,105 @@
   export default {
     data () {
       return {
-      
-        tabledata: [
+        headers: [
           {
-             Time: "8 - 9",
-            Monday : 'CSC1142',
-            Tuesday: "",
-            Wednesday: "MAT2233",
-            Thursday: "",
-            Friday: "PHY3145"
+            text: 'Time',
+            align: 'start',
+            sortable: false,
+            value: 'name',
+          },
+          { text: 'Monday', value: 'Monday' },
+          { text: 'Tuesday', value: 'Tuesday' },
+          { text: 'Wednesday', value: 'Wednesday' },
+          { text: 'Thursday', value: 'Thursday' },
+          { text: 'Friday', value: 'Friday' },
+        ],
+        item: [
+          {
+            name: '08 - 09',
+            Monday: '',
+            Tuesday: 'CSC1133',
+            Wednesday: '',
+            Thursday: '',
+            Friday: 'CSC1122',
           },
           {
-             Time: "9 - 10",
-            Monday : '',
-            Tuesday: "MAT1122",
-            Wednesday: "MAT2233",
-            Thursday: "",
-            Friday: "PHY3145"
+            name: '08 - 09',
+            Monday: 'CSC1133',
+            Tuesday: '',
+            Wednesday: 'CSC1133',
+            Thursday: 'MAT1122',
+            Friday: '',
           },
           {
-            Time: "10 - 11",
-            Monday : '',
-            Tuesday: "MAT1122",
-            Wednesday: "MAT2233",
-            Thursday: "CSC3244",
-            Friday: "PHY3145"
+            name: '08 - 09',
+            Monday: 'CSC1122',
+            Tuesday: '',
+            Wednesday: 'CSC1144',
+            Thursday: 'CSC1122',
+            Friday: 'CSC1122',
+          },
+          {
+            name: '08 - 09',
+            Monday: 'CSC1144',
+            Tuesday: 'CSC1133',
+            Wednesday: '',
+            Thursday: 'MAT1122',
+            Friday: '',
+          },
+           {
+            name: '08 - 09',
+            Monday: '',
+            Tuesday: 'CSC1133',
+            Wednesday: '',
+            Thursday: '',
+            Friday: 'CSC1122',
+          },
+          {
+            name: '08 - 09',
+            Monday: 'CSC1133',
+            Tuesday: '',
+            Wednesday: 'CSC1133',
+            Thursday: 'MAT1122',
+            Friday: '',
+          },
+          {
+            name: '08 - 09',
+            Monday: 'CSC1122',
+            Tuesday: '',
+            Wednesday: 'CSC1144',
+            Thursday: 'CSC1122',
+            Friday: 'CSC1122',
+          },
+          {
+            name: '08 - 09',
+            Monday: 'CSC1144',
+            Tuesday: 'CSC1133',
+            Wednesday: '',
+            Thursday: 'MAT1122',
+            Friday: '',
           },
         ],
-
       }
+    },
+    
+    methods: {
+      getColor (Monday) {
+        if (Monday == "CSC1133") return 'red'
+        else if(Monday == "CSC1122") return 'blue'
+        else if(Monday == "CSC1144") return 'yellow'
+        else return 'white'
+      },
     },
   }
 </script>
+
+<style scoped>
+.v-data-table
+  /deep/
+  tbody
+  /deep/
+  tr:hover:not(.v-data-table__expanded__content) {
+  background:white !important;
+}
+</style>
