@@ -12,6 +12,7 @@ import ViewAlerts from "./views/ViewAlerts.vue"
 import MarkAttendance from "./views/MarkAttendance.vue"
 import RegisterUsers from "./views/RegisterUsers.vue"
 import SetMRAP from "./views/SetMRAP.vue"
+import SetMahapolaDuration from "./views/SetMahapolaDuration.vue"
 
 Vue.use(Router)
 
@@ -75,9 +76,14 @@ export default new Router({
       component: RegisterUsers
     },
     {
-      path: '/SETMRAP',
+      path: '/SetMRAP',
       name: 'setmrap',
       component: SetMRAP
+    },
+    {
+      path: '/SetMahapolaDuration',
+      name: 'setmahapoladuration',
+      component: SetMahapolaDuration
     },
   ]
 })
