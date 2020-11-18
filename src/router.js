@@ -15,6 +15,7 @@ import SetMRAP from "./views/SetMRAP.vue"
 import SetMahapolaDuration from "./views/SetMahapolaDuration.vue"
 import ViewMentorGroups from "./views/ViewMentorGroups.vue"
 import ViewStudentDetails from "./views/ViewStudentDetails.vue"
+import ViewAttendanceSheet from "./views/ViewAttendanceSheet.vue"
 
 
 Vue.use(Router)
@@ -97,6 +98,11 @@ export default new Router({
       path: '/ViewStudentDetails',
       name: 'viewstudentdetails',
       component: ViewStudentDetails
+    },
+    {
+      path: '/ViewAttendanceSheet',
+      name: 'viewattendancesheet',
+      component: ViewAttendanceSheet
     },
   ]
 })
