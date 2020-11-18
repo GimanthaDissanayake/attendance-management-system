@@ -17,6 +17,7 @@ import ViewMentorGroups from './views/ViewMentorGroups.vue'
 import ViewStudentDetails from './views/ViewStudentDetails.vue'
 import ViewAttendanceSheet from './views/ViewAttendanceSheet.vue'
 import SendAlert from './views/SendAlert.vue'
+import ViewAllStudents from './views/ViewAllStudents.vue'
 
 
 
@@ -110,6 +111,11 @@ export default new Router({
       path: '/SendAlert',
       name: 'sendalert',
       component: SendAlert
+    },
+    {
+      path: '/ViewAllStudents',
+      name: 'viewallstudents',
+      component: ViewAllStudents
     },
   ]
 })

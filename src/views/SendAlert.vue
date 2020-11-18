@@ -1,6 +1,6 @@
 <template>
     <v-container>
-        <p class='text-h5'>Attendance Sheet</p> 
+        <p class='text-h5'>Send Alert</p> 
 
         <v-card>
             <v-container>
