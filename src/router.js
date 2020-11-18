@@ -8,14 +8,16 @@ import ViewMahapolaEligibility from './views/ViewMahapolaEligibility.vue'
 import ViewDetailedAttendance from './views/ViewDetailedAttendance.vue'
 import ViewDetailedCourse from './views/ViewDetailedCourse.vue'
 import ViewRegisteredStudents from './views/ViewRegisteredStudents.vue'
-import ViewAlerts from "./views/ViewAlerts.vue"
-import MarkAttendance from "./views/MarkAttendance.vue"
-import RegisterUsers from "./views/RegisterUsers.vue"
-import SetMRAP from "./views/SetMRAP.vue"
-import SetMahapolaDuration from "./views/SetMahapolaDuration.vue"
-import ViewMentorGroups from "./views/ViewMentorGroups.vue"
-import ViewStudentDetails from "./views/ViewStudentDetails.vue"
-import ViewAttendanceSheet from "./views/ViewAttendanceSheet.vue"
+import ViewAlerts from './views/ViewAlerts.vue'
+import MarkAttendance from './views/MarkAttendance.vue'
+import RegisterUsers from './views/RegisterUsers.vue'
+import SetMRAP from './views/SetMRAP.vue'
+import SetMahapolaDuration from './views/SetMahapolaDuration.vue'
+import ViewMentorGroups from './views/ViewMentorGroups.vue'
+import ViewStudentDetails from './views/ViewStudentDetails.vue'
+import ViewAttendanceSheet from './views/ViewAttendanceSheet.vue'
+import SendAlert from './views/SendAlert.vue'
+
 
 
 Vue.use(Router)
@@ -103,6 +105,11 @@ export default new Router({
       path: '/ViewAttendanceSheet',
       name: 'viewattendancesheet',
       component: ViewAttendanceSheet
+    },
+    {
+      path: '/SendAlert',
+      name: 'sendalert',
+      component: SendAlert
     },
   ]
 })
