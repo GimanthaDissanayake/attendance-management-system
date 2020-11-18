@@ -14,6 +14,7 @@ import RegisterUsers from "./views/RegisterUsers.vue"
 import SetMRAP from "./views/SetMRAP.vue"
 import SetMahapolaDuration from "./views/SetMahapolaDuration.vue"
 import ViewMentorGroups from "./views/ViewMentorGroups.vue"
+import ViewStudentDetails from "./views/ViewStudentDetails.vue"
 
 
 Vue.use(Router)
@@ -91,6 +92,11 @@ export default new Router({
       path: '/ViewMentorGroups',
       name: 'viewmentorgroups',
       component: ViewMentorGroups
+    },
+    {
+      path: '/ViewStudentDetails',
+      name: 'viewstudentdetails',
+      component: ViewStudentDetails
     },
   ]
 })
