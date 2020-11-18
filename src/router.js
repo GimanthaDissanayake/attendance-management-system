@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import ViewCourses from './views/ViewCourses.vue'
-import Medical from './views/Medical.vue'
 import Timetable from './views/Timetable.vue'
 import ViewAttendance from './views/ViewAttendance.vue'
 import ViewMahapolaEligibility from './views/ViewMahapolaEligibility.vue'
@@ -31,11 +30,6 @@ export default new Router({
       path: '/ViewCourses',
       name: 'viewcourses',
       component: ViewCourses
-    },
-    {
-      path: '/Medical',
-      name: 'medical',
-      component: Medical
     },
     {
       path: '/Timetable',
