@@ -69,80 +69,14 @@
 </template>
 
 <script>
+import { viewDetailedCourse } from "../data/data";
 export default {
     data() {
         return {
-            course: {
-                course_code: 'CSC1142',
-                course_title: 'System Analysis and Design',
-                overall_attendance_percentage: '85%'
-            },
-            headers: [
-                { text: 'Date', align: 'start',  value: 'date'},
-                { text: 'Attendance Percentage', value: 'percentage'},
-            ],
-            dates: [
-                {
-                    date: '12.01.2020',
-                    percentage: '100%'
-                },
-                {
-                    date: '19.01.2020',
-                    percentage: '90%'
-                },
-                {
-                    date: '26.01.2020',
-                    percentage: '100%'
-                },
-                {
-                    date: '02.02.2020',
-                    percentage: '95%'
-                },
-                {
-                    date: '09.02.2020',
-                    percentage: '80%'
-                },
-                {
-                    date: '16.02.2020',
-                    percentage: '40%'
-                },
-                {
-                    date: '23.02.2020',
-                    percentage: '100%'
-                },
-                {
-                    date: '12.01.2020',
-                    percentage: '100%'
-                },
-                {
-                    date: '12.01.2020',
-                    percentage: '60%'
-                },
-                {
-                    date: '12.01.2020',
-                    percentage: '80%'
-                },
-                {
-                    date: '12.01.2020',
-                    percentage: '78%'
-                },
-                {
-                    date: '12.01.2020',
-                    percentage: '100%'
-                },
-                {
-                    date: '12.01.2020',
-                    percentage: '90%'
-                },
-                {
-                    date: '12.01.2020',
-                    percentage: '50%'
-                },
-                {
-                    date: '12.01.2020',
-                    percentage: '60%'
-                },
-            ],
+            course:viewDetailedCourse.course,
+            headers:viewDetailedCourse.headers,
+            dates:viewDetailedCourse.dates,
+            
         }
     },
 }

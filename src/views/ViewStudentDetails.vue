@@ -116,48 +116,14 @@
 </template>
 
 <script>
+import { viewStudentDetails } from "../data/data";
 export default {
     data() {
         return{
-            student:{
-                name: 'Kamal Perera',
-                registration_no: 'SC/2021/12291',
-                degree_program: 'BCS',
-                level: 'Level 3',
-                mentor: 'Kasun Sirisena'
-            },
-            headers: [
-                { text: 'Course Code', align: 'start',  value: 'course_code'},
-                { text: 'Course Name', value: 'course_name'},
-                { text: 'Attendance Percentage', value: 'attendance_percentage'},
-            ],
-            courses: [
-                {
-                    course_code: 'CSC1124',
-                    course_name: 'Internet programming',
-                    attendance_percentage: 50
-                },
-                 {
-                    course_code: 'CSC1333',
-                    course_name: 'Programming techniques',
-                    attendance_percentage: 60
-                },
-                 {
-                    course_code: 'CSC1124',
-                    course_name: 'Group Project',
-                    attendance_percentage: 100
-                },
-                 {
-                    course_code: 'CSC1124',
-                    course_name: 'Internet programming',
-                    attendance_percentage: 75
-                },
-                 {
-                    course_code: 'CSC1124',
-                    course_name: 'Internet programming',
-                    attendance_percentage: 90
-                },
-            ]
+            student:viewStudentDetails.student,
+            headers: viewStudentDetails.headers,
+            courses: viewStudentDetails.courses
+            
         }
     },
      methods: {

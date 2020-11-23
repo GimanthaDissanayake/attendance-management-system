@@ -151,7 +151,7 @@
             <br>
             <v-data-table
               :headers="headers"
-              :items="desserts"
+              :items="data"
               class="elevation-1"
             >
               <template v-slot:item.remove="{ item }">
@@ -194,49 +194,14 @@
 </template>
 
 <script>
-  export default {
-    
-    data: () => ({
-      items: ['Foo', 'Bar', 'Fizz', 'Buzz'],
-       e1: 1,
-    }),
-  }
-</script>
-
-<script>
+import { markAttendance } from "../data/data";
   export default {
     data () {
       return {
-        items: ['Foo', 'Bar', 'Fizz', 'Buzz'],
+        headers: markAttendance.headers,
+        data: markAttendance.data,
+        items: markAttendance.items,
        e1: 1,
-        headers: [
-          {
-            text: 'Registration no',
-            align: 'start',
-            sortable: false,
-            value: 'reg_no',
-          },
-          { text: 'Name', value: 'name' },
-          { text: 'Remove from list', value: 'remove' },
-          
-        ],
-        desserts: [
-          {
-            reg_no: 'SC/2017/10303',
-            name: "Heshan Jayasinghe",
-            remove: 'remove',
-         
-           
-          },
-          {
-            reg_no: 'SC/2017/10285',
-            name: 'Gimantha Dissanayake',
-            remove: 'remove',
-           
-    
-          },
-        
-        ],
       }
     },
    

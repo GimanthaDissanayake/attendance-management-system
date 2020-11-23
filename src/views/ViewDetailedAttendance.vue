@@ -96,83 +96,14 @@
 </template>
 
 <script>
+import { viewDetailedAttendance } from "../data/data";
 export default {
     data() {
         return{
-            student:{
-                name: 'Kamal Perera',
-                registration_no: 'SC/2021/12291',
-                degree_program: 'BCS',
-                course_code: 'CSC1142',
-                course_title: 'System Analysis and Design',
-                attendance_percentage: '85%'
-            },
-            headers: [
-                { text: 'Date', align: 'start',  value: 'date'},
-                { text: 'Attendance Status', value: 'status'},
-            ],
-            dates: [
-                {
-                    date: '12.01.2020',
-                    status: 'present'
-                },
-                {
-                    date: '19.01.2020',
-                    status: 'present'
-                },
-                {
-                    date: '26.01.2020',
-                    status: 'present'
-                },
-                {
-                    date: '02.02.2020',
-                    status: 'present'
-                },
-                {
-                    date: '09.02.2020',
-                    status: 'absent'
-                },
-                {
-                    date: '16.02.2020',
-                    status: 'present'
-                },
-                {
-                    date: '23.02.2020',
-                    status: 'present'
-                },
-                {
-                    date: '12.01.2020',
-                    status: 'present'
-                },
-                {
-                    date: '12.01.2020',
-                    status: 'present'
-                },
-                {
-                    date: '12.01.2020',
-                    status: 'present'
-                },
-                {
-                    date: '12.01.2020',
-                    status: 'present'
-                },
-                {
-                    date: '12.01.2020',
-                    status: 'present'
-                },
-                {
-                    date: '12.01.2020',
-                    status: 'present'
-                },
-                {
-                    date: '12.01.2020',
-                    status: 'present'
-                },
-                {
-                    date: '12.01.2020',
-                    status: 'present'
-                },
-            ]
+            student:viewDetailedAttendance.student,
+            headers:viewDetailedAttendance.headers,
+            dates:viewDetailedAttendance.dates,
+            
         }
     },
     methods: {

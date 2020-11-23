@@ -53,6 +53,7 @@
 </template>
 
 <script>
+import { viewMentorGroups } from "../data/data";
   export default {
     data () {
       return {
@@ -60,35 +61,10 @@
         searchName: '',
         filteredStudents: null,
         selectedLevel: '',
-        headers: [
-            { text: 'Registration Number', align: 'start',  value: 'registration_no'},
-            { text: 'Student Name', value: 'name'},
-        ],
-        students: [
-            {
-                registration_no: 'SC/2017/10030',
-                name: 'Heshan Jayasinghe',
-                level: 'Level 3',
-            },
-            {
-                registration_no: 'SC/2017/10031',
-                name: 'Gimantha Dissanayake',
-                level: 'Level 3',
-            },
-            {
-                registration_no: 'SC/2017/10032',
-                name: 'Ramesh Shanilka',
-                level: 'Level 2',
-            },
-            {
-                registration_no: 'SC/2017/10033',
-                name: 'Dinuka Heshan',
-                level: 'Level 1',
-            },
-        ],
-        levels: [
-          'Level 1', 'Level 2', 'Level 3'
-        ],
+        headers: viewMentorGroups.headers,
+        students: viewMentorGroups.students,
+        levels: viewMentorGroups.levels,
+       
       }
     },
     methods: {

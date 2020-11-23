@@ -42,23 +42,23 @@ export default new Router({
       component: ViewAttendance
     },
     {
-      path: '/MahapolaEligibility',
-      name: 'mahapolaeligibility',
+      path: '/ViewMahapolaEligibility',
+      name: 'viewmahapolaeligibility',
       component: ViewMahapolaEligibility
     },
     {
-      path: '/DetailedAttendance',
-      name: 'detailedattendance',
+      path: '/ViewDetailedAttendance',
+      name: 'viewdetailedattendance',
       component: ViewDetailedAttendance
     },
     {
-      path: '/DetailedCourse',
-      name: 'detailedcourse',
+      path: '/ViewDetailedCourse',
+      name: 'viewdetailedcourse',
       component: ViewDetailedCourse
     },
     {
-      path: '/RegisteredStudents',
-      name: 'registeredstudents',
+      path: '/ViewRegisteredStudents',
+      name: 'viewregisteredstudents',
       component: ViewRegisteredStudents
     },
     {

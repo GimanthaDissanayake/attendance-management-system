@@ -32,42 +32,13 @@
 </template>
 
 <script>
+import { viewAttendance } from "../data/data";
 export default {
     data () {
       return {
         search: '',
-        headers: [
-            { text: 'Course Code', align: 'start',  value: 'course_code'},
-            { text: 'Course Title', value: 'course_title'},
-            { text: 'Attendance Percentage', value:'attendance_percentage'},
-        ],
-        courses: [
-            {
-                course_code: 'CSC3113',
-                course_title: 'Group Project',
-                attendance_percentage: '100',
-            },
-            {
-                course_code: 'CSC3122',
-                course_title: 'E-commerce and Professional Practice',
-                attendance_percentage: '88',
-            },
-            {
-                course_code: 'CSC3132',
-                course_title: 'Data Warehousing and Data mining	',
-                attendance_percentage: '95',
-            },
-            {
-                course_code: 'CSC3142',
-                course_title: 'Internet Services and Protocols	',
-                attendance_percentage: '80',
-            },
-            {
-                course_code: 'CSC3172',
-                course_title: 'Distributed Systems',
-                attendance_percentage: '70',
-            },
-        ]
+        headers:viewAttendance.headers,
+        courses:viewAttendance.courses,
       }
     },
     methods: {
