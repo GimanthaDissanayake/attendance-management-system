@@ -19,37 +19,45 @@
         :items="courses"
         :search="search"
         >
-            <template v-slot:item.attendance_percentage="{ item }">
+            <!-- <template v-slot:item.attendance_percentage="{ item }">
                 <v-chip
                 :color="getColor(item.attendance_percentage)"
                 dark>
                     {{ item.attendance_percentage }}
                 </v-chip>
-            </template>
+            </template> -->
         </v-data-table>
     </v-card>
   </v-container>
 </template>
 
 <script>
-import { viewAttendance } from "../data/data";
+import axios from 'axios';
+//import { viewAttendance } from "../data/data";
 export default {
     data () {
       return {
         search: '',
-        headers:viewAttendance.headers,
-        courses:viewAttendance.courses,
+        headers: [
+          { text: 'Course Code', align: 'start',  value: 'course_code'},
+          { text: 'Course Title', value: 'course_title'},
+          { text: 'Department Id' , value: "department_id"}
+          
+        ],
+        courses: [],
+       
       }
     },
-    methods: {
-        getColor(attendance_percentage){
-            if(attendance_percentage < 80) return 'red'
-            else if(attendance_percentage > 80) return 'green'
-            else return 'orange'
-        }
-    }
+    mounted() {
+     axios.get('http://localhost:3030/api/course/')
+       .then((response) =>{
+       this.courses = response.data.courses;
+    })
+     .catch((error) => {
+       console.log(err);
+     });
+
+   },
+   
 }
 </script>
-
-<style>
-</style>
