@@ -52,48 +52,17 @@
 </template>
 
 <script>
+import { viewAllStudents } from "../data/data";
 export default {
     data() {
         return {
             search: '',
             filteredStudents: null,
             selectedLevel: '',
-            headers: [
-                { text: 'Registration Number', align: 'start',  value: 'registration_no'},
-                { text: 'Name', value: 'name'},
-            ],
-            students: [
-                {
-                    registration_no: 'SC/2017/10030',
-                    name: 'Heshan Jayasinghe',
-                    level: 'Level 3',
-                    degree: 'BCS'
-                },
-                {
-                    registration_no: 'SC/2017/10031',
-                    name: 'Gimantha Dissanayake',
-                    level: 'Level 3',
-                    degree: 'BCS'
-                },
-                {
-                    registration_no: 'SC/2017/10032',
-                    name: 'Ramesh Shanilka',
-                    level: 'Level 2',
-                    degree: 'BCS'
-                },
-                {
-                    registration_no: 'SC/2017/10033',
-                    name: 'Dinuka Heshan',
-                    level: 'Level 1',
-                    degree: 'BSC'
-                },
-            ],
-            levels: [
-                'Level 1', 'Level 2', 'Level 3'
-            ],
-            degrees: [
-                'BSC', 'BCS'
-            ],
+           headers:viewAllStudents.headers,
+           students:viewAllStudents.students,
+           levels:viewAllStudents.levels,
+           degrees:viewAllStudents.degrees,
         }
     },
     methods: {

@@ -50,6 +50,13 @@
                                     {{ item.percentage }}
                                 </v-chip>
                             </template>
+                            <template v-slot:item.alert="{ item }">
+                                <v-btn
+                                    :color="red"
+                                >
+                                    {{ item.alert }}
+                                </v-btn>
+                            </template>
                         </v-data-table>
                     </v-card>
                 </v-col>
@@ -60,47 +67,15 @@
 </template>
 
 <script>
+import { viewRegisteredStudents } from '../data/data';
 export default {
     data() {
         return {
             search: '',
-            course: {
-                course_code: 'CSC1142',
-                course_title: 'System Analysis and Design',
-                overall_attendance_percentage: '85%'
-            },
-            students: [
-                {
-                    registration_no : 'SC/2017/10100',
-                    name: 'A.B.C silva',
-                    percentage: '80'
-                },
-                {
-                    registration_no : 'SC/2017/10200',
-                    name: 'A.B.C silva',
-                    percentage: '80'
-                },
-                {
-                    registration_no : 'SC/2017/10100',
-                    name: 'A.B.C silva',
-                    percentage: '100'
-                },
-                {
-                    registration_no : 'SC/2017/10100',
-                    name: 'A.B.C silva',
-                    percentage: '80'
-                },
-                {
-                    registration_no : 'SC/2017/10100',
-                    name: 'A.B.C silva',
-                    percentage: '70'
-                },
-            ],
-            headers: [
-                { text: 'Registration Number', align: 'start',  value: 'registration_no'},
-                { text: 'Name', value: 'name'},
-                { text: 'Attendance Percentage', value: 'percentage'}
-            ]
+            course:viewRegisteredStudents.course,
+            students: viewRegisteredStudents.students,
+            headers:viewRegisteredStudents.headers,
+            
         }
     },
     methods: {

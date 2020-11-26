@@ -19,66 +19,45 @@
         :items="courses"
         :search="search"
         >
-            <template v-slot:item.attendance_percentage="{ item }">
+            <!-- <template v-slot:item.attendance_percentage="{ item }">
                 <v-chip
                 :color="getColor(item.attendance_percentage)"
                 dark>
                     {{ item.attendance_percentage }}
                 </v-chip>
-            </template>
+            </template> -->
         </v-data-table>
     </v-card>
   </v-container>
 </template>
 
 <script>
+import axios from 'axios';
+//import { viewAttendance } from "../data/data";
 export default {
     data () {
       return {
         search: '',
         headers: [
-            { text: 'Course Code', align: 'start',  value: 'course_code'},
-            { text: 'Course Title', value: 'course_title'},
-            { text: 'Attendance Percentage', value:'attendance_percentage'},
+          { text: 'Course Code', align: 'start',  value: 'course_code'},
+          { text: 'Course Title', value: 'course_title'},
+          { text: 'Department Id' , value: "department_id"}
+          
         ],
-        courses: [
-            {
-                course_code: 'CSC3113',
-                course_title: 'Group Project',
-                attendance_percentage: '100',
-            },
-            {
-                course_code: 'CSC3122',
-                course_title: 'E-commerce and Professional Practice',
-                attendance_percentage: '88',
-            },
-            {
-                course_code: 'CSC3132',
-                course_title: 'Data Warehousing and Data mining	',
-                attendance_percentage: '95',
-            },
-            {
-                course_code: 'CSC3142',
-                course_title: 'Internet Services and Protocols	',
-                attendance_percentage: '80',
-            },
-            {
-                course_code: 'CSC3172',
-                course_title: 'Distributed Systems',
-                attendance_percentage: '70',
-            },
-        ]
+        courses: [],
+       
       }
     },
-    methods: {
-        getColor(attendance_percentage){
-            if(attendance_percentage < 80) return 'red'
-            else if(attendance_percentage > 80) return 'green'
-            else return 'orange'
-        }
-    }
+    mounted() {
+     axios.get('http://localhost:3030/api/course/')
+       .then((response) =>{
+       this.courses = response.data.courses;
+    })
+     .catch((error) => {
+       console.log(err);
+     });
+
+   },
+   
 }
 </script>
-
-<style>
-</style>

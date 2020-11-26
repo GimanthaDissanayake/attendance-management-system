@@ -20,27 +20,14 @@
 </template>
 
 <script>
+import { viewMahapolaEligibility } from "../data/data";
 export default {
     data(){
         return{
             eligibility: false,
-            headers: [
-                { text: 'Course Code', align: 'start',  value: 'course_code'},
-                { text: 'Course Title', value: 'course_title'},
-                { text: 'Attendance Percentage', value:'attendance_percentage'},
-            ],
-            courses: [
-                {
-                    course_code: 'CSC3113',
-                    course_title: 'Group Project',
-                    attendance_percentage: '79',
-                },
-                {
-                    course_code: 'CSC3122',
-                    course_title: 'E-commerce and Professional Practice',
-                    attendance_percentage: '68',
-                },
-            ]
+            headers: viewMahapolaEligibility.headers,
+            courses: viewMahapolaEligibility.courses,
+            
         }
     },
 }

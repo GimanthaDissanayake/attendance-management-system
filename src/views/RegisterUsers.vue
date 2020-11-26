@@ -138,16 +138,12 @@
 </template>
 
 <script>
+import { registerUsers } from "../data/data";
   export default {
     data () {
       return {
+        student:registerUsers.student,
         e1: 1,
-        student:{
-                name: 'Kamal Perera',
-                registration_no: 'SC/2021/12291',
-                level: '3',
-                image_status: 'Registered',
-            },
       }
     },
   }

@@ -71,88 +71,12 @@
 </template>
 
 <script>
+  import { timetable } from "../data/data";
   export default {
     data () {
       return {
-        headers: [
-          {
-            text: 'Time',
-            align: 'start',
-            sortable: false,
-            value: 'name',
-          },
-          { text: 'Monday', value: 'Monday' },
-          { text: 'Tuesday', value: 'Tuesday' },
-          { text: 'Wednesday', value: 'Wednesday' },
-          { text: 'Thursday', value: 'Thursday' },
-          { text: 'Friday', value: 'Friday' },
-        ],
-        item: [
-          {
-            name: '08 - 09',
-            Monday: '',
-            Tuesday: 'CSC1133',
-            Wednesday: '',
-            Thursday: '',
-            Friday: 'CSC1122',
-          },
-          {
-            name: '08 - 09',
-            Monday: 'CSC1133',
-            Tuesday: '',
-            Wednesday: 'CSC1133',
-            Thursday: 'MAT1122',
-            Friday: '',
-          },
-          {
-            name: '08 - 09',
-            Monday: 'CSC1122',
-            Tuesday: '',
-            Wednesday: 'CSC1144',
-            Thursday: 'CSC1122',
-            Friday: 'CSC1122',
-          },
-          {
-            name: '08 - 09',
-            Monday: 'CSC1144',
-            Tuesday: 'CSC1133',
-            Wednesday: '',
-            Thursday: 'MAT1122',
-            Friday: '',
-          },
-           {
-            name: '08 - 09',
-            Monday: '',
-            Tuesday: 'CSC1133',
-            Wednesday: '',
-            Thursday: '',
-            Friday: 'CSC1122',
-          },
-          {
-            name: '08 - 09',
-            Monday: 'CSC1133',
-            Tuesday: '',
-            Wednesday: 'CSC1133',
-            Thursday: 'MAT1122',
-            Friday: '',
-          },
-          {
-            name: '08 - 09',
-            Monday: 'CSC1122',
-            Tuesday: '',
-            Wednesday: 'CSC1144',
-            Thursday: 'CSC1122',
-            Friday: 'CSC1122',
-          },
-          {
-            name: '08 - 09',
-            Monday: 'CSC1144',
-            Tuesday: 'CSC1133',
-            Wednesday: '',
-            Thursday: 'MAT1122',
-            Friday: '',
-          },
-        ],
+        headers : timetable.headers,
+        item: timetable.item,
       }
     },
     

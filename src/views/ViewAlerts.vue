@@ -37,12 +37,11 @@
 </template>
 
 <script>
+  import { viewAlerts } from "../data/data";
+
   export default {
     data: () => ({
-      cards: [
-            {date:'April 11', from: 'Heshan Jayasinghe' , msg: 'this is the first msg'},  
-            {date:'March 05', from: 'Gimantha Dissanayake' , msg: 'this is the second msg'}
-        ],
+     cards : viewAlerts.cards,
       drawer: null,
     }),
   }

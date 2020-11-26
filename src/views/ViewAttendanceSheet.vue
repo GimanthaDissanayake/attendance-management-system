@@ -55,47 +55,13 @@
 </template>
 
 <script>
+import { viewAttendanceSheet } from "../data/data";
 export default {
     data() {
         return {
-            course: {
-                course_code: 'CSC1142',
-                course_title: 'System Analysis and Design',
-                date: '11.01.2020',
-                overall_attendance_percentage: '85%'
-            },
-            students: [
-                {
-                    registration_no : 'SC/2017/10100',
-                    name: 'A.B.C silva',
-                    status: 'present'
-                },
-                {
-                    registration_no : 'SC/2017/10200',
-                    name: 'A.B.C silva',
-                    status: 'absent'
-                },
-                {
-                    registration_no : 'SC/2017/10100',
-                    name: 'A.B.C silva',
-                    status: 'present'
-                },
-                {
-                    registration_no : 'SC/2017/10100',
-                    name: 'A.B.C silva',
-                    status: 'present'
-                },
-                {
-                    registration_no : 'SC/2017/10100',
-                    name: 'A.B.C silva',
-                    status: 'absent'
-                },
-            ],
-            headers: [
-                { text: 'Registration Number', align: 'start',  value: 'registration_no'},
-                { text: 'Name', value: 'name'},
-                { text: 'Status', value: 'status'}
-            ]
+            course: viewAttendanceSheet.course,
+            students: viewAttendanceSheet.students,
+            headers: viewAttendanceSheet.headers
         }
     }
 }
