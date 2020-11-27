@@ -41,10 +41,12 @@
       </v-card-title>
 
       <v-data-table
+        loading="isLoading"
         :headers="headers"
         :items="filteredCourses"
         :items-per-page="10"
         :search="search"
+        v-on:click:row="selectCourse"
         class="elevation-1">
       </v-data-table>
     </v-card>    
@@ -53,11 +55,12 @@
 
 <script>
 import axios from 'axios';
-import { mapGetters } from "vuex";
+import { mapGetters, mapMutations } from "vuex";
 import { viewCourses } from "../data/data";
   export default {
     data () {
       return {
+        isLoading: true,
         search: '',
         filteredCourses: [],
         courses: [],
@@ -68,6 +71,7 @@ import { viewCourses } from "../data/data";
       }
     },
     methods: {
+      ...mapMutations(["setCourse"]),   
       ...mapGetters(["getToken", "getUser"]),
       async getCourses() {
         const token = this.getToken();
@@ -87,7 +91,6 @@ import { viewCourses } from "../data/data";
           //console.log(result.data);
           this.courses = result.data.courses;
         }
-        
       },
       filterLevels(selected) {
         if(selected!=null) {
@@ -105,12 +108,23 @@ import { viewCourses } from "../data/data";
       },
       resetDisplayed(){
         this.filteredCourses = this.courses.filter(course => course.level === this.selectedLevel)
+      },
+      selectCourse(course){
+        this.setCourse({
+          course_code: course.course_code,
+            course_title: course.course_title,
+            level: course.level,
+            semester: course.semester
+        });
+        //console.log(course);
+        this.$router.push("/viewDetailedAttendance");
       }
     },
     async mounted(){
       try {
         this.getCourses().then(() => {
           this.resetCourses();
+          this.isLoading = false;
         });
       } catch(err) {
         console.log(err.toString());

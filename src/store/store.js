@@ -7,12 +7,18 @@ Vue.use(Vuex);
 export const store = new Vuex.Store({
     state: {
         user: {
-            name : null,
+            name: null,
             username: null,
             is_logged: false,
             role: null
         },
         token: null,
+        course: {
+            course_code: null,
+            course_title: null,
+            level: null,
+            semester: null
+        }
     },
     getters: {
         getToken: state => {
@@ -20,6 +26,9 @@ export const store = new Vuex.Store({
         },
         getUser: state => {
             return state.user;
+        },
+        getCourse: state => {
+            return state.course;
         }
     },
     mutations: {
@@ -28,6 +37,9 @@ export const store = new Vuex.Store({
         },
         setUser: (state, payload) => {
             state.user = payload;
+        },
+        setCourse: (state, payload) => {
+            state.course = payload;
         },
         removeToken: state => {
             state.token = null;
