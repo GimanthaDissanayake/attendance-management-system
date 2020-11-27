@@ -1,10 +1,13 @@
 <template>
   <v-app class="grey lighten-4">
-    <Navbar></Navbar>
-
-    <v-main class="mx-4 mb-4">
+    <div v-if="is_logged">
+      <Navbar></Navbar>
+      <v-main class="mx-4 mb-4">
       <router-view></router-view>
     </v-main>
+    </div>
+    
+    <Login v-if="!is_logged"></Login>    
 
     <v-footer
       absolute
@@ -20,11 +23,21 @@
 
 <script>
 import Navbar from './components/Navbar'
+import Login from './views/Login'
 
 export default {
   components: { 
-    Navbar 
+    Navbar,
+    Login 
   },
-  name: 'App'
+  name: 'App',
+  computed: {
+    is_logged(){ 
+      return this.$store.state.user.is_logged;
+    }
+  },
+  methods: {
+    
+  }
 }
 </script>

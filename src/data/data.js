@@ -1,3 +1,15 @@
+export const navBar = {
+    headers: [
+        { title: 'Dashboard', icon: 'mdi-view-dashboard', path: '/', access: 'all'},
+        { title: 'My Courses', icon: 'mdi-school', path: '/viewCourses', access: ['student','lecturer','mentor','dh','admin']},
+        { title: 'Mentor Groups', icon: 'mdi-account-supervisor', path: '/viewMentorGroups', access: ['mentor','dh']},
+        { title: 'View Timetable', icon: 'mdi-timetable', path: '/timetable', access: ['student','lecturer','mentor']},
+        { title: 'Mahapola Eligibility', icon: 'mdi-cash', path: '/viewMahapolaEligibility', access: 'student'},
+        { title: 'View Students', icon: 'mdi-account', path: '/viewAllStudents', access: ['lecturer','mentor','dh','admin']},
+        { title: 'Mahapola Duration', icon: 'mdi-calendar-edit', path: '/setMahapolaDuration', access: 'admin'},
+    ]
+};
+
 export const viewAlerts = {
   cards: [
     {date:'April 11', from: 'Heshan Jayasinghe' , msg: 'this is the first msg'},  
@@ -30,7 +42,7 @@ export const markAttendance = {
   
   ],
   items: ['Foo', 'Bar', 'Fizz', 'Buzz'],
-}
+};
 
 
 export const registerUsers = {
@@ -239,69 +251,70 @@ headers: [
 ]
 };
 
+//courses
+//      {
+    //     course_code: 'CSC3113',
+    //     course_title: 'Group Project',
+    //     attendance_percentage: '100',
+    //     level: 'Level 3',
+    //     semester: 'Semester 1',
+    // },
+    // {
+    //     course_code: 'CSC3122',
+    //     course_title: 'E-commerce and Professional Practice',
+    //     attendance_percentage: '88',
+    //     level: 'Level 3',
+    //     semester: 'Semester 1',
+    // },
+    // {
+    //     course_code: 'CSC3132',
+    //     course_title: 'Data Warehousing and Data mining	',
+    //     attendance_percentage: '95',
+    //     level: 'Level 3',
+    //     semester: 'Semester 1',
+    // },
+    // {
+    //     course_code: 'CSC3142',
+    //     course_title: 'Internet Services and Protocols	',
+    //     attendance_percentage: '80',
+    //     level: 'Level 3',
+    //     semester: 'Semester 1',
+    // },
+    // {
+    //     course_code: 'CSC3172',
+    //     course_title: 'Distributed Systems',
+    //     attendance_percentage: '70',
+    //     level: 'Level 3',
+    //     semester: 'Semester 1',
+    // },
+    // {
+    //     course_code: 'CSC2213',
+    //     course_title: 'Rapid Application Development',
+    //     attendance_percentage: '82',
+    //     level: 'Level 2',
+    //     semester: 'Semester 2',
+    // },
+    // {
+    //     course_code: 'CSC2222',
+    //     course_title: 'Computer Systems',
+    //     attendance_percentage: '79',
+    //     level: 'Level 2',
+    //     semester: 'Semester 2',
+    // },
+    // {
+    //     course_code: 'CSC2133',
+    //     course_title: 'Operating Systems',
+    //     attendance_percentage: '90',
+    //     level: 'Level 2',
+    //     semester: 'Semester 1',
+    // },
+
+
 export const viewCourses = {
   headers: [
     { text: 'Course Code', align: 'start',  value: 'course_code'},
     { text: 'Course Title', value: 'course_title'},
     { text: 'Attendance Percentage', value:'attendance_percentage'},
-],
-courses: [
-    {
-        course_code: 'CSC3113',
-        course_title: 'Group Project',
-        attendance_percentage: '100',
-        level: 'Level 3',
-        semester: 'Semester 1',
-    },
-    {
-        course_code: 'CSC3122',
-        course_title: 'E-commerce and Professional Practice',
-        attendance_percentage: '88',
-        level: 'Level 3',
-        semester: 'Semester 1',
-    },
-    {
-        course_code: 'CSC3132',
-        course_title: 'Data Warehousing and Data mining	',
-        attendance_percentage: '95',
-        level: 'Level 3',
-        semester: 'Semester 1',
-    },
-    {
-        course_code: 'CSC3142',
-        course_title: 'Internet Services and Protocols	',
-        attendance_percentage: '80',
-        level: 'Level 3',
-        semester: 'Semester 1',
-    },
-    {
-        course_code: 'CSC3172',
-        course_title: 'Distributed Systems',
-        attendance_percentage: '70',
-        level: 'Level 3',
-        semester: 'Semester 1',
-    },
-    {
-        course_code: 'CSC2213',
-        course_title: 'Rapid Application Development',
-        attendance_percentage: '82',
-        level: 'Level 2',
-        semester: 'Semester 2',
-    },
-    {
-        course_code: 'CSC2222',
-        course_title: 'Computer Systems',
-        attendance_percentage: '79',
-        level: 'Level 2',
-        semester: 'Semester 2',
-    },
-    {
-        course_code: 'CSC2133',
-        course_title: 'Operating Systems',
-        attendance_percentage: '90',
-        level: 'Level 2',
-        semester: 'Semester 1',
-    },
 ],
 levels: [
   'Level 1', 'Level 2', 'Level 3'

@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <p class='text-h5'>View Courses</p>      
+    <p class='text-h5'>My Courses</p>      
 
     <v-card>
       <v-card-title>
@@ -52,23 +52,45 @@
 </template>
 
 <script>
+import axios from 'axios';
+import { mapGetters } from "vuex";
 import { viewCourses } from "../data/data";
   export default {
     data () {
       return {
         search: '',
-        filteredCourses: null,
+        filteredCourses: [],
+        courses: [],
         selectedLevel: '',
         headers:viewCourses.headers,
-        courses: viewCourses.courses,
         levels:viewCourses.levels,
-        semesters:viewCourses.semesters,
-        
+        semesters:viewCourses.semesters,        
       }
     },
     methods: {
+      ...mapGetters(["getToken", "getUser"]),
+      async getCourses() {
+        const token = this.getToken();
+        const user = this.getUser();        
+        if(user.role === "student"){
+          const registration_no = user.username;
+          const result = await axios.post(process.env.VUE_APP_BACKEND_SERVER + "/api/student/courses/",{
+            registration_no,
+          });
+          //console.log(result.data);
+          this.courses = result.data.courses;
+        } else {
+          const lecturer_id = user.username;
+          const result = await axios.post(process.env.VUE_APP_BACKEND_SERVER + "/api/course/lecturer_id/",{
+            lecturer_id,
+          });
+          //console.log(result.data);
+          this.courses = result.data.courses;
+        }
+        
+      },
       filterLevels(selected) {
-        if(selected!=null){
+        if(selected!=null) {
           this.selectedLevel = selected;
           this.filteredCourses = this.courses.filter(course => course.level === selected)
         }        
@@ -85,8 +107,14 @@ import { viewCourses } from "../data/data";
         this.filteredCourses = this.courses.filter(course => course.level === this.selectedLevel)
       }
     },
-    beforeMount(){
-      this.resetCourses()
+    async mounted(){
+      try {
+        this.getCourses().then(() => {
+          this.resetCourses();
+        });
+      } catch(err) {
+        console.log(err.toString());
+      }
     }
   }
 </script>
