@@ -123,10 +123,13 @@ import { viewCourses } from "../data/data";
       },
       selectCourse(course){
         this.setCourse({
+          co_id: course.co_id,
+          type: course.type,
           course_code: course.course_code,
           course_title: course.course_title,
           level: course.level,
-          semester: course.semester
+          semester: course.semester,
+          percentage: course.attendance_percentage
         });
         //console.log(course);
         this.$router.push("/viewDetailedAttendance");

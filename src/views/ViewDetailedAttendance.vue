@@ -65,7 +65,7 @@
                             Attendance Percentage :
                         </v-col>
                         <v-col>
-                            <v-chip>{{course.attendance_percentage}}</v-chip>
+                            <v-chip>{{course.percentage}}%</v-chip>
                         </v-col>
                     </v-row>                    
                 </v-col>
@@ -102,12 +102,10 @@ import { viewDetailedAttendance } from "../data/data";
 export default {
     data() {
         return{
-            course: null,
-            selectedStudent: null,
-            student:viewDetailedAttendance.student,
+            course: [],
+            student:[],
             headers:viewDetailedAttendance.headers,
-            dates:viewDetailedAttendance.dates,
-            
+            dates:[],            
         }
     },
     methods: {
@@ -117,27 +115,51 @@ export default {
             else return 'red'
         },
         async getStudent(registration_no){
-            console.log('abc'+registration_no);
-            await axios.post(process.env.VUE_APP_BACKEND_SERVER + "/api/student/registration_no/",{
+            return await axios.post(process.env.VUE_APP_BACKEND_SERVER + "/api/student/registration_no/",{
             registration_no,
             })
             .then(result => {
                 this.student = result.data.student[0][0];
-                //this.selectedStudent = result.data.student[0];
-                //console.log(s.student_name);
-            //   console.log(result.data.student[0]);
-              })
-              .catch(err => {console.log(err)});
+            })
+            .catch(err => {
+                console.log(err);
+            });
         },
         async setData(){
             this.course = this.getCourse();
-            //console.log(this.$store.state.user.username);
+            const co_id = this.course.co_id;
+            const student_id = this.$store.state.user.username;
+            //console.log(co_id);
             if(this.$store.state.user.role === "student")
-                this.getStudent(this.$store.state.user.username);
+                await this.getStudent(student_id);
+
+            await axios.post(process.env.VUE_APP_BACKEND_SERVER + "/api/student/attendance/", {
+                student_id,
+                co_id
+            })
+            .then(async result => {
+                const attendanceData = result.data.attendance;
+                const newDates = attendanceData.map((attendanceDetail) => {
+                    attendanceDetail.date = attendanceDetail.date_time.split('T')[0];
+                    if(attendanceDetail.status === 1)
+                        attendanceDetail.status = 'present'
+                    else
+                        attendanceDetail.status = 'absent';
+                    return attendanceDetail;
+                })
+                return await newDates;                
+            })
+            .then(nd => {
+                this.dates = nd; 
+                console.log(nd);
+            })
+            .catch(err => {
+                console.log(err);
+            });
         }
     }, 
-    async mounted() {
-        this.setData();
+    async created() {
+        await this.setData();
     }
 }
 </script>

@@ -14,10 +14,13 @@ export const store = new Vuex.Store({
         },
         token: null,
         course: {
+            co_id:null,
+            type:null,
             course_code: null,
             course_title: null,
             level: null,
-            semester: null
+            semester: null,
+            percentage: null
         }
     },
     getters: {
