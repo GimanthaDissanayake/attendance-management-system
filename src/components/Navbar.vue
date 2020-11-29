@@ -1,5 +1,5 @@
 <template>
-  <nav>
+  <nav fill-height>
     <v-app-bar flat app dark class="primary">
       <v-app-bar-nav-icon @click.stop="drawer=!drawer"></v-app-bar-nav-icon>      
       <v-toolbar-title>
@@ -14,10 +14,10 @@
           <v-icon color="black" right>mdi-logout-variant</v-icon>
         </v-btn>
     </v-app-bar>
-      <v-navigation-drawer app clipped v-model="drawer">
+      <v-navigation-drawer app clipped fill-height v-model="drawer">
         <v-img src="../assets/logo.png"></v-img>
         <v-list nav dense>
-          <v-list-item
+          <v-list-item color="primary"
             v-for="item in items"
             v-bind:key="item.title"
             link

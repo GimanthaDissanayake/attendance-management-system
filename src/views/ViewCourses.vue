@@ -48,6 +48,13 @@
         :search="search"
         v-on:click:row="selectCourse"
         class="elevation-1">
+        <template v-slot:item.attendance_percentage="{ item }">
+                                <v-chip
+                                :color="getColor(item.attendance_percentage)"
+                                dark>
+                                    {{ item.attendance_percentage }}
+                                </v-chip>
+                            </template>
       </v-data-table>
     </v-card>    
   </v-container>
@@ -73,6 +80,11 @@ import { viewCourses } from "../data/data";
     methods: {
       ...mapMutations(["setCourse"]),   
       ...mapGetters(["getToken", "getUser"]),
+      getColor(percentage){
+        if(percentage > 80) return 'green'
+        else if(percentage == 80) return 'orange'
+        else return 'red'
+      },
       async getCourses() {
         const token = this.getToken();
         const user = this.getUser();        
@@ -112,9 +124,9 @@ import { viewCourses } from "../data/data";
       selectCourse(course){
         this.setCourse({
           course_code: course.course_code,
-            course_title: course.course_title,
-            level: course.level,
-            semester: course.semester
+          course_title: course.course_title,
+          level: course.level,
+          semester: course.semester
         });
         //console.log(course);
         this.$router.push("/viewDetailedAttendance");

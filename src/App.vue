@@ -3,15 +3,15 @@
     <div v-if="is_logged">
       <Navbar></Navbar>
       <v-main class="mx-4 mb-4">
-      <router-view></router-view>
-    </v-main>
+        <router-view></router-view>
+      </v-main>
     </div>
     
     <Login v-if="!is_logged"></Login>    
 
     <v-footer
       absolute
-      class="font-weight-medium">
+      class="font-weight-medium" color="#E0E0E0">
       <v-col
         class="text-center"
         cols="12">
