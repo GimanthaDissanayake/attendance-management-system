@@ -131,15 +131,17 @@ import { viewCourses } from "../data/data";
           semester: course.semester,
           percentage: course.attendance_percentage
         });
-        //console.log(course);
-        this.$router.push("/viewDetailedAttendance");
+        if(this.getUser().role === "student")
+          this.$router.push("/viewDetailedAttendance");
+        else  
+          this.$router.push("/viewDetailedCourse");
       }
     },
     async mounted(){
       try {
         this.getCourses().then(() => {
-          this.resetCourses();
-          this.isLoading = false;
+        this.resetCourses();
+        this.isLoading = false;
         });
       } catch(err) {
         console.log(err.toString());

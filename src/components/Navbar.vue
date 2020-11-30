@@ -22,8 +22,9 @@
             v-bind:key="item.title"
             link
             router
+            :disabled="checkDisabled"
             :to="item.path"
-            v-show="item.access=='all' || item.access.includes(user.role)">
+            v-show="item.access.includes('all') || (item.access.includes(user.role) && item.access.includes('yes'))">
               <v-list-item-icon>
                 <v-icon>{{ item.icon }}</v-icon>
               </v-list-item-icon>
@@ -33,8 +34,7 @@
           </v-list-item>
         </v-list>
       </v-navigation-drawer>
-  </nav>
-  
+  </nav>  
 </template>
 
 <script>
@@ -44,6 +44,10 @@ export default {
   computed: {
     user(){ 
       return this.$store.state.user;
+    },
+    checkDisabled(value){
+      value.items[4].access = ['student', this.$store.state.mahapola];
+      return false;
     }
   },
   data() {
@@ -56,7 +60,10 @@ export default {
     ...mapMutations(["removeToken"]),
     logout() {
       this.removeToken();
-    }
+    },
+  },
+  mounted(){
+    //console.log(this.user);
   }
 }
 </script>

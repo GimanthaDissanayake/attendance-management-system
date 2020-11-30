@@ -40,7 +40,7 @@ export default {
         }
     },
     methods: { 
-        ...mapMutations(["setToken", "setUser"]),       
+        ...mapMutations(["setToken", "setUser", "setMahapola"]),       
         async login() {
             this.loading = true;
 
@@ -60,8 +60,14 @@ export default {
                         //     is_logged: true,
                         //     role: response.data.role
                         // };
+                        
+                        if(response.data.mahapola===0){
+                            this.setMahapola('no');
+                        } else {
+                            this.setMahapola('yes');
+                        }
+                            
                         this.setToken(response.data.token);
-                        console.log(response.data);
                         this.setUser({
                             name: response.data.name,
                             username: response.data.username,

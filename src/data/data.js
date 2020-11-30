@@ -1,12 +1,12 @@
 export const navBar = {
     headers: [
-        { title: 'Dashboard', icon: 'mdi-view-dashboard', path: '/', access: 'all'},
-        { title: 'My Courses', icon: 'mdi-school', path: '/viewCourses', access: ['student','lecturer','mentor','dh','admin']},
-        { title: 'Mentor Groups', icon: 'mdi-account-supervisor', path: '/viewMentorGroups', access: ['mentor','dh']},
-        { title: 'View Timetable', icon: 'mdi-timetable', path: '/timetable', access: ['student','lecturer','mentor']},
-        { title: 'Mahapola Eligibility', icon: 'mdi-cash', path: '/viewMahapolaEligibility', access: 'student'},
-        { title: 'View Students', icon: 'mdi-account', path: '/viewAllStudents', access: ['lecturer','mentor','dh','admin']},
-        { title: 'Mahapola Duration', icon: 'mdi-calendar-edit', path: '/setMahapolaDuration', access: 'admin'},
+        { title: 'Dashboard', icon: 'mdi-view-dashboard', path: '/', access: ['all','yes']},
+        { title: 'My Courses', icon: 'mdi-school', path: '/viewCourses', access: ['student','lecturer','mentor','dh','admin','yes']},
+        { title: 'Mentor Groups', icon: 'mdi-account-supervisor', path: '/viewMentorGroups', access: ['mentor','dh','yes']},
+        { title: 'View Timetable', icon: 'mdi-timetable', path: '/timetable', access: ['student','lecturer','mentor','yes']},
+        { title: 'Mahapola Eligibility', icon: 'mdi-cash', path: '/viewMahapolaEligibility', access: ['student','yes']},
+        { title: 'View Students', icon: 'mdi-account', path: '/viewAllStudents', access: ['lecturer','mentor','dh','admin','yes']},
+        { title: 'Mahapola Duration', icon: 'mdi-calendar-edit', path: '/setMahapolaDuration', access: ['admin','yes']},
     ]
 };
 
@@ -326,81 +326,11 @@ semesters: [
 };
 
 export const viewDetailedAttendance = {
-  student:{
-    name: 'Kamal Perera',
-    registration_no: 'SC/2021/12291',
-    degree_program: 'BCS',
-    course_code: 'CSC1142',
-    course_title: 'System Analysis and Design',
-    attendance_percentage: '85%'
-},
 headers: [
-    { text: 'Date', align: 'start',  value: 'date'},
-    { text: 'Attendance Status', value: 'status'},
+    { text: 'DATE', align: 'start',  value: 'date'},
+    { text: 'ATTENDANCE STATUS', value: 'status'},
 ],
-dates: [
-    {
-        date: '12.01.2020',
-        status: 'present'
-    },
-    {
-        date: '19.01.2020',
-        status: 'present'
-    },
-    {
-        date: '26.01.2020',
-        status: 'present'
-    },
-    {
-        date: '02.02.2020',
-        status: 'present'
-    },
-    {
-        date: '09.02.2020',
-        status: 'absent'
-    },
-    {
-        date: '16.02.2020',
-        status: 'present'
-    },
-    {
-        date: '23.02.2020',
-        status: 'present'
-    },
-    {
-        date: '12.01.2020',
-        status: 'present'
-    },
-    {
-        date: '12.01.2020',
-        status: 'present'
-    },
-    {
-        date: '12.01.2020',
-        status: 'present'
-    },
-    {
-        date: '12.01.2020',
-        status: 'present'
-    },
-    {
-        date: '12.01.2020',
-        status: 'present'
-    },
-    {
-        date: '12.01.2020',
-        status: 'present'
-    },
-    {
-        date: '12.01.2020',
-        status: 'present'
-    },
-    {
-        date: '12.01.2020',
-        status: 'present'
-    },
-]
-}
+};
 
 export const viewDetailedCourse = {
   course: {

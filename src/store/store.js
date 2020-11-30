@@ -13,6 +13,7 @@ export const store = new Vuex.Store({
             role: null
         },
         token: null,
+        mahapola: 'no',
         course: {
             co_id:null,
             type:null,
@@ -32,6 +33,9 @@ export const store = new Vuex.Store({
         },
         getCourse: state => {
             return state.course;
+        },
+        getMahapola: state => {
+            return state.mahapola;
         }
     },
     mutations: {
@@ -43,6 +47,9 @@ export const store = new Vuex.Store({
         },
         setCourse: (state, payload) => {
             state.course = payload;
+        },
+        setMahapola: (state,payload) => {
+            state.mahapola = payload;
         },
         removeToken: state => {
             state.token = null;

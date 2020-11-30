@@ -151,7 +151,6 @@ export default {
             })
             .then(nd => {
                 this.dates = nd; 
-                console.log(nd);
             })
             .catch(err => {
                 console.log(err);
