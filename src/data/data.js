@@ -408,9 +408,10 @@ dates: [
 
 export const viewMahapolaEligibility = {
   headers: [
-    { text: 'Course Code', align: 'start',  value: 'course_code'},
-    { text: 'Course Title', value: 'course_title'},
-    { text: 'Attendance Percentage', value:'attendance_percentage'},
+    { text: 'COURSE CODE', align: 'start',  value: 'course_code'},
+    { text: 'COURSE TITLE', value: 'course_title'},
+    { text: 'TYPE', value: 'type'},
+    { text: 'ATTENDANCE PERCENTAGE', value:'percentage'},
 ],
 courses: [
     {

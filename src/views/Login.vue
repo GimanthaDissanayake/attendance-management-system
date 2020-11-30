@@ -53,13 +53,6 @@ export default {
                     password,
                 }).then(response => {
                     if(response.status === 200){
-                        // localStorage.jwt = response.data.token;
-                        // localStorage.user = {
-                        //     name: response.data.name,
-                        //     username: response.data.username,
-                        //     is_logged: true,
-                        //     role: response.data.role
-                        // };
                         
                         if(response.data.mahapola===0){
                             this.setMahapola('no');
@@ -89,14 +82,6 @@ export default {
                     } else    
                         console.log(err);
                 });
-                // console.log(result.data);
-
-                // this.setToken(result.data.token);
-                // this.setUser({
-                //     is_logged: true,
-                //     role: result.data.role
-                // });
-                // this.loading = false;
             } catch(err) {
                 console.log(err);
             }
