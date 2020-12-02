@@ -66,7 +66,6 @@ export default {
           }
         });
         this.courses = mappedCourses;
-        console.log(result.data.mahapola);
       }
     },
     async created(){

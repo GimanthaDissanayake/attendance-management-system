@@ -60,7 +60,7 @@ export const timetable = {
       text: 'Time',
       align: 'start',
       sortable: false,
-      value: 'name',
+      value: 'time',
     },
     { text: 'Monday', value: 'Monday' },
     { text: 'Tuesday', value: 'Tuesday' },
@@ -70,7 +70,7 @@ export const timetable = {
   ],
   item: [
     {
-      name: '08 - 09',
+      time: '08 - 09',
       Monday: '',
       Tuesday: 'CSC1133',
       Wednesday: '',
@@ -78,7 +78,7 @@ export const timetable = {
       Friday: 'CSC1122',
     },
     {
-      name: '08 - 09',
+      time: '08 - 09',
       Monday: 'CSC1133',
       Tuesday: '',
       Wednesday: 'CSC1133',
@@ -86,7 +86,7 @@ export const timetable = {
       Friday: '',
     },
     {
-      name: '08 - 09',
+      time: '08 - 09',
       Monday: 'CSC1122',
       Tuesday: '',
       Wednesday: 'CSC1144',
@@ -94,7 +94,7 @@ export const timetable = {
       Friday: 'CSC1122',
     },
     {
-      name: '08 - 09',
+      time: '08 - 09',
       Monday: 'CSC1144',
       Tuesday: 'CSC1133',
       Wednesday: '',
@@ -102,7 +102,7 @@ export const timetable = {
       Friday: '',
     },
      {
-      name: '08 - 09',
+      time: '08 - 09',
       Monday: '',
       Tuesday: 'CSC1133',
       Wednesday: '',
@@ -110,7 +110,7 @@ export const timetable = {
       Friday: 'CSC1122',
     },
     {
-      name: '08 - 09',
+      time: '08 - 09',
       Monday: 'CSC1133',
       Tuesday: '',
       Wednesday: 'CSC1133',
@@ -118,7 +118,7 @@ export const timetable = {
       Friday: '',
     },
     {
-      name: '08 - 09',
+      time: '08 - 09',
       Monday: 'CSC1122',
       Tuesday: '',
       Wednesday: 'CSC1144',
@@ -126,7 +126,7 @@ export const timetable = {
       Friday: 'CSC1122',
     },
     {
-      name: '08 - 09',
+      time: '08 - 09',
       Monday: 'CSC1144',
       Tuesday: 'CSC1133',
       Wednesday: '',
