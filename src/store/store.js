@@ -12,6 +12,9 @@ export const store = new Vuex.Store({
             is_logged: false,
             role: null
         },
+        dates: {
+            date: null,
+        },
         token: null,
         mahapola: 'no',
         course: {
@@ -34,9 +37,15 @@ export const store = new Vuex.Store({
         getCourse: state => {
             return state.course;
         },
+        getDate: state => {
+            return state.dates;
+        },
         getMahapola: state => {
             return state.mahapola;
-        }
+        },
+        getTime: state => {
+            return state.time;
+        },
     },
     mutations: {
         setToken: (state, payload) => {
@@ -50,6 +59,9 @@ export const store = new Vuex.Store({
         },
         setMahapola: (state,payload) => {
             state.mahapola = payload;
+        },
+        setDate: (state,payload) => {
+            state.dates = payload;
         },
         removeToken: state => {
             state.token = null;

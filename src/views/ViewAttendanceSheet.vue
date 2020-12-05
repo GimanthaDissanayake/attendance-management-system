@@ -25,7 +25,7 @@
                                  <p>Date :</p>
                              </v-col>
                              <v-col>
-                                 <v-chip>{{course.date}}</v-chip>
+                                 <v-chip>{{date}}</v-chip>
                              </v-col>
                              <v-col>
                                  <p>Overall Attendance Percentage :</p>
@@ -56,17 +56,39 @@
 
 <script>
 import { viewAttendanceSheet } from "../data/data";
+import axios from 'axios';
+import { mapGetters } from "vuex";
+
 export default {
     data() {
         return {
-            course: viewAttendanceSheet.course,
-            students: viewAttendanceSheet.students,
-            headers: viewAttendanceSheet.headers
+            course:[],
+            students: [],
+            headers: viewAttendanceSheet.headers,
+            dates:[] ,
         }
+    },
+    methods: {
+        ...mapGetters(["getCourse"],["getUser"],["getDate"]),
+        
+         async setData(){
+           this.course = this.getCourse();
+          this.dates = this.getDate();
+            // const course_code = this.course.course_code;
+             const co_id = this.course.co_id;
+             const date = this.dates.date;
+
+        //     this.date = this.getDate();
+             console.log(this.dates);
+             console.log(this.course);
+        
+        },
+        
+    },
+    
+    async created() {
+        await this.setData();
     }
 }
 </script>
 
-<style>
-
-</style>

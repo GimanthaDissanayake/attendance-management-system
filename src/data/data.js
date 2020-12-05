@@ -19,29 +19,10 @@ export const viewAlerts = {
 
 export const markAttendance = {
   headers: [
-    {
-      text: 'Registration no',
-      align: 'start',
-      sortable: false,
-      value: 'registration_no',
-    },
-    { text: 'Name', value: 'name' },
-    { text: 'Remove from list', value: 'remove' },
+    { text: 'Registration No', value: 'registration_no' },
+    { text: 'Name', value: 'student_name' },
+    { text: 'Remove from list', value: 'actions', sortable: false },
   ],
-  data: [
-    {
-      registration_no: 'SC/2017/10303',
-      name: "Heshan Jayasinghe",
-      remove: 'remove',
-    },
-    {
-      registration_no: 'SC/2017/10285',
-      name: 'Gimantha Dissanayake',
-      remove: 'remove',
-    },
-  
-  ],
-  items: ['Foo', 'Bar', 'Fizz', 'Buzz'],
 };
 
 
@@ -246,7 +227,7 @@ students: [
 ],
 headers: [
     { text: 'Registration Number', align: 'start',  value: 'registration_no'},
-    { text: 'Name', value: 'name'},
+    { text: 'Name', value: 'student_name'},
     { text: 'Status', value: 'status'}
 ]
 };
