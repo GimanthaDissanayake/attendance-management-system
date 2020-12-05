@@ -1,11 +1,12 @@
 export const navBar = {
     headers: [
         { title: 'Dashboard', icon: 'mdi-view-dashboard', path: '/', access: ['all','yes']},
-        { title: 'My Courses', icon: 'mdi-school', path: '/viewCourses', access: ['student','lecturer','mentor','dh','admin','yes']},
+        { title: 'My Courses', icon: 'mdi-school', path: '/viewCourses', access: ['student','lecturer','mentor','dh','yes']},
         { title: 'Mentor Groups', icon: 'mdi-account-supervisor', path: '/viewMentorGroups', access: ['mentor','dh','yes']},
         { title: 'View Timetable', icon: 'mdi-timetable', path: '/timetable', access: ['student','lecturer','mentor','yes']},
         { title: 'Mahapola Eligibility', icon: 'mdi-cash', path: '/viewMahapolaEligibility', access: ['student','yes']},
-        { title: 'View Students', icon: 'mdi-account', path: '/viewAllStudents', access: ['lecturer','mentor','dh','admin','yes']},
+        { title: 'View Students', icon: 'mdi-account', path: '/viewAllStudents', access: ['lecturer','mentor','dh','yes']},
+        { title: 'Register Students', icon: 'mdi-account', path: '/RegisterUsers', access: ['admin','yes']},
         { title: 'Mahapola Duration', icon: 'mdi-calendar-edit', path: '/setMahapolaDuration', access: ['admin','yes']},
     ]
 };
