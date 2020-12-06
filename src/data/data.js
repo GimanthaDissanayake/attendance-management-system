@@ -28,12 +28,10 @@ export const markAttendance = {
 
 
 export const registerUsers = {
-  student:{
-    name: 'Kamal Perera',
-    registration_no: 'SC/2021/12291',
-    level: '3',
-    image_status: 'Registered',
-  }
+    headers: [
+        { text: 'Registration No', value: 'registration_no' },
+        { text: 'Name', value: 'student_name' },
+      ],
 };
 
 export const timetable = {

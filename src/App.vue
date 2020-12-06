@@ -1,14 +1,14 @@
 <template>
   <v-app class="grey lighten-4">
-    <div v-if="is_logged">
+    <v-container v-if="is_logged">
       <Navbar></Navbar>
       <v-main class="mx-4 mb-4">
         <router-view></router-view>
       </v-main>
-    </div>
+    </v-container>
     
     <Login v-if="!is_logged"></Login>    
-
+<br><br><br>
     <v-footer
       absolute
       class="font-weight-medium" color="#E0E0E0">

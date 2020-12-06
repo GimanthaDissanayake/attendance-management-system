@@ -55,7 +55,6 @@
       </v-snackbar>
   </div>
   </v-container>
-  <!-- confirmarion component should add here -->
 </template>
 
 <script>

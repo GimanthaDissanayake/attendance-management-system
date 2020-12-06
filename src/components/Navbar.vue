@@ -6,7 +6,7 @@
         Attendance Management System
       </v-toolbar-title>
        <v-spacer></v-spacer>
-        <v-btn class="mx-2" color="#DBB2FF" fab small>
+        <v-btn v-show="user.role!='admin'" class="mx-2" color="#DBB2FF" fab small>
           <v-icon small color="black">mdi-android-messages</v-icon>
         </v-btn>
         <v-btn color="#DBB2FF" v-on:click="logout">
