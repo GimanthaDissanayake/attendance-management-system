@@ -46,7 +46,13 @@
         </v-container>
       </v-stepper-content>
       <v-stepper-content step="2">
-        <v-container>
+        <v-container>          
+          <v-progress-linear v-if="isLoading"
+            color="primary"
+            indeterminate
+            rounded
+            height="6"
+          ></v-progress-linear>
           <v-row>
             <v-col cols="6" sm="6" md="6">
               <v-row>
@@ -104,6 +110,20 @@
       </v-stepper-content>
     </v-stepper-items>
   </v-stepper>
+  <v-snackbar
+    v-model="snackbar"
+    :timeout="2000">
+      {{ snackbarText }}
+      <template v-slot:action="{ attrs }">
+        <v-btn
+          color="secondary"
+          text
+          v-bind="attrs"
+          @click="snackbar = false">
+          Close
+        </v-btn>
+      </template>
+    </v-snackbar>
   </v-container>
 </template>
 
@@ -121,6 +141,9 @@ import { registerUsers } from "../data/data";
         image: null,
         imageFile: null,
         e1: 1,
+        snackbar: false,
+        snackbarText: '',
+        isLoading: false
       }
     },
     methods: {
@@ -150,11 +173,21 @@ import { registerUsers } from "../data/data";
         let formData = new FormData();
         formData.append('imageFile', imageFile);
         formData.append('indexNumber', indexNumber);
-        console.log(formData)
+        this.isLoading = true;
         await axios.post(process.env.VUE_APP_FLASK_SERVER+'/save', formData)
         .then(result => {
-          console.log(result)
-          this.e1 = 1;
+          this.snackbar = true;
+          if(result.status===200) {
+            this.snackbarText = 'Image Saved Successfully!';
+            this.e1 = 1;
+            this.image = null;
+            this.imageFile = null;
+          }
+          else {
+            this.snackbarText = 'There was a Problem Saving the Image!';
+            console.log(result)
+          }
+          this.isLoading = false;
         }).catch(err => {
           console.log(err);
         });
