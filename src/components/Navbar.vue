@@ -59,6 +59,7 @@ export default {
   methods: {
     ...mapMutations(["removeToken"]),
     logout() {
+      this.$router.push("/");
       this.removeToken();
     },
   },
