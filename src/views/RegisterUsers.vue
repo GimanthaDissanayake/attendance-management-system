@@ -145,16 +145,13 @@ import { registerUsers } from "../data/data";
 				})
       },
       async uploadImage() {
-        const imageFile = this.imageFile;
+        const imageFile = this.imageFile; 
         const indexNumber = this.student.registration_no;
-        await axios.post(process.env.VUE_APP_FLASK_SERVER+'/save/', {
-          imageFile,
-          indexNumber
-        },{
-          headers: {'Access-Control-Allow-Origin': '*',
-                    'Access-Control-Allow-Methods': 'GET, POST, PUT, PATCH, DELETE',
-                    'Access-Control-Allow-Headers': 'Content-Type, Authorization'}
-        })
+        let formData = new FormData();
+        formData.append('imageFile', imageFile);
+        formData.append('indexNumber', indexNumber);
+        console.log(formData)
+        await axios.post(process.env.VUE_APP_FLASK_SERVER+'/save', formData)
         .then(result => {
           console.log(result)
           this.e1 = 1;
