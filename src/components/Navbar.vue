@@ -46,7 +46,7 @@ export default {
       return this.$store.state.user;
     },
     checkDisabled(value){
-      value.items[4].access = ['student', this.$store.state.mahapola];
+      value.items[5].access = ['student', this.$store.state.mahapola];
       return false;
     }
   },
