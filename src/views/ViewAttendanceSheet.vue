@@ -58,7 +58,6 @@
 import { viewAttendanceSheet } from "../data/data";
 import axios from 'axios';
 import { mapGetters } from "vuex";
-
 export default {
     data() {
         return {
@@ -66,6 +65,7 @@ export default {
             students: [],
             headers: viewAttendanceSheet.headers,
             selectedDate:'' ,
+        
         }
     },
     methods: {
@@ -76,11 +76,23 @@ export default {
           this.selectedDate = this.$store.state.selectedDate;
             // const course_code = this.course.course_code;
              const co_id = this.course.co_id;
-            //  const date = this.dates.date;
-
+              const date = this.selectedDate;
         //     this.date = this.getDate();
              console.log(this.selectedDate);
-             console.log(this.course);
+             console.log(this.course.co_id);
+
+             return await axios.post(process.env.VUE_APP_BACKEND_SERVER + "/api/student/attendance_sheet/",{
+             co_id,
+             date
+             })
+             .then(async result => {
+                this.students = result.data.attendance;
+                console.log(result);
+               // this.date_time = attendanceData.date_time;               
+            })
+            .catch(err => {
+                console.log(err);
+            });
         
         },
         
