@@ -121,7 +121,7 @@ export default {
     },
      methods: {
         ...mapGetters(["getCourse"],["getUser"]),
-        
+        ...mapMutations(["setSelectedDate"]),
         async setReg(){
             this.course = this.getCourse();
             const course_code = this.course.course_code;
@@ -167,9 +167,7 @@ export default {
 
         },
         selectDate(dates){
-        this.setDate({
-            dates:dates.date,
-        });
+            this.setSelectedDate(dates.date);
         //console.log(dates.date);
 
     

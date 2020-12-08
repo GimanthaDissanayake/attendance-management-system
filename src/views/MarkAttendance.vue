@@ -1,114 +1,99 @@
 <template>
-  <div>
-    <p class='text-h5'>Mark attendance</p> 
+  <v-container>
+    <p class='text-h5'>Mark Attendance</p> 
     <v-stepper v-model="e1">
       <v-stepper-header>
         <v-stepper-step
           :complete="e1 > 1"
           step="1">
-          Select the course unit
+          Select the Course Unit
         </v-stepper-step>
-
         <v-divider></v-divider>
-
         <v-stepper-step
           :complete="e1 > 2"
           step="2">
-          Mark attendance
+          Mark Attendance
         </v-stepper-step>
-
         <v-divider></v-divider>
-
         <v-stepper-step step="3">
-          Confirm attendance
+          Confirm Attendance
         </v-stepper-step>
       </v-stepper-header>
 
       <v-stepper-items>
         <v-stepper-content step="1">        
           <v-container>
-            <v-layout row wrap style="padding: 15px">
-              <v-flex md9 xs12>
-                <v-layout row>
-                  <v-flex md3 xs12>
-                    <v-layout>
-                      <v-flex md9 mx9>
-                        Course details :
-                      </v-flex>
-                    </v-layout>
-                  </v-flex>
-                  <v-flex md3 xs12>
-                    <v-select 
-                      :items="v_select_course_codes"
-                      item-text="course_code" 
-                      item-value="course_code"
-                      :placeholder="courses[0].course_code"
-                      label="Select Course"
-                      @input="changedCourseCode"/>            
-                  </v-flex>
-                  <v-flex md3 xs12>
-                    <v-select 
-                      :items="v_select_type"
-                      item-text="" 
-                      item-value=""
-                      :placeholder="courses[0].type"
-                      label="Select Type"
-                      @input="changedType"/>
-                  </v-flex>                
-                  <v-flex md3 xs12>
-                    <v-select 
-                      :items="v_select_level"
-                      item-text="" 
-                      item-value=""
-                      :placeholder="courses[0].level"
-                      label="Select Level"
-                      @input="changedLevel"/>                  
-                  </v-flex>
-                </v-layout>
-              </v-flex>
-            </v-layout>
-            <v-layout row wrap style="padding: 15px">
-              <v-flex md9 xs12>
-                <v-layout row wrap>
-                  <v-flex md3 xs12>
-                    <v-layout>
-                      <v-flex md9 mx9>
-                        Start Time :
-                      </v-flex>
-                    </v-layout>
-                  </v-flex>
-                  <v-flex md3 xs12>
-                    <vue-timepicker 
-                        v-model="courses[0].start_time" 
-                      format="HH" 
-                      @input="STimeHandler">
-                    </vue-timepicker>
-                  </v-flex>
-                </v-layout>
-                <v-layout row wrap>
-                  <v-flex md3 xs12>
-                    <v-layout>                    
-                      <v-flex md9 mx9>
-                        End Time :
-                      </v-flex>
-                    </v-layout>
-                  </v-flex>
-                  <v-flex md3 xs12>
-                    <vue-timepicker 
-                      v-model="courses[0].end_time" 
-                      format="HH" 
-                      @input="ETtimeHandler">
-                    </vue-timepicker>
-                  </v-flex>
-                </v-layout>                
-              </v-flex>
+            <v-row wrap style="padding: 15px">
+              <v-col md3 xs12>
+                Course details:
+              </v-col>
+              <v-col md3 xs12>
+                <v-select 
+                  :items="v_select_course_codes"
+                  item-text="course_code" 
+                  item-value="course_code"
+                  :placeholder="courses[0].course_code"
+                  label="Select Course"
+                  @input="changedCourseCode"/>            
+              </v-col>
+              <v-col md3 xs12>
+                <v-select 
+                  :items="v_select_type"
+                  item-text="" 
+                  item-value=""
+                  :placeholder="courses[0].type"
+                  label="Select Type"
+                  @input="changedType"/>
+              </v-col>                
+              <v-col md3 xs12>
+                <v-select 
+                  :items="v_select_level"
+                  item-text="" 
+                  item-value=""
+                  :placeholder="courses[0].level"
+                  label="Select Level"
+                  @input="changedLevel"/>                  
+              </v-col>
+            </v-row>
+            <v-row wrap style="padding: 15px">
+              <v-col>
+                <v-row>
+                  <v-col>
+                    Start Time:
+                  </v-col>
+                  <v-col>
+                    <v-time-picker
+                      v-model="startTime"
+                      format="24hr">
+                    </v-time-picker>
+                  </v-col>
+                </v-row>                     
+              </v-col>
+              <v-spacer></v-spacer>
+              <v-col>
+                <v-row>
+                  <v-col>
+                    End Time:
+                  </v-col>
+                  <v-col>
+                    <v-time-picker
+                      v-model="endTime"
+                      format="24hr">
+                    </v-time-picker>
+                  </v-col>
+                </v-row>               
+              </v-col>
+              <v-spacer></v-spacer>              
+            </v-row>  
+            <v-row>
+              <v-spacer></v-spacer>
                 <v-btn
-                    color="primary"
-                    @click="e1 = 2">
+                  color="primary"
+                  @click="e1 = 2">
                     Mark attendance
-                  </v-btn>
-              </v-layout>  
-            </v-container>
+                </v-btn>
+            </v-row>
+          </v-container>
         </v-stepper-content>
 
         <v-stepper-content step="2">
@@ -227,21 +212,21 @@
         </v-stepper-content>
       </v-stepper-items>
     </v-stepper>
-  </div>
+  </v-container>
 </template>
 
 <script>
 import axios from 'axios';
 import { mapGetters } from "vuex";
 import { markAttendance } from "../data/data";
-import VueTimepicker from 'vue2-timepicker/src/vue-timepicker.vue'
+// import VueTimepicker from 'vue2-timepicker/src/vue-timepicker.vue'
 import { WebCam } from "vue-web-cam";
 
 export default {
   name: "App",
   components: {
     "vue-web-cam": WebCam,
-    VueTimepicker,
+    // VueTimepicker,
   },
   data(){
     return{
@@ -251,7 +236,7 @@ export default {
 
       //stepper 3 props
       registeredStudents: [],
-      registeredStudentLength: '',
+      registeredStudentsLength: 0,
       recognizedStudents: [ 'SC/2017/10271' ],
       absentStudents: [],
       addUnreg:'',
@@ -260,6 +245,7 @@ export default {
       attendancePercentage: '',
       datas: [],
       dialogDelete: false,
+      dialog: null, //?????
 
       //stepper 1 props
       v_select_course_codes: [],
@@ -270,10 +256,22 @@ export default {
       selectedLevel: null,
       STenteredValue:'',
       ETenteredValue: '',
-      courses: [],   
-
+      courses: [{
+        co_id: "",
+        course_code: "",
+        course_title: "",
+        day_of_week: "",
+        end_time: "",
+        level: "",
+        semester: "",
+        start_time: "",
+        type: ""
+      }],   
+      startTime: "",
+      endTime: "",
       //stepper 2 props
       img: null,
+      deviceId: '',
       devices: [],      
     }
   },
@@ -287,90 +285,117 @@ export default {
       
       //stepper 1
       //auto fill form date
-      const result = await axios.post(process.env.VUE_APP_BACKEND_SERVER + "/api/course/course_time/",{
-          lecturer_id,
-      });
-
+      // const result = await axios.post(process.env.VUE_APP_BACKEND_SERVER + "/api/course/course_time/",{
+      //     lecturer_id,
+      // });
+      //console.log(result);
       //stepper 3
       // get courses list of the current lecture
       const res = await axios.post(process.env.VUE_APP_BACKEND_SERVER + "/api/course/lecturer_id/",{
           lecturer_id,
       });
 
-
       //course codes conduct by current lecturer
       this.v_select_course_codes = res.data.courses;
 
+      //get the current day of the week
+      const currentDayOfWeek = new Date().getDay();
+
+      //get courses conducted on current day of week
+      const mappedCourses = [];
+       await res.data.courses.map(course => {
+         if(course.day_of_week=currentDayOfWeek)
+          mappedCourses.push(course);
+       });
 
       //All courses conduct by lecuterer current date
-      const returnedCourses = result.data.courses;
-
-      //if current day has two courses , find the course
+      // const returnedCourses = result.data.courses;
+      const returnedCourses = mappedCourses;
+      this.courses = returnedCourses;
+      //if current day has more than one course , set a course
       if(returnedCourses.length > 0){
-        var d = new Date();
+        //get the hour of current time
+        var currentHour = new Date().getHours();
+
+        //select a course going on at current time
+        const mappedCourses = [];
+        await returnedCourses.forEach(c => {
+          const st = c.start_time.split('T')[1].split(':')[0];
+          const et = c.end_time.split('T')[1].split(':')[0];
+          if(currentHour>=st && currentHour<et) {
+            this.start_time = 
+            this.mappedCourses.push(c);
+          }
+        });
+        if(mappedCourses.length > 0)
+          this.courses = mappedCourses;
+
+        this.startTime = this.courses[0].start_time.split('T')[1].split(':')[0]+':'+'00';
+        this.endTime = this.courses[0].end_time.split('T')[1].split(':')[0]+':'+'00';
         //var n = d.getHours(); //===================================================  must uncomment this
-        var n = 3;
+        // var n = 3;
 
-        for(var i = 0; i < returnedCourses.length;i++){
-          var s_t = returnedCourses[i].start_time.slice(11,13);
-          var e_t = returnedCourses[i].end_time.slice(11,13);
+        // for(var i = 0; i < returnedCourses.length;i++){
+        //   var s_t = returnedCourses[i].start_time.slice(11,13);
+        //   var e_t = returnedCourses[i].end_time.slice(11,13);
 
-          //find the start time and end time using current time
-          if(s_t < n && e_t > n){          
-            this.start_time = s_t;
-            this.end_time = e_t;
-            this.course_code = returnedCourses[i].course_code;
-            this.level = returnedCourses[i].level;
-            this.type = returnedCourses[i].type;
+        //   //find the start time and end time using current time
+        //   if(s_t < n && e_t > n){    
+        //     this.start_time = s_t;
+        //     this.end_time = e_t;
+        //     this.course_code = returnedCourses[i].course_code;
+        //     this.level = returnedCourses[i].level;
+        //     this.type = returnedCourses[i].type;
 
-            const mappedCourses = [];
+        //     const mappedCourses = [];
 
-            returnedCourses.map(course => {
-              course.start_time = this.start_time;
-              course.end_time = this.end_time;
-              course.course_code = this.course_code;
-              course.level = this.level;
-              course.type = this.type;
-              mappedCourses.push(course);
-            }); 
+        //     returnedCourses.map(course => {
+        //       course.start_time = this.start_time;
+        //       course.end_time = this.end_time;
+        //       course.course_code = this.course_code;
+        //       course.level = this.level;
+        //       course.type = this.type;
+        //       mappedCourses.push(course);
+        //     }); 
 
-            //return final course details
-            this.courses = mappedCourses;
-          }          
-        }
+        //     //return final course details
+        //     this.courses = mappedCourses;
+        //   }          
+        // }
       } 
 
+      //what is this?????????????????????????????????????????
       //stepper 3
       // get registered student list for current course
-      const course_code = this.courses[0].course_code;
-      const registeredStudentResult = await axios.post(process.env.VUE_APP_BACKEND_SERVER + "/api/student/course_code/",{
-          course_code,
-      });
-      
-      //return registered students
-      this.registeredStudents = registeredStudentResult.data.students;
+      // const course_code = this.courses[0].course_code;
+      // const registeredStudentResult = await axios.post(process.env.VUE_APP_BACKEND_SERVER + "/api/student/course_code/",{
+      //     course_code,
+      // });
+      // console.log(registeredStudentResult);
+      // //return registered students
+      // this.registeredStudents = registeredStudentResult.data.students;
 
-      // logic for find absent student list
-      var flag,i,j;
-      for ( i = 0 ; i < this.registeredStudents.length; i++ ) {
-        flag = 0;
-        for (  j = 0; j < this.recognizedStudents.length;  j++ ) {
-          if(this.registeredStudents[i].registration_no ==  this.recognizedStudents[j]){
-            flag = 1;
-          }  
-        }
-        if(flag == 0){
-          this.absentStudents.push(this.registeredStudents[i]); 
-        }
-      }    
+      // // logic for find absent student list
+      // var flag,i,j;
+      // for ( i = 0 ; i < this.registeredStudents.length; i++ ) {
+      //   flag = 0;
+      //   for (  j = 0; j < this.recognizedStudents.length;  j++ ) {
+      //     if(this.registeredStudents[i].registration_no ==  this.recognizedStudents[j]){
+      //       flag = 1;
+      //     }  
+      //   }
+      //   if(flag == 0){
+      //     this.absentStudents.push(this.registeredStudents[i]); 
+      //   }
+      // }    
 
-      //Add unregistered
+      // //Add unregistered
 
-      //find present students
-      this.presentStudents = this.registeredStudents.length - this.absentStudents.length;
+      // //find present students
+      // this.presentStudents = this.registeredStudents.length - this.absentStudents.length;
   
-      //find the attendance presentage
-      this.registeredStudentsLength = this.registeredStudents.length;
+      // //find the attendance presentage
+      // this.registeredStudentsLength = this.registeredStudents.length;
 
     },
     addUnregisteredStudents(){
@@ -386,18 +411,11 @@ export default {
       }
     },
     changedLevel(event){
+      console.log(event);
       this.selectedLevel = event;
     },
     changedCourseCode(event){
       this.selectedCourseCode = event;
-    },
-    //start_time time picker
-    STtimeHandler (val) {
-      this.STenteredValue = val;
-    },
-    //end_time time picker
-    ETtimeHandler (val) {
-      this.ETenteredValue = val;
     },
     //stepper 2 camera methods
     onCapture() {  

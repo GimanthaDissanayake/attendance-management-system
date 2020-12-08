@@ -25,7 +25,7 @@
                                  <p>Date :</p>
                              </v-col>
                              <v-col>
-                                 <v-chip>{{date}}</v-chip>
+                                 <v-chip>{{selectedDate}}</v-chip>
                              </v-col>
                              <v-col>
                                  <p>Overall Attendance Percentage :</p>
@@ -65,21 +65,21 @@ export default {
             course:[],
             students: [],
             headers: viewAttendanceSheet.headers,
-            dates:[] ,
+            selectedDate:'' ,
         }
     },
     methods: {
-        ...mapGetters(["getCourse"],["getUser"],["getDate"]),
+        ...mapGetters(["getCourse"],["getUser"],["getSelectedDate"]),
         
          async setData(){
            this.course = this.getCourse();
-          this.dates = this.getDate();
+          this.selectedDate = this.$store.state.selectedDate;
             // const course_code = this.course.course_code;
              const co_id = this.course.co_id;
-             const date = this.dates.date;
+            //  const date = this.dates.date;
 
         //     this.date = this.getDate();
-             console.log(this.dates);
+             console.log(this.selectedDate);
              console.log(this.course);
         
         },
