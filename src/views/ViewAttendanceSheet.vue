@@ -1,6 +1,6 @@
 <template>
     <v-container>
-        <p class='text-h5'>Attendance Sheet</p> 
+        <p class='text-h5'>Attendance Sheet - {{selectedDate}}</p> 
 
         <v-card>
             <v-container>
@@ -28,10 +28,10 @@
                                  <v-chip>{{selectedDate}}</v-chip>
                              </v-col>
                              <v-col>
-                                 <p>Overall Attendance Percentage :</p>
+                                 <p>Attendance Percentage :</p>
                              </v-col>
                              <v-col>
-                                 <v-chip>{{course.overall_attendance_percentage}}</v-chip>
+                                 <v-chip>{{percentage+'%'}}</v-chip>
                              </v-col>
                          </v-row>
                     </v-col>
@@ -45,6 +45,13 @@
                         :headers="headers"
                         :items="students"
                         :items-per-page="5" >
+                        <template v-slot:item.status="{ item }">
+                                <v-chip
+                                :color="getColor(item.status)"
+                                dark>
+                                    {{ item.status }}
+                                </v-chip>
+                            </template>
                         </v-data-table>
                     </v-card>
                 </v-col>
@@ -65,30 +72,50 @@ export default {
             students: [],
             headers: viewAttendanceSheet.headers,
             selectedDate:'' ,
+            count:0,
+            total:'',
+            percentage:'',
         
         }
     },
     methods: {
         ...mapGetters(["getCourse"],["getUser"],["getSelectedDate"]),
+        getColor(status){
+            if(status == 'present') return 'green'
+            else return 'red'
+        },
         
          async setData(){
            this.course = this.getCourse();
           this.selectedDate = this.$store.state.selectedDate;
-            // const course_code = this.course.course_code;
-             const co_id = this.course.co_id;
-              const date = this.selectedDate;
-        //     this.date = this.getDate();
-             console.log(this.selectedDate);
-             console.log(this.course.co_id);
-
+         
+            const co_id = this.course.co_id;
+            const date = this.selectedDate;
+    
              return await axios.post(process.env.VUE_APP_BACKEND_SERVER + "/api/student/attendance_sheet/",{
              co_id,
              date
              })
              .then(async result => {
-                this.students = result.data.attendance;
-                console.log(result);
-               // this.date_time = attendanceData.date_time;               
+                const newResult = result.data.attendance;
+                this.total = newResult.length;
+            
+                const changedStatus = newResult.map((attendanceDetail) => {
+                    if(attendanceDetail.status === 1){
+                        attendanceDetail.status = 'present'
+                        this.count++;
+                    }
+                    else
+                        attendanceDetail.status = 'absent';
+
+                    return attendanceDetail;
+                })
+                return await changedStatus;              
+            })
+            .then(ns => {
+                this.students = ns;
+                //count attendance percentage
+                this.percentage = (this.count/this.total)*100;
             })
             .catch(err => {
                 console.log(err);
