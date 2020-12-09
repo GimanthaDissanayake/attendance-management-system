@@ -46,7 +46,7 @@
                                                     <p>Attendance Percentage :</p>
                                                 </v-col>
                                                 <v-col>
-                                                    <v-chip>3</v-chip>
+                                                    <v-chip></v-chip>
                                                 </v-col>
                                             </v-row>
                                         </v-col>
@@ -67,7 +67,10 @@
                                     
                                     <v-row>
                                         <v-col cols="12" sm="4" md="12">
-                                            <v-btn class="primary">
+                                            <v-btn 
+                                            class="primary"
+                                            @click="regbtn"
+                                            >
                                                 view Registered Students
                                             </v-btn>                   
                                         </v-col>
@@ -92,7 +95,9 @@
                         :headers="headers"
                         :items="dates"
                         v-on:click:row="selectDate"
-                        :items-per-page="5" >
+                        :items-per-page="5" 
+                    
+                        >
                         </v-data-table>
                     </v-card>
                 </v-col>
@@ -126,14 +131,12 @@ export default {
             this.course = this.getCourse();
             const course_code = this.course.course_code;
             const co_id = this.course.co_id;
-            //console.log(co_id);
-            //const course_code = this.course.course_code;
+            console.log(this.course)
             return await axios.post(process.env.VUE_APP_BACKEND_SERVER + "/api/student/course_code/",{
              course_code,
              })
              .then(result => {
                  const list = result.data.students;
-                //this.ListReg = "heshan";
                 this.ListReg = list.length;
              })
              .catch(err => {
@@ -173,6 +176,9 @@ export default {
     
           this.$router.push("/ViewAttendanceSheet");
         
+      },
+      regbtn(){
+          this.$router.push("/ViewRegisteredStudents");
       }
     },
     
