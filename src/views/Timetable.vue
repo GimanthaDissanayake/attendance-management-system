@@ -61,7 +61,7 @@ export default {
             id,
             role
             });
-            this.events = result.data.courses;   
+            this.events = result.data.courses;  
             
             if(user.role === "student"){
             const registration_no = user.username;
@@ -69,6 +69,14 @@ export default {
                 registration_no,
             });
             this.courses = result.data.courses;
+            //console.log(this.courses)
+            // else{
+            //     const lecturer_id = user.username;
+            //     const result = await axios.post(process.env.VUE_APP_BACKEND_SERVER + "/api/student/lecturer_id/",{
+            //     lecturer_id,
+            // });
+            // this.courses = result.data.courses;
+            // console.log(this.courses)
             }
         }
     },

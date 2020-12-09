@@ -39,24 +39,38 @@
                             </v-text-field>
                         </v-card-title>
                         <v-data-table
-                        :headers="headers"
-                        :items="students"
-                        :search="search"
-                        :items-per-page="5" >
-                            <template v-slot:item.percentage="{ item }">
+                            :search="search"
+                            :headers="headers"
+                            :items="student"
+                            
+                            :items-per-page="5" >
+
+                            <template v-slot:student.percentage="{ student }">
                                 <v-chip
-                                :color="getColor(item.percentage)"
+                                :color="getColor(student.percentage)"
                                 dark>
-                                    {{ item.percentage }}
+                                    {{ student.percentage }}
                                 </v-chip>
                             </template>
-                            <template v-slot:item.alert="{ item }">
+                             <template v-slot:item.actions="{ item }">            
                                 <v-btn
-                                    :color="red"
-                                >
-                                    {{ item.alert }}
+                                    small
+                                    @click="deleteItem(item)">
+                                    <v-icon>mdi-message-alert</v-icon>
+                                    Send Alert      
                                 </v-btn>
                             </template>
+                            
+                            
+                            <template>            
+                                <v-btn
+                                    small
+                                    >
+                                        <v-icon>mdi-delete</v-icon>
+                                            Send Alert      
+                                </v-btn>            
+                            </template>
+
                         </v-data-table>
                     </v-card>
                 </v-col>
@@ -68,22 +82,55 @@
 
 <script>
 import { viewRegisteredStudents } from '../data/data';
+import axios from 'axios';
+import { mapGetters } from "vuex";
 export default {
     data() {
         return {
-            search: '',
-            course:viewRegisteredStudents.course,
-            students: viewRegisteredStudents.students,
+            course:[],
+            student:[],
+            search:'',
+            //search: '',
+           // course:viewRegisteredStudents.course,
+            //students: viewRegisteredStudents.students,
             headers:viewRegisteredStudents.headers,
             
         }
     },
     methods: {
+        ...mapGetters(["getCourse"]),
+        
         getColor(percentage){
             if(percentage < 80) return 'red'
             else if(percentage > 80) return 'green'
             else return 'orange'
+        },
+        async setData(){
+            this.course = this.getCourse();
+            //this.selectedDate = this.$store.state.selectedDate;
+            const course_code = this.course.course_code;
+            //const co_id = this.course.co_id;
+            //const date = this.selectedDate;
+        //     this.date = this.getDate();
+            // console.log(this.selectedDate);
+            console.log(this.course.co_id);
+            //const year = '2020';
+
+             return await axios.post(process.env.VUE_APP_BACKEND_SERVER + "/api/student/course_code/",{
+             course_code,
+             })
+             .then(async result => {
+                this.student = result.data.students;
+                console.log(result);
+               // this.date_time = attendanceData.date_time;               
+            })
+            .catch(err => {
+                console.log(err);
+            });
         }
+    },
+    async created() {
+        await this.setData();
     }
 }
 </script>

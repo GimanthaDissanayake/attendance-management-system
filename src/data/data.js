@@ -392,39 +392,34 @@ students: [
         registration_no : 'SC/2017/10100',
         name: 'A.B.C silva',
         percentage: '80',
-        alert: 'Send Alert'
 
     },
     {
         registration_no : 'SC/2017/10200',
         name: 'A.B.C silva',
         percentage: '80',
-        alert: 'Send Alert'
     },
     {
         registration_no : 'SC/2017/10100',
         name: 'A.B.C silva',
         percentage: '100',
-        alert: 'Send Alert'
     },
     {
         registration_no : 'SC/2017/10100',
         name: 'A.B.C silva',
         percentage: '80',
-        alert: 'Send Alert'
     },
     {
         registration_no : 'SC/2017/10100',
         name: 'A.B.C silva',
         percentage: '70',
-        alert: 'Send Alert'
     },
 ],
 headers: [
     { text: 'Registration Number', align: 'start',  value: 'registration_no'},
-    { text: 'Name', value: 'name'},
+    { text: 'Name', value: 'student_name'},
     { text: 'Attendance Percentage', value: 'percentage'},
-    { text: 'Send alert', value:'alert'}
+    { text: 'Send alert', value:'actions'}
 ]
 }
 
