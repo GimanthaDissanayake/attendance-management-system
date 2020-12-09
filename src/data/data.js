@@ -6,7 +6,7 @@ export const navBar = {
         { title: 'Mentor Groups', icon: 'mdi-account-supervisor', path: '/viewMentorGroups', access: ['mentor','dh','yes']},
         { title: 'View Timetable', icon: 'mdi-timetable', path: '/timetable', access: ['student','lecturer','mentor','yes']},
         { title: 'Mahapola Eligibility', icon: 'mdi-cash', path: '/viewMahapolaEligibility', access: ['student','yes']},
-        { title: 'View Students', icon: 'mdi-account', path: '/viewAllStudents', access: ['lecturer','mentor','dh','yes']},
+        { title: 'View Students', icon: 'mdi-account', path: '/viewAllStudents', access: ['dh','yes']},
         { title: 'Register Students', icon: 'mdi-account', path: '/RegisterUsers', access: ['admin','yes']},
         { title: 'Mahapola Duration', icon: 'mdi-calendar-edit', path: '/setMahapolaDuration', access: ['admin','yes']},
     ]
