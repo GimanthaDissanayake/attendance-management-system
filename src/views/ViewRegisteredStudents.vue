@@ -39,9 +39,10 @@
                             </v-text-field>
                         </v-card-title>
                         <v-data-table
+                            :search="search"
                             :headers="headers"
                             :items="student"
-                            :search="search"
+                            
                             :items-per-page="5" >
 
                             <template v-slot:student.percentage="{ student }">
@@ -88,6 +89,7 @@ export default {
         return {
             course:[],
             student:[],
+            search:'',
             //search: '',
            // course:viewRegisteredStudents.course,
             //students: viewRegisteredStudents.students,

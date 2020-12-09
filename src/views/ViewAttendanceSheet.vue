@@ -2,11 +2,11 @@
     <v-container>
         <p class='text-h5'>Attendance Sheet - {{selectedDate}}</p> 
 
-        <v-card>
-            <v-container>
-                <v-row>
-                     <v-col cols="14" sm="7" md="7">
-                         <v-row>
+        <v-card class="mx-4 mb-4 text-body-2">
+            <v-container align="center" justify="center">
+                <v-row cols="14" sm="7" md="7">
+                     <v-col>
+                         <v-row align="center" justify="center">
                              <v-col>
                                  <p>Course Code :</p>
                              </v-col>
@@ -20,7 +20,7 @@
                                  <v-chip>{{course.course_title}}</v-chip>
                              </v-col>
                          </v-row>
-                         <v-row>
+                         <v-row align="center" justify="center">
                              <v-col>
                                  <p>Date :</p>
                              </v-col>
@@ -42,6 +42,9 @@
                 <v-col cols="12" sm="8" md="8">
                     <v-card>
                         <v-data-table
+                        v-model="search"
+                        loading="isLoading"
+                        :search="search"
                         :headers="headers"
                         :items="students"
                         :items-per-page="5" >
@@ -122,6 +125,17 @@ export default {
             });
         
         },
+
+
+        
+        // resetCourses(){
+        //     this.selectedLevel = ''
+        //     this.filteredCourses = this.courses
+        // },
+        // resetDisplayed(){
+        //     this.filteredCourses = this.courses.filter(course => course.level === this.selectedLevel)
+        // },
+
         
     },
     
