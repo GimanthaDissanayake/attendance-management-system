@@ -1,59 +1,63 @@
 <template>
   <v-container>
-    <p class='text-h5'>Set Duration for Mahapola Eligibility</p> <br>
-    <v-card>
-      <v-row>
-        <v-spacer></v-spacer>
-        <v-col xs="12" md="4">
-          <span class="headline mb-2">Start Date</span>
-          <v-row justify="center">
-            <v-date-picker 
-              v-model="start_date"
-              elevation="10"
-              :min="start_min"
-              :max="start_max" ></v-date-picker>
+    <v-row>
+      <p class='text-h5'>Set Duration for Mahapola Eligibility</p> <br>
+    </v-row>
+    <v-row>
+      <v-col>
+        <v-card>
+          <v-row>
+            <v-spacer></v-spacer>
+            <v-col xs="12" md="4">
+              <span class="headline mb-2">Start Date</span>
+              <v-row justify="center">
+                <v-date-picker 
+                  v-model="start_date"
+                  elevation="10"
+                  :min="start_min"
+                  :max="start_max" ></v-date-picker>
+              </v-row>
+            </v-col>
+            <v-spacer></v-spacer>
+            <v-col xs="12" md="4">
+              <span class="headline mb-2">End Date</span>
+              <v-row justify="center">
+                <v-date-picker 
+                  v-model="end_date"
+                  elevation="10"
+                  :min="end_min"
+                  :max="end_max"></v-date-picker>
+              </v-row>
+            </v-col> 
+            <v-spacer></v-spacer>       
           </v-row>
-        </v-col>
-        <v-spacer></v-spacer>
-        <v-col xs="12" md="4">
-          <span class="headline mb-2">End Date</span>
-          <v-row justify="center">
-            <v-date-picker 
-              v-model="end_date"
-              elevation="10"
-              :min="end_min"
-              :max="end_max"></v-date-picker>
-          </v-row>
-        </v-col> 
-        <v-spacer></v-spacer>       
-      </v-row>
-      <v-card-actions>
-        <v-spacer></v-spacer>
-        <v-btn 
-          class="primary" 
-          v-on:click="setDate">
-          SET DATES
-        </v-btn>
-        <v-spacer></v-spacer>
-      </v-card-actions>
-    </v-card>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn 
+              class="primary" 
+              v-on:click="setDate">
+              SET DATES
+            </v-btn>
+            <v-spacer></v-spacer>
+          </v-card-actions>
+        </v-card>
+      </v-col>
+    </v-row>
     <!-- below is shown when data insert is successfull -->
-    <div class="text-center" v-if="snackbar">
-      <v-snackbar
-        color="primary"
-        v-model="snackbar"
-        :timeout="timeout">
-        {{ text }}
-        <template v-slot:action="{ attrs }">
-          <v-btn
-            text
-            v-bind="attrs"
-            @click="snackbar = false">
-            Close
-          </v-btn>
-        </template>
-      </v-snackbar>
-  </div>
+    <v-snackbar
+      color="primary"
+      v-model="snackbar"
+      :timeout="timeout">
+      {{ text }}
+      <template v-slot:action="{ attrs }">
+        <v-btn
+          text
+          v-bind="attrs"
+          @click="snackbar = false">
+          Close
+        </v-btn>
+      </template>
+    </v-snackbar>
   </v-container>
 </template>
 

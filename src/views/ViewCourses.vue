@@ -1,72 +1,79 @@
 <template>
   <v-container>
-    <p class='text-h5'>My Courses</p>      
+    <v-row>
+      <p class='text-h5'>My Courses</p>  
+    </v-row>    
+    <v-row>
+      <v-col>
+        <v-card>
+          <v-card-title>
+            <v-row cols=12>
+              <v-col cols=2 v-show="showYear">
+                <v-select
+                  :items="years"
+                  label="Select Year"
+                  outlined
+                  clearable
+                  v-on:change="filterYears"
+                  v-on:click:clear="resetYear">
+                </v-select>
+              </v-col>
+              <v-col cols=2>
+                <v-select
+                  :items="levels"
+                  label="Select Level"
+                  outlined
+                  clearable
+                  v-on:change="filterLevels"
+                  v-on:click:clear="resetCourses">
+                </v-select>
+              </v-col>
+              <v-col cols=2>
+                <v-select
+                  :items="semesters"
+                  label="Select Semester"
+                  outlined
+                  clearable
+                  :disabled = "this.selectedLevel==''"
+                  v-on:change="filterSemesters"
+                  v-on:click:clear="resetDisplayed">
+                </v-select>
+              </v-col>
+              <v-col>
+                <v-text-field
+                  v-model="search"
+                  label="Search"
+                  placeholder="Enter Course Code or Course Title to search"
+                  append-icon="mdi-magnify"
+                  outlined
+                  clearable
+                  single-line>
+                </v-text-field>
+              </v-col>
+            </v-row>       
+          </v-card-title>
 
-    <v-card>
-      <v-card-title>
-        <v-row cols=12>
-          <v-col cols=2 v-show="showYear">
-            <v-select
-              :items="years"
-              label="Select Year"
-              outlined
-              clearable
-              v-on:change="filterYears"
-              v-on:click:clear="resetYear">
-            </v-select>
-          </v-col>
-          <v-col cols=2>
-            <v-select
-              :items="levels"
-              label="Select Level"
-              outlined
-              clearable
-              v-on:change="filterLevels"
-              v-on:click:clear="resetCourses">
-            </v-select>
-          </v-col>
-          <v-col cols=2>
-            <v-select
-              :items="semesters"
-              label="Select Semester"
-              outlined
-              clearable
-              :disabled = "this.selectedLevel==''"
-              v-on:change="filterSemesters"
-              v-on:click:clear="resetDisplayed">
-            </v-select>
-          </v-col>
-          <v-col>
-            <v-text-field
-              v-model="search"
-              label="Search"
-              placeholder="Enter Course Code or Course Title to search"
-              append-icon="mdi-magnify"
-              outlined
-              clearable
-              single-line>
-            </v-text-field>
-          </v-col>
-        </v-row>       
-      </v-card-title>
-
-      <v-data-table
-        loading="isLoading"
-        :headers="headers"
-        :items="filteredCourses"
-        :items-per-page="10"
-        :search="search"
-        v-on:click:row="selectCourse"
-        class="elevation-1">
-        <template v-slot:item.attendance_percentage="{ item }">
-            <v-chip
-            :color="getColor(item.attendance_percentage)"
-            dark>
-                {{ item.attendance_percentage }}
-            </v-chip>
-        </template>
-      </v-data-table>
-    </v-card>    
+          <v-data-table
+            loading="isLoading"
+            :headers="headers"
+            :items="filteredCourses"
+            :items-per-page="10"
+            :search="search"
+            v-on:click:row="selectCourse"
+            class="elevation-1">
+            <template v-slot:item.attendance_percentage="{ item }">
+                <v-chip
+                :color="getColor(item.attendance_percentage)"
+                dark>
+                    {{ item.attendance_percentage }}
+                </v-chip>
+            </template>
+          </v-data-table>
+        </v-card>  
+      </v-col>
+      
+    </v-row>
+      
   </v-container>
 </template>
 
@@ -106,7 +113,7 @@ import { viewCourses } from "../data/data";
           const result = await axios.post(process.env.VUE_APP_BACKEND_SERVER + "/api/student/courses/",{
             registration_no,
           });
-          console.log(result.data);
+          //console.log(result.data);
           this.courses = result.data.courses;
         } else if (user.role != "admin") {
           const lecturer_id = user.username;

@@ -1,262 +1,270 @@
 <template>
   <v-container>
-    <p class='text-h5'>Mark Attendance</p> 
-    <v-stepper v-model="e1">
-      <v-stepper-header>
-        <v-stepper-step
-          :complete="e1 > 1"
-          step="1">
-          Select the Course Unit
-        </v-stepper-step>
-        <v-divider></v-divider>
-        <v-stepper-step
-          :complete="e1 > 2"
-          step="2">
-          Mark Attendance
-        </v-stepper-step>
-        <v-divider></v-divider>
-        <v-stepper-step step="3">
-          Confirm Attendance
-        </v-stepper-step>
-      </v-stepper-header>
+    <v-row>
+      <p class='text-h5'>Mark Attendance</p> 
+    </v-row>
+    <v-row>
+      <v-col>
+        <v-stepper v-model="e1">
+          <v-stepper-header>
+            <v-stepper-step
+              :complete="e1 > 1"
+              step="1">
+              Select the Course Unit
+            </v-stepper-step>
+            <v-divider></v-divider>
+            <v-stepper-step
+              :complete="e1 > 2"
+              step="2">
+              Mark Attendance
+            </v-stepper-step>
+            <v-divider></v-divider>
+            <v-stepper-step step="3">
+              Confirm Attendance
+            </v-stepper-step>
+          </v-stepper-header>
 
-      <v-stepper-items>
-        <v-stepper-content step="1">        
-          <v-container>
-            <v-progress-linear v-if="isLoading"
-            color="primary"
-            indeterminate
-            rounded
-            height="6"
-            ></v-progress-linear>
-            <v-row wrap style="padding: 15px">
-              <v-col md3 xs12>
-                Course details:
-              </v-col>
-              <v-col md3 xs12>
-                <v-select 
-                  :items="v_select_course_codes"
-                  item-text="course_code" 
-                  item-value="course_code"
-                  :placeholder="courses[0].course_code"
-                  label="Select Course"
-                  @input="changedCourseCode"/>            
-              </v-col>
-              <v-col md3 xs12>
-                <v-select 
-                  :items="v_select_type"
-                  item-text="" 
-                  item-value=""
-                  :placeholder="courses[0].type"
-                  label="Select Type"
-                  @input="changedType"/>
-              </v-col>                
-              <v-col md3 xs12>
-                <v-select 
-                  :items="v_select_level"
-                  item-text="" 
-                  item-value=""
-                  :placeholder="courses[0].level"
-                  label="Select Level"
-                  @input="changedLevel"/>                  
-              </v-col>
-            </v-row>
-            <v-row wrap style="padding: 15px">
-              <v-spacer></v-spacer>
-              <v-col>
+          <v-stepper-items>
+            <v-stepper-content step="1">        
+              <v-container>
+                <v-progress-linear v-if="isLoading"
+                color="primary"
+                indeterminate
+                rounded
+                height="6"
+                ></v-progress-linear>
+                <v-row wrap style="padding: 15px">
+                  <v-col md3 xs12>
+                    Course details:
+                  </v-col>
+                  <v-col md3 xs12>
+                    <v-select 
+                      :items="v_select_course_codes"
+                      item-text="course_code" 
+                      item-value="course_code"
+                      :placeholder="courses[0].course_code"
+                      label="Select Course"
+                      @input="changedCourseCode"/>            
+                  </v-col>
+                  <v-col md3 xs12>
+                    <v-select 
+                      :items="v_select_type"
+                      item-text="" 
+                      item-value=""
+                      :placeholder="courses[0].type"
+                      label="Select Type"
+                      @input="changedType"/>
+                  </v-col>                
+                  <v-col md3 xs12>
+                    <v-select 
+                      :items="v_select_level"
+                      item-text="" 
+                      item-value=""
+                      :placeholder="courses[0].level"
+                      label="Select Level"
+                      @input="changedLevel"/>                  
+                  </v-col>
+                </v-row>
+                <v-row wrap style="padding: 15px">
+                  <v-spacer></v-spacer>
+                  <v-col>
+                    <v-row>
+                      <v-col>
+                        Start Time:
+                      </v-col>
+                      <v-col>
+                        <v-time-picker
+                          v-model="startTime"
+                          format="24hr">
+                        </v-time-picker>
+                      </v-col>
+                    </v-row>                     
+                  </v-col>
+                  <v-spacer></v-spacer>
+                  <v-col>
+                    <v-row>
+                      <v-col>
+                        End Time:
+                      </v-col>
+                      <v-col>
+                        <v-time-picker
+                          v-model="endTime"
+                          format="24hr">
+                        </v-time-picker>
+                      </v-col>
+                    </v-row>               
+                  </v-col>
+                  <v-spacer></v-spacer>              
+                </v-row>  
                 <v-row>
-                  <v-col>
-                    Start Time:
-                  </v-col>
-                  <v-col>
-                    <v-time-picker
-                      v-model="startTime"
-                      format="24hr">
-                    </v-time-picker>
-                  </v-col>
-                </v-row>                     
-              </v-col>
-              <v-spacer></v-spacer>
-              <v-col>
-                <v-row>
-                  <v-col>
-                    End Time:
-                  </v-col>
-                  <v-col>
-                    <v-time-picker
-                      v-model="endTime"
-                      format="24hr">
-                    </v-time-picker>
-                  </v-col>
-                </v-row>               
-              </v-col>
-              <v-spacer></v-spacer>              
-            </v-row>  
-            <v-row>
-              <v-spacer></v-spacer>
-                <v-btn
-                  color="primary"
-                  @click="setRegisteredStudentData">
-                    Mark attendance
-                </v-btn>
-            </v-row>
-          </v-container>
-        </v-stepper-content>
-
-        <v-stepper-content step="2">
-          <v-container>
-            <v-progress-linear v-if="isLoading"
-            color="primary"
-            indeterminate
-            rounded
-            height="6"
-            ></v-progress-linear>
-            <!-- <v-row>
-              <v-select
-              :items="devices.deviceId"
-                label="Select Camera Device"></v-select>
-            </v-row> -->
-            <v-row align="center" justify="center">
-              <v-col 
-                cols="12"
-                sm="6">
-                <vue-web-cam
-                  ref="webcam"
-                  :device-id="deviceId"  
-                  @cameras="onCameras"
-                />
-                  <!--before@cameras @error="onError" -->
-                  <!--afterdevice-id @stopped="onStopped" -->
-                  <!--secondevent @started="onStarted" -->
-                  <!--lastevent @camera-change="onCameraChange" -->
-              </v-col>
-              <v-col 
-                cols="12"
-                sm="6">
-                  <v-img :src="img"></v-img>
-              </v-col>
-            </v-row>
-            <v-row  align="center" justify="center">
-              <v-col>
-                <v-btn
-                @click="e1=1; img=null;">
-                  Previous
-                </v-btn>
-              </v-col>
-              <v-col>
-                <v-btn   
-                class="primary"     
-                @click="onCapture"
-                text>
-                  <span v-if="img === null">Mark attendance</span>
-                  <span v-else >Retake Image</span>
-                </v-btn> 
-              </v-col>
-              <v-col>
-                <v-btn
-                  color="primary"
-                  v-if="img != null"
-                  @click="submitImage">
-                  Continue
-                </v-btn>
-              </v-col>
-            </v-row> 
-          </v-container>       
-        </v-stepper-content>
-
-        <v-stepper-content step="3">
-          <v-container>
-            <v-progress-linear v-if="isLoading"
-            color="primary"
-            indeterminate
-            rounded
-            height="6"
-            ></v-progress-linear>
-            <v-row>
-              <v-col>
-                Number of present students : {{ presentStudents}}
-              </v-col>
-              <v-spacer></v-spacer>
-              <v-col>
-                Attendance percentage : {{ (presentStudents / registeredStudentsLength ) * 100  }} %
-              </v-col> 
-            </v-row>
-            <br>
-            <v-row width=100%>
-              <v-col>
-                <v-data-table
-                  :headers="headers"
-                  :items="absentStudents"
-                  sort-by="registraion_no"
-                  class="elevation-1"
-                  flat>
-                  <template v-slot:top>
-                    <v-toolbar
-                    flat>
-                      <v-toolbar-title>Absent Students List</v-toolbar-title>
-                      <v-spacer></v-spacer>
-                      <v-dialog
-                        v-model="dialog"
-                        max-width="500px">
-                    
-                      </v-dialog>
-                      <v-dialog v-model="dialogDelete" max-width="500px">
-                        <v-card>
-                          <v-card-title class="headline">Are you sure you want to delete this item?</v-card-title>
-                          <v-card-actions>
-                            <v-spacer></v-spacer>
-                              <v-btn color="blue darken-1" text @click="closeDelete">Cancel</v-btn>
-                              <v-btn color="blue darken-1" text @click="deleteItemConfirm">OK</v-btn>
-                            <v-spacer></v-spacer>
-                          </v-card-actions>
-                        </v-card>
-                      </v-dialog>
-                    </v-toolbar>
-                  </template>
-                  <template v-slot:item.actions="{ item }">            
+                  <v-spacer></v-spacer>
                     <v-btn
-                      small
-                      @click="deleteItem(item)">
-                      <v-icon>mdi-delete</v-icon>
-                      Remove      
-                    </v-btn>            
-                  </template>
-                </v-data-table>
-              </v-col>              
-            </v-row>
-            <br>
-            Add unregistered students
-            <v-row>
-              <v-col>
-                <v-text-field
-                  label="SC/20XX/XXXX"
-                  v-model="addUnreg">
-                </v-text-field>     
-              </v-col>
-              <v-col>
-                <v-btn
-                  @click="addUnregisteredStudents">
-                  Add
-                </v-btn>
-              </v-col>
-              <v-col>
-                <v-btn
-                @click="e1=2">
-                  Previous
-                </v-btn>
-              </v-col>
-              <v-col>
-                <v-btn
-                  color="primary"
-                  @click="uploadAttendance">
-                  Confirm Attendance
-                </v-btn>
-              </v-col>
-            </v-row>
-          </v-container>
-        </v-stepper-content>
-      </v-stepper-items>
-    </v-stepper>
+                      color="primary"
+                      @click="setRegisteredStudentData">
+                        Mark attendance
+                    </v-btn>
+                </v-row>
+              </v-container>
+            </v-stepper-content>
+
+            <v-stepper-content step="2">
+              <v-container>
+                <v-progress-linear v-if="isLoading"
+                color="primary"
+                indeterminate
+                rounded
+                height="6"
+                ></v-progress-linear>
+                <!-- <v-row>
+                  <v-select
+                  :items="devices.deviceId"
+                    label="Select Camera Device"></v-select>
+                </v-row> -->
+                <v-row align="center" justify="center">
+                  <v-col 
+                    cols="12"
+                    sm="6">
+                    <vue-web-cam
+                      ref="webcam"
+                      :device-id="deviceId"  
+                      @cameras="onCameras"
+                    />
+                      <!--before@cameras @error="onError" -->
+                      <!--afterdevice-id @stopped="onStopped" -->
+                      <!--secondevent @started="onStarted" -->
+                      <!--lastevent @camera-change="onCameraChange" -->
+                  </v-col>
+                  <v-col 
+                    cols="12"
+                    sm="6">
+                      <v-img :src="img"></v-img>
+                  </v-col>
+                </v-row>
+                <v-row  align="center" justify="center">
+                  <v-col>
+                    <v-btn
+                    @click="e1=1; img=null;">
+                      Previous
+                    </v-btn>
+                  </v-col>
+                  <v-col>
+                    <v-btn   
+                    class="primary"     
+                    @click="onCapture"
+                    text>
+                      <span v-if="img === null">Mark attendance</span>
+                      <span v-else >Retake Image</span>
+                    </v-btn> 
+                  </v-col>
+                  <v-col>
+                    <v-btn
+                      color="primary"
+                      v-if="img != null"
+                      @click="submitImage">
+                      Continue
+                    </v-btn>
+                  </v-col>
+                </v-row> 
+              </v-container>       
+            </v-stepper-content>
+
+            <v-stepper-content step="3">
+              <v-container>
+                <v-progress-linear v-if="isLoading"
+                color="primary"
+                indeterminate
+                rounded
+                height="6"
+                ></v-progress-linear>
+                <v-row>
+                  <v-col>
+                    Number of present students : {{ presentStudents}}
+                  </v-col>
+                  <v-spacer></v-spacer>
+                  <v-col>
+                    Attendance percentage : {{ (presentStudents / registeredStudentsLength ) * 100  }} %
+                  </v-col> 
+                </v-row>
+                <br>
+                <v-row width=100%>
+                  <v-col>
+                    <v-data-table
+                      :headers="headers"
+                      :items="absentStudents"
+                      sort-by="registraion_no"
+                      class="elevation-1"
+                      flat>
+                      <template v-slot:top>
+                        <v-toolbar
+                        flat>
+                          <v-toolbar-title>Absent Students List</v-toolbar-title>
+                          <v-spacer></v-spacer>
+                          <v-dialog
+                            v-model="dialog"
+                            max-width="500px">
+                        
+                          </v-dialog>
+                          <v-dialog v-model="dialogDelete" max-width="500px">
+                            <v-card>
+                              <v-card-title class="headline">Are you sure you want to delete this item?</v-card-title>
+                              <v-card-actions>
+                                <v-spacer></v-spacer>
+                                  <v-btn color="blue darken-1" text @click="closeDelete">Cancel</v-btn>
+                                  <v-btn color="blue darken-1" text @click="deleteItemConfirm">OK</v-btn>
+                                <v-spacer></v-spacer>
+                              </v-card-actions>
+                            </v-card>
+                          </v-dialog>
+                        </v-toolbar>
+                      </template>
+                      <template v-slot:item.actions="{ item }">            
+                        <v-btn
+                          small
+                          @click="deleteItem(item)">
+                          <v-icon>mdi-delete</v-icon>
+                          Remove      
+                        </v-btn>            
+                      </template>
+                    </v-data-table>
+                  </v-col>              
+                </v-row>
+                <br>
+                Add unregistered students
+                <v-row>
+                  <v-col>
+                    <v-text-field
+                      label="SC/20XX/XXXX"
+                      v-model="addUnreg">
+                    </v-text-field>     
+                  </v-col>
+                  <v-col>
+                    <v-btn
+                      @click="addUnregisteredStudents">
+                      Add
+                    </v-btn>
+                  </v-col>
+                  <v-col>
+                    <v-btn
+                    @click="e1=2">
+                      Previous
+                    </v-btn>
+                  </v-col>
+                  <v-col>
+                    <v-btn
+                      color="primary"
+                      @click="uploadAttendance">
+                      Confirm Attendance
+                    </v-btn>
+                  </v-col>
+                </v-row>
+              </v-container>
+            </v-stepper-content>
+          </v-stepper-items>
+        </v-stepper>
+      </v-col>
+    </v-row>
+    
+    
     <v-snackbar
     v-model="snackbar"
     :timeout="2000">

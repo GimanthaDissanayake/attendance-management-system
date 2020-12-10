@@ -1,82 +1,79 @@
 <template>
   <v-container>
-    <p class='text-h5'>View Registered Students</p>  
-
-    <v-card class="mx-4 mb-4 text-body-2">
-        <v-container>
-            <v-row>
-                <v-col cols="12" sm="6" md="6">
-                    <v-row>
-                        <v-col>
-                            <p>Course Code :</p>
-                        </v-col>
-                        <v-col>
-                            <v-chip>{{course.course_code}}</v-chip>
-                        </v-col>
-                        <v-col>
-                            <p>Course Title :</p>
-                        </v-col>
-                        <v-col>
-                            <v-chip>{{course.course_title}}</v-chip>
-                        </v-col>
-                    </v-row>                      
-                </v-col>
-            </v-row>
-        </v-container>
-        <v-container>
-            <v-row align="center" justify="center">
-                <v-col cols="12" sm="8" md="8">
-                    <v-card>
-                        <v-card-title>
-                            <v-text-field
-                            v-model="search"
-                            label="Search"
-                            placeholder="Enter Student Registration Number or Name to search"
-                            append-icon="mdi-magnify"
-                            outlined
-                            clearable
-                            single-line>
-                            </v-text-field>
-                        </v-card-title>
-                        <v-data-table
-                            :search="search"
-                            :headers="headers"
-                            :items="student"
-                            
-                            :items-per-page="5" >
-
-                            <template v-slot:student.percentage="{ student }">
-                                <v-chip
-                                :color="getColor(student.percentage)"
-                                dark>
-                                    {{ student.percentage }}
-                                </v-chip>
-                            </template>
-                             <template v-slot:item.actions="{ item }">            
-                                <v-btn
-                                    small
-                                    @click="deleteItem(item)">
-                                    <v-icon>mdi-message-alert</v-icon>
-                                    Send Alert      
-                                </v-btn>
-                            </template>
-                            
-                            
-                            <template>            
-                                <v-btn
-                                    small
-                                    >
-                                        <v-icon>mdi-delete</v-icon>
+    <v-row>
+        <p class='text-h5'>View Registered Students</p>
+    </v-row>
+    <v-row>
+        <v-col>
+            <v-card>
+                <br>
+                <v-row>
+                    <v-spacer></v-spacer>
+                    <v-col>
+                        <p>Course Code :</p>
+                    </v-col>
+                    <v-col>
+                        <v-chip>{{course.course_code}}</v-chip>
+                    </v-col>
+                    <v-spacer></v-spacer>
+                    <v-col>
+                        <p>Course Title :</p>
+                    </v-col>
+                    <v-col>
+                        <v-chip>{{course.course_title}}</v-chip>
+                    </v-col>
+                    <v-spacer></v-spacer>
+                </v-row>
+                <v-row align="center" justify="center">
+                    <v-col cols="12" sm="8" md="8">
+                        <v-card>
+                            <v-card-title>
+                                <v-text-field
+                                    v-model="search"
+                                    label="Search"
+                                    placeholder="Enter Student Registration Number or Name to search"
+                                    append-icon="mdi-magnify"
+                                    outlined
+                                    clearable
+                                    single-line>
+                                </v-text-field>
+                            </v-card-title>
+                            <v-card-text>
+                                <v-data-table
+                                :search="search"
+                                :headers="headers"
+                                :items="student"                            
+                                :items-per-page="5" >
+                                    <template v-slot:student.percentage="{ student }">
+                                        <v-chip
+                                            :color="getColor(student.percentage)"
+                                            dark>
+                                                {{ student.percentage }}
+                                        </v-chip>
+                                    </template>
+                                    <template v-slot:item.actions="{ item }">            
+                                        <v-btn
+                                            small
+                                            @click="deleteItem(item)">
+                                            <v-icon>mdi-message-alert</v-icon>
                                             Send Alert      
-                                </v-btn>            
-                            </template>
-
-                        </v-data-table>
-                    </v-card>
-                </v-col>
-            </v-row>
-          </v-container>
-    </v-card>
+                                        </v-btn>
+                                    </template>
+                                    <template>            
+                                        <v-btn
+                                            small>
+                                                <v-icon>mdi-delete</v-icon>
+                                                Send Alert      
+                                        </v-btn>            
+                                    </template>
+                                </v-data-table>
+                            </v-card-text>                            
+                        </v-card>
+                    </v-col>
+                </v-row>
+            </v-card>
+        </v-col>        
+    </v-row>
   </v-container>
 </template>
 

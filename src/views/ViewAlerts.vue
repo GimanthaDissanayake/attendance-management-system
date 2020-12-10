@@ -1,41 +1,43 @@
 
 <template>
-  <div>
-    <h1 class="subheading grey--text">Alerts</h1>
-      <v-container
-        class="py-8 px-6"
-        fluid
-      > 
-        <v-expansion-panels>
-          <v-expansion-panel
-            v-for="alert in alert"
-            :key="alert.lecturer_id"
-          >
-            <v-expansion-panel-header>
-              <v-list two-line>
-                <v-list-item>
-                  <v-list-item-content>
-                    <v-list-item-title> {{ alert.lecturer_name }}
-                      <div  style="text-align:right">
-                        {{ alert.date }} 
-                      </div>
-                    </v-list-item-title>
-                    <!-- <v-list-item-subtitle >
-                      <div>
-                        {{ alert.msg }} 
-                      </div>
-                    </v-list-item-subtitle> -->
-                    </v-list-item-content>
-                  </v-list-item>
-              </v-list>
-            </v-expansion-panel-header>
-          <v-expansion-panel-content>
-            {{alert.message}}
-          </v-expansion-panel-content>
-        </v-expansion-panel>
-      </v-expansion-panels>
-    </v-container>
-  </div>
+  <v-container>
+    <v-row>
+      <p class='text-h5'>Alerts</p>
+    </v-row>
+    <v-row>
+      <v-col>
+        <v-card>
+          <v-expansion-panels>
+            <v-expansion-panel
+              v-for="alert in alert"
+              :key="alert.lecturer_id">
+                <v-expansion-panel-header>
+                  <v-list two-line>
+                    <v-list-item>
+                      <v-list-item-content>
+                        <v-list-item-title> {{ alert.lecturer_name }}
+                          <div  style="text-align:right">
+                            {{ alert.date }} 
+                          </div>
+                        </v-list-item-title>
+                        <!-- <v-list-item-subtitle >
+                          <div>
+                            {{ alert.msg }} 
+                          </div>
+                        </v-list-item-subtitle> -->
+                        </v-list-item-content>
+                      </v-list-item>
+                  </v-list>
+                </v-expansion-panel-header>
+                <v-expansion-panel-content>
+                  {{alert.message}}
+                </v-expansion-panel-content>
+            </v-expansion-panel>
+          </v-expansion-panels>
+        </v-card>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>

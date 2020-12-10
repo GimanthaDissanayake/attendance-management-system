@@ -1,66 +1,70 @@
 <template>
     <v-container>
-        <p class='text-h5'>Attendance Sheet - {{selectedDate}}</p> 
-
-        <v-card class="mx-4 mb-4 text-body-2">
-            <v-container align="center" justify="center">
-                <v-row cols="14" sm="7" md="7">
-                     <v-col>
-                         <v-row align="center" justify="center">
-                             <v-col>
-                                 <p>Course Code :</p>
-                             </v-col>
-                             <v-col>
-                                 <v-chip>{{course.course_code}}</v-chip>
-                             </v-col>
-                             <v-col>
-                                 <p>Course Title :</p>
-                             </v-col>
-                             <v-col>
-                                 <v-chip>{{course.course_title}}</v-chip>
-                             </v-col>
-                         </v-row>
-                         <v-row align="center" justify="center">
-                             <v-col>
-                                 <p>Date :</p>
-                             </v-col>
-                             <v-col>
-                                 <v-chip>{{selectedDate}}</v-chip>
-                             </v-col>
-                             <v-col>
-                                 <p>Attendance Percentage :</p>
-                             </v-col>
-                             <v-col>
-                                 <v-chip>{{percentage+'%'}}</v-chip>
-                             </v-col>
-                         </v-row>
-                    </v-col>
-                </v-row>
-            </v-container>   
-            <v-container>
-                <v-row align="center" justify="center">
-                <v-col cols="12" sm="8" md="8">
-                    <v-card>
-                        <v-data-table
-                        v-model="search"
-                        loading="isLoading"
-                        :search="search"
-                        :headers="headers"
-                        :items="students"
-                        :items-per-page="5" >
-                        <template v-slot:item.status="{ item }">
-                                <v-chip
-                                :color="getColor(item.status)"
-                                dark>
-                                    {{ item.status }}
-                                </v-chip>
-                            </template>
-                        </v-data-table>
-                    </v-card>
-                </v-col>
-            </v-row>   
-            </v-container> 
-        </v-card> 
+        <v-row>
+            <p class='text-h5'>Attendance Sheet - {{selectedDate}}</p> 
+        </v-row>
+        <v-row>
+            <v-col>
+                <v-card>
+                    <br>
+                    <v-row>
+                        <v-spacer></v-spacer>
+                        <v-col>
+                            <p>Course Code :</p>
+                        </v-col>
+                        <v-col>
+                            <v-chip>{{course.course_code}}</v-chip>
+                        </v-col>
+                        <v-col>
+                            <p>Course Title :</p>
+                        </v-col>
+                        <v-col>
+                            <v-chip>{{course.course_title}}</v-chip>
+                        </v-col>
+                        <v-spacer></v-spacer>
+                    </v-row>
+                    <v-row>
+                        <v-spacer></v-spacer>
+                        <v-col>
+                            <p>Date :</p>
+                        </v-col>
+                        <v-col>
+                            <v-chip>{{selectedDate}}</v-chip>
+                        </v-col>
+                        <v-col>
+                            <p>Attendance Percentage :</p>
+                        </v-col>
+                        <v-col>
+                            <v-chip>{{percentage+'%'}}</v-chip>
+                        </v-col>
+                        <v-spacer></v-spacer>
+                    </v-row>
+                    <v-card-text>
+                        <v-row align="center" justify="center">
+                            <v-col cols="12" sm="8" md="8">
+                                <v-card>
+                                    <v-data-table
+                                        v-model="search"
+                                        loading="isLoading"
+                                        :search="search"
+                                        :headers="headers"
+                                        :items="students"
+                                        :items-per-page="5" >
+                                        <template v-slot:item.status="{ item }">
+                                            <v-chip
+                                                :color="getColor(item.status)"
+                                                dark>
+                                                    {{ item.status }}
+                                            </v-chip>
+                                        </template>
+                                    </v-data-table>
+                                </v-card>
+                            </v-col>
+                        </v-row>   
+                    </v-card-text>                    
+                </v-card> 
+            </v-col>
+        </v-row>
     </v-container>
 </template>
 
