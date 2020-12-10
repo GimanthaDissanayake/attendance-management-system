@@ -108,16 +108,16 @@ export default {
         async setData(){
             this.course = this.getCourse();
             //this.selectedDate = this.$store.state.selectedDate;
-            const course_code = this.course.course_code;
+            const co_id = this.course.co_id;
             //const co_id = this.course.co_id;
             //const date = this.selectedDate;
         //     this.date = this.getDate();
             // console.log(this.selectedDate);
-            console.log(this.course.co_id);
+            //console.log(this.course.co_id);
             //const year = '2020';
 
-             return await axios.post(process.env.VUE_APP_BACKEND_SERVER + "/api/student/course_code/",{
-             course_code,
+             return await axios.post(process.env.VUE_APP_BACKEND_SERVER + "/api/student/co_id/",{
+             co_id,
              })
              .then(async result => {
                 this.student = result.data.students;

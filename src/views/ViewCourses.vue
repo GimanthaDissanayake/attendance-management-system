@@ -59,12 +59,12 @@
         v-on:click:row="selectCourse"
         class="elevation-1">
         <template v-slot:item.attendance_percentage="{ item }">
-                                <v-chip
-                                :color="getColor(item.attendance_percentage)"
-                                dark>
-                                    {{ item.attendance_percentage }}
-                                </v-chip>
-                            </template>
+            <v-chip
+            :color="getColor(item.attendance_percentage)"
+            dark>
+                {{ item.attendance_percentage }}
+            </v-chip>
+        </template>
       </v-data-table>
     </v-card>    
   </v-container>
@@ -106,7 +106,7 @@ import { viewCourses } from "../data/data";
           const result = await axios.post(process.env.VUE_APP_BACKEND_SERVER + "/api/student/courses/",{
             registration_no,
           });
-          //console.log(result.data);
+          console.log(result.data);
           this.courses = result.data.courses;
         } else if (user.role != "admin") {
           const lecturer_id = user.username;
