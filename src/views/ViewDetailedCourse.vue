@@ -58,7 +58,7 @@
                                                     <p>Year :</p>
                                                 </v-col>
                                                 <v-col>
-                                                    <v-chip>2020</v-chip>
+                                                    <v-chip>{{course.year}}</v-chip>
                                                 </v-col>
                                             </v-row>                      
                                         </v-col>

@@ -164,7 +164,8 @@ import { viewCourses } from "../data/data";
           course_title: course.course_title,
           level: course.level,
           semester: course.semester,
-          percentage: course.attendance_percentage
+          percentage: course.attendance_percentage,
+          year: course.year
         });
         if(this.getUser().role === "student")
           this.$router.push("/viewDetailedAttendance");
