@@ -95,7 +95,7 @@ import { viewCourses } from "../data/data";
           });
           //console.log(result.data);
           this.courses = result.data.courses;
-        } else {
+        } else if (user.role != "admin") {
           const lecturer_id = user.username;
           const result = await axios.post(process.env.VUE_APP_BACKEND_SERVER + "/api/course/lecturer_id/",{
             lecturer_id,
