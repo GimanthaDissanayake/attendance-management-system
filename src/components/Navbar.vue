@@ -6,9 +6,19 @@
         Attendance Management System
       </v-toolbar-title>
        <v-spacer></v-spacer>
-        <v-btn v-show="user.role!='admin'" class="mx-2" color="#DBB2FF" fab small>
+        
+
+      <v-badge
+          content="2"
+          overlap
+          left
+          color="#DBB2FF"
+      >
+        <v-btn v-show="user.role!='admin'" class="mx-2" color="#DBB2FF" fab small @click="message">
           <v-icon small color="black">mdi-android-messages</v-icon>
         </v-btn>
+      </v-badge>
+
         <v-btn color="#DBB2FF" v-on:click="logout">
           <span class="black--text">Sign Out</span>
           <v-icon color="black" right>mdi-logout-variant</v-icon>
@@ -61,6 +71,9 @@ export default {
     logout() {
       this.$router.push("/");
       this.removeToken();
+    },
+    message() {
+      this.$router.push("./viewAlerts");
     },
   },
   mounted(){
