@@ -125,17 +125,6 @@ export default {
             });
         
         },
-
-
-        
-        // resetCourses(){
-        //     this.selectedLevel = ''
-        //     this.filteredCourses = this.courses
-        // },
-        // resetDisplayed(){
-        //     this.filteredCourses = this.courses.filter(course => course.level === this.selectedLevel)
-        // },
-
         
     },
     

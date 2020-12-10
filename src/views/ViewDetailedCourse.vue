@@ -118,7 +118,6 @@ export default {
             headers:viewDetailedCourse.headers,
             dates: [],
             ListReg: [],
-            cour:[],
             course2:[],
             date_time: [],
             
@@ -145,7 +144,7 @@ export default {
 
         },
         async setDate(){
-             this.course2 = this.getCourse();
+            this.course2 = this.getCourse();
             const co_id = this.course.co_id;
            
             return await axios.post(process.env.VUE_APP_BACKEND_SERVER + "/api/course/attendance/",{
