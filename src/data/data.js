@@ -262,7 +262,7 @@ export const viewDetailedCourse = {
 },
 headers: [
     { text: 'Date', align: 'start',  value: 'date'},
-    { text: 'Attendance Percentage', value: 'percentage'},
+    { text: 'Attendance Percentage (%)', value: 'percentage'},
 ],
 dates: [
     {

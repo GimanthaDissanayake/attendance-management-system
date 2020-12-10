@@ -74,19 +74,13 @@
                                                 view Registered Students
                                             </v-btn>                   
                                         </v-col>
-                                    </v-row>
-                                    
-                                </v-col>
-                                
-                            </v-row>
-            
+                                    </v-row>                                    
+                                </v-col>                                
+                            </v-row>            
                         </v-container>
-
                 </v-col>
             </v-row>
-          </v-container>
-
-          
+          </v-container>          
           <v-container>
             <v-row align="center" justify="center">
                 <v-col cols="12" sm="8" md="8">
@@ -95,9 +89,7 @@
                         :headers="headers"
                         :items="dates"
                         v-on:click:row="selectDate"
-                        :items-per-page="5" 
-                    
-                        >
+                        :items-per-page="5">
                         </v-data-table>
                     </v-card>
                 </v-col>
@@ -130,13 +122,14 @@ export default {
             this.course = this.getCourse();
             const course_code = this.course.course_code;
             const co_id = this.course.co_id;
-            console.log(this.course)
+            //console.log(this.course)
             return await axios.post(process.env.VUE_APP_BACKEND_SERVER + "/api/student/course_code/",{
              course_code,
              })
              .then(result => {
-                 const list = result.data.students;
-                this.ListReg = list.length;
+                // const list = result.data.students;
+                // console.log(result.data.students.length);
+                this.ListReg = result.data.students.length;
              })
              .catch(err => {
                  console.log(err);
@@ -152,10 +145,10 @@ export default {
              })
              .then(async result => {
                 const attendanceData = result.data.attendance;
+                // console.log(attendanceData);
                 this.date_time = attendanceData.date_time;
                 const newDates = attendanceData.map((attendanceDetail) => {
-                    attendanceDetail.date = attendanceDetail.date_time.split('T')[0];
-            
+                    attendanceDetail.date = attendanceDetail.date_time.split('T')[0];            
                     return attendanceDetail;
                 })
                 return await newDates;                
