@@ -113,7 +113,6 @@ import { viewCourses } from "../data/data";
           const result = await axios.post(process.env.VUE_APP_BACKEND_SERVER + "/api/course/lecturer_id/",{
             lecturer_id,
           });
-          console.log(result.data.courses);
           this.courses = result.data.courses;
           let y = await this.courses.map(c => {
             return c.year;

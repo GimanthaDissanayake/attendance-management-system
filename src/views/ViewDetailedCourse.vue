@@ -46,7 +46,7 @@
                                                     <p>Attendance Percentage :</p>
                                                 </v-col>
                                                 <v-col>
-                                                    <v-chip></v-chip>
+                                                    <v-chip>{{course.percentage}}</v-chip>
                                                 </v-col>
                                             </v-row>
                                         </v-col>
