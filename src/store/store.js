@@ -30,7 +30,8 @@ export const store = new Vuex.Store({
             level: null,
             mentor_name: null,
             mentor_id: null,
-        }
+        },
+        alertNo: false,
     },
     getters: {
         getToken: state => {
@@ -54,6 +55,9 @@ export const store = new Vuex.Store({
         getTime: state => {
             return state.time;
         },
+        getAlertNo: state => {
+            return state.alertNo;
+        },
     },
     mutations: {
         setToken: (state, payload) => {
@@ -70,6 +74,9 @@ export const store = new Vuex.Store({
         },
         setMahapola: (state,payload) => {
             state.mahapola = payload;
+        },
+        setAlertNo: (state,payload) => {
+            state.alertNo = payload;
         },
         setSelectedDate: (state,payload) => {
             state.selectedDate = payload;
