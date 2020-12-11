@@ -7,11 +7,26 @@
     <v-row>
       <v-col>
         <v-card>
+          <v-btn
+            @click="readAllBtn"
+            
+            color="blue-grey"
+            class="ma-2 white--text"
+           
+          >
+            Mark All As Read
+            <v-icon
+              right
+              dark
+            >
+             mdi-comment-eye
+            </v-icon>
+          </v-btn>
           <v-expansion-panels>
             <v-expansion-panel
               v-for="alert in alert"
               :key="alert.lecturer_id">
-                <v-expansion-panel-header @click="MouseEvent">
+                <v-expansion-panel-header>
                   <v-list two-line>
                     <v-list-item>
                       <v-list-item-content>
@@ -54,6 +69,7 @@
     },
     methods: {
       ...mapGetters(["getToken", "getUser"]),
+     // ...mapMutations(['setAlertNo']),
       async setMessage() {
         const token = this.getToken();
         const user = this.getUser();
@@ -78,20 +94,17 @@
             .catch(err => {
                 console.log(err);
             });
-
-          //console.log(result.data);
-         
       },
-      MouseEvent(event){
-        // const userId = this.user.username;
-        // console.log(userId)
-        // const result = await axios.post(process.env.VUE_APP_BACKEND_SERVER + "/api/alert/badge/",{
-        //     userId
-        // });
-    
-        //  this.badgeNum = result.data.alert.length;
-         console.log(event.lecturer_id)
+      readAllBtn(){
+        const user = this.getUser();
+        const username = user.username;
+        //setAlertNo(true);
+
+         axios.post(process.env.VUE_APP_BACKEND_SERVER + "/api/alert/reset_read/",{
+          username
+        })
       }
+      
     },
     async mounted(){
       try {

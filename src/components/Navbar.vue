@@ -9,7 +9,9 @@
         
 
       <v-badge
+          v-show="user.role!='admin'"
           :content="badgeNum"
+          v-if="badgeNum > 0"
           overlap
           left
           color="red"
@@ -18,6 +20,10 @@
           <v-icon small color="black">mdi-android-messages</v-icon>
         </v-btn>
       </v-badge>
+
+      <v-btn v-if="!badgeNum" v-show="user.role!='admin'" class="mx-2" color="#DBB2FF" fab small @click="message">
+          <v-icon small color="black">mdi-android-messages</v-icon>
+        </v-btn>
 
         <v-btn color="#DBB2FF" v-on:click="logout">
           <span class="black--text">Sign Out</span>
@@ -72,6 +78,7 @@ export default {
   methods: {
     ...mapGetters(['getUser']),
     ...mapMutations(["removeToken"]),
+   // ...mapMutations()
     async setBadge(){
       this.users = this.getUser();
       //console.log(this.users)
@@ -85,8 +92,6 @@ export default {
          this.badgeNum = result.data.alert.length;
          console.log(this.badgeNum)
       //this.badgeNum = result.data.alert
-      
-     
 
     },
     logout() {

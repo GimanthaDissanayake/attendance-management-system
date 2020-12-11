@@ -94,17 +94,21 @@ export default {
             message:'',
             id:'',
             snackbar:'',
-            snackbarText:''
+            snackbarText:'',
+            user:[],
         }
     },
     methods: {
         ...mapGetters(["getToken"]),
         ...mapGetters(["getStudent"]),
         ...mapGetters(["getCourse"]),
+        ...mapGetters(["getUser"]),
         async setData() {
             const token = this.getToken();
             this.student = this.getStudent();
             this.course = this.getCourse();
+            this.user = this.getUser();
+            //console.log(this.user.username)
             
         },
          sendbtn(){
@@ -115,13 +119,16 @@ export default {
             else if(this.receiver === 'student'){
                 this.id = this.student.registration_no;
             }
+
             const message = this.message;
             const receiver = this.receiver; 
             const userId = this.id;
+            const username = this.user.username;
             axios.post(process.env.VUE_APP_BACKEND_SERVER + "/api/alert/send_alert/",{
                 message,
                 userId,
-                receiver
+                receiver,
+                username
             })
             .then(result => {
                
