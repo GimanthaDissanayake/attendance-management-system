@@ -9,10 +9,10 @@
         
 
       <v-badge
-          content="2"
+          :content="badgeNum"
           overlap
           left
-          color="#DBB2FF"
+          color="red"
       >
         <v-btn v-show="user.role!='admin'" class="mx-2" color="#DBB2FF" fab small @click="message">
           <v-icon small color="black">mdi-android-messages</v-icon>
@@ -48,7 +48,8 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex';
+import axios from 'axios';
+import { mapGetters, mapMutations } from 'vuex';
 import { navBar } from "../data/data";
 export default {
   computed: {
@@ -64,10 +65,30 @@ export default {
     return {
       drawer: true,
       items: navBar.headers,
+      badgeNum:'',
+      users:'',
     }
   },
   methods: {
+    ...mapGetters(['getUser']),
     ...mapMutations(["removeToken"]),
+    async setBadge(){
+      this.users = this.getUser();
+      //console.log(this.users)
+
+      const userId = this.user.username;
+      console.log(userId)
+       const result = await axios.post(process.env.VUE_APP_BACKEND_SERVER + "/api/alert/badge/",{
+       userId
+       });
+    
+         this.badgeNum = result.data.alert.length;
+         console.log(this.badgeNum)
+      //this.badgeNum = result.data.alert
+      
+     
+
+    },
     logout() {
       this.$router.push("/");
       this.removeToken();
@@ -76,8 +97,13 @@ export default {
       this.$router.push("./viewAlerts");
     },
   },
-  mounted(){
-    //console.log(this.user);
+  async mounted(){
+    try {
+        this.setBadge();
+        
+      } catch(err) {
+        console.log(err.toString());
+      }
   }
 }
 </script>
