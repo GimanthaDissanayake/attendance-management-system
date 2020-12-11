@@ -1,129 +1,134 @@
 <template>
   <v-container>
+    <v-row>
     <p class='text-h5'>Register a Student for Face-Recognition</p> 
-
-    <v-stepper v-model="e1">
-    <v-stepper-header>
-      <v-stepper-step
-        :complete="e1 > 1"
-        step="1">
-        Select a Student
-      </v-stepper-step>
-      <v-divider></v-divider>
-      <v-stepper-step
-        :complete="e1 > 2"
-        step="2">
-        Upload an Image
-      </v-stepper-step>
-    </v-stepper-header>
-    <v-stepper-items>
-      <v-stepper-content step="1">
-        <v-container>
-          <v-row align="center" justify="center">
-            <v-col cols="12" sm="8" md="8">
-              <v-card>
-                <v-card-title>
-                  <v-text-field
-                    v-model="search"
-                    label="Search"
-                    placeholder="Enter Student Registration Number or Name to search"
-                    append-icon="mdi-magnify"
-                    outlined
-                    clearable
-                    single-line>
-                  </v-text-field>
-                </v-card-title>
-                <v-data-table
-                  :headers="headers"
-                  :items="students"
-                  :search="search"
-                  :items-per-page="10" 
-                  v-on:click:row="selectStudent">
-                </v-data-table>
-              </v-card>
-            </v-col>
-          </v-row>
-        </v-container>
-      </v-stepper-content>
-      <v-stepper-content step="2">
-        <v-container>          
-          <v-progress-linear v-if="isLoading"
-            color="primary"
-            indeterminate
-            rounded
-            height="6"
-          ></v-progress-linear>
-          <v-row>
-            <v-col cols="6" sm="6" md="6">
-              <v-row>
-                <v-col cols="7" sm="5" md="5">
-                  Student Name :
-                </v-col>
-                <v-col>
-                  <v-chip>{{student.name}}</v-chip>
-                </v-col>
-              </v-row>                    
-            </v-col>
-            <v-col cols="6" sm="6" md="6">
-              <v-row>
-                <v-col cols="7" sm="5" md="5">
-                  Registration No :
-                </v-col>
-                <v-col>
-                  <v-chip>{{student.registration_no}}</v-chip>
-                </v-col>
-              </v-row>                    
-            </v-col>
-          </v-row>
-          <v-row>
-            <v-file-input
-              placeholder="Pick the image"
-              prepend-icon="mdi-camera"
-              label="Upload image"
-              v-model="imageFile"
-              v-on:change="setImage">
-            </v-file-input>
-          </v-row> 
-          <v-row>
-            <v-spacer></v-spacer>
-            <v-img
-              max-height="250"
-              max-width="350"
-              contain
-              :src="image">
-            </v-img>
-            <v-spacer></v-spacer>
-          </v-row> 
-          <v-row>
-            <v-btn
-              @click="e1 = 1; image=null; imageFile=null"> 
-              Previous
-            </v-btn>
-            <v-spacer></v-spacer>
-            <v-btn
-              class="primary"
-              @click="uploadImage"> 
-              Upload Image
-            </v-btn>
-          </v-row> 
-        </v-container>
-      </v-stepper-content>
-    </v-stepper-items>
-  </v-stepper>
-  <v-snackbar
-    v-model="snackbar"
-    :timeout="2000">
-      {{ snackbarText }}
-      <template v-slot:action="{ attrs }">
-        <v-btn
-          color="secondary"
-          text
-          v-bind="attrs"
-          @click="snackbar = false">
-          Close
-        </v-btn>
-      </template>
-    </v-snackbar>
+    </v-row>
+    <v-row>
+      <v-col>
+        <v-stepper v-model="e1">
+          <v-stepper-header>
+            <v-stepper-step
+              :complete="e1 > 1"
+              step="1">
+              Select a Student
+            </v-stepper-step>
+            <v-divider></v-divider>
+            <v-stepper-step
+              :complete="e1 > 2"
+              step="2">
+              Upload an Image
+            </v-stepper-step>
+          </v-stepper-header>
+          <v-stepper-items>
+            <v-stepper-content step="1">
+              <v-container>
+                <v-row align="center" justify="center">
+                  <v-col cols="12" sm="8" md="8">
+                    <v-card>
+                      <v-card-title>
+                        <v-text-field
+                          v-model="search"
+                          label="Search"
+                          placeholder="Enter Student Registration Number or Name to search"
+                          append-icon="mdi-magnify"
+                          outlined
+                          clearable
+                          single-line>
+                        </v-text-field>
+                      </v-card-title>
+                      <v-data-table
+                        :headers="headers"
+                        :items="students"
+                        :search="search"
+                        :items-per-page="10" 
+                        v-on:click:row="selectStudent">
+                      </v-data-table>
+                    </v-card>
+                  </v-col>
+                </v-row>
+              </v-container>
+            </v-stepper-content>
+            <v-stepper-content step="2">
+              <v-container>          
+                <v-progress-linear v-if="isLoading"
+                  color="primary"
+                  indeterminate
+                  rounded
+                  height="6"
+                ></v-progress-linear>
+                <v-row>
+                  <v-col cols="6" sm="6" md="6">
+                    <v-row>
+                      <v-col cols="7" sm="5" md="5">
+                        Student Name :
+                      </v-col>
+                      <v-col>
+                        <v-chip>{{student.name}}</v-chip>
+                      </v-col>
+                    </v-row>                    
+                  </v-col>
+                  <v-col cols="6" sm="6" md="6">
+                    <v-row>
+                      <v-col cols="7" sm="5" md="5">
+                        Registration No :
+                      </v-col>
+                      <v-col>
+                        <v-chip>{{student.registration_no}}</v-chip>
+                      </v-col>
+                    </v-row>                    
+                  </v-col>
+                </v-row>
+                <v-row>
+                  <v-file-input
+                    placeholder="Pick the image"
+                    prepend-icon="mdi-camera"
+                    label="Upload image"
+                    v-model="imageFile"
+                    v-on:change="setImage">
+                  </v-file-input>
+                </v-row> 
+                <v-row>
+                  <v-spacer></v-spacer>
+                  <v-img
+                    max-height="250"
+                    max-width="350"
+                    contain
+                    :src="image">
+                  </v-img>
+                  <v-spacer></v-spacer>
+                </v-row> 
+                <v-row>
+                  <v-btn
+                    @click="e1 = 1; image=null; imageFile=null"> 
+                    Previous
+                  </v-btn>
+                  <v-spacer></v-spacer>
+                  <v-btn
+                    class="primary"
+                    @click="uploadImage"> 
+                    Upload Image
+                  </v-btn>
+                </v-row> 
+              </v-container>
+            </v-stepper-content>
+          </v-stepper-items>
+        </v-stepper>
+      </v-col>
+    </v-row>
+    <v-snackbar
+      v-model="snackbar"
+      :timeout="2000">
+        {{ snackbarText }}
+        <template v-slot:action="{ attrs }">
+          <v-btn
+            color="secondary"
+            text
+            v-bind="attrs"
+            @click="snackbar = false">
+            Close
+          </v-btn>
+        </template>
+      </v-snackbar>
   </v-container>
 </template>
 

@@ -27,7 +27,7 @@
                                 <p>Level :</p>
                             </v-col>
                             <v-col>
-                                <v-chip>{{student.level}}</v-chip>
+                                <v-chip>{{course.level}}</v-chip>
                             </v-col>
                         </v-row>
                         <v-row>
@@ -35,54 +35,120 @@
                                 <p>Mentor Name :</p>
                             </v-col>
                             <v-col>
-                                <v-chip>{{student.mentor}}</v-chip>
+                                <v-chip>{{student.mentor_name}}</v-chip>
                             </v-col>
                         </v-row>
                     </v-col>
                     <v-col>
                         <p>Select Receiver:</p>
                         <v-radio-group v-model="receiver">
-                            <v-radio label="Student" value="student">
+                            <v-radio label="Student" value="student" >
                             </v-radio>
                             <v-radio label="Mentor" value="mentor">
                             </v-radio>
-                        </v-radio-group>
+                        </v-radio-group> 
                     </v-col>
                 </v-row>
                 <v-row>
                     <v-container>
-                        <v-textarea outlined clearable label="Message"></v-textarea>
+                        <v-textarea outlined clearable label="Message" v-model="message"></v-textarea>
                     </v-container>                    
                 </v-row>
                 <v-row>
                     <v-spacer></v-spacer>
                     <v-col cols="4" sm="2" md="2">
                         <v-container>
-                            <v-btn block large elevation="4">Send</v-btn>
+                            <v-btn @click="sendbtn" block large elevation="4">Send</v-btn>
                         </v-container>          
                     </v-col>                         
                 </v-row>
             </v-container>
+            <v-snackbar
+            v-model="snackbar"
+            :timeout="2000">
+            {{ snackbarText }}
+                <template v-slot:action="{ attrs }">
+                    <v-btn
+                        color="secondary"
+                        text
+                        v-bind="attrs"
+                        @click="snackbar = false">
+                            Close
+                    </v-btn>
+                </template>
+        </v-snackbar>
         </v-card>
+        
     </v-container>
 </template>
 
 <script>
+import axios from 'axios';
+import { mapGetters} from "vuex";
 export default {
-    data() {
-        return {
-            receiver: null,
-            student:{
-                name: 'Kamal Perera',
-                registration_no: 'SC/2021/12291',
-                level: 'Level 3',
-                mentor: 'Kasun Sirisena'
-            },
+    data () {
+        return {  
+            student: [],
+            course:[],
+            receiver:'',
+            message:'',
+            id:'',
+            snackbar:'',
+            snackbarText:''
         }
+    },
+    methods: {
+        ...mapGetters(["getToken"]),
+        ...mapGetters(["getStudent"]),
+        ...mapGetters(["getCourse"]),
+        async setData() {
+            const token = this.getToken();
+            this.student = this.getStudent();
+            this.course = this.getCourse();
+            
+        },
+         sendbtn(){
+            if(this.receiver === 'mentor')
+            {
+                this.id = this.student.mentor_id;
+            }    
+            else if(this.receiver === 'student'){
+                this.id = this.student.registration_no;
+            }
+            const message = this.message;
+            const receiver = this.receiver; 
+            const userId = this.id;
+            axios.post(process.env.VUE_APP_BACKEND_SERVER + "/api/alert/send_alert/",{
+                message,
+                userId,
+                receiver
+            })
+            .then(result => {
+               
+                this.snackbar = true;
+                if(result.data.message==='success'){
+                    this.snackbarText = 'Alert sent Successfully!';
+                    
+                }
+                else{
+                   
+                    this.snackbarText = 'There was an error send alert!';
+                }
+                setTimeout( () => this.$router.push({ path: '/viewRegisteredStudents'}), 2000);
+            })
+            .catch(err => {
+                this.snackbarText = 'Alert sending Failed!';
+                console.log(err);
+            })
+        }    
+    },
+    async mounted(){
+      try {
+        await this.setData();
+      } catch(err) {
+        console.log(err.toString());
+      }
     }
 }
+
 </script>
-
-<style>
-
-</style>

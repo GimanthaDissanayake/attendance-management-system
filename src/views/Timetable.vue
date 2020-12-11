@@ -1,23 +1,25 @@
 <template>
   <v-container>
-      <p class='text-h5'>My Timetable</p>      
-
-      <v-card :loading="isLoading"> 
-        <v-sheet height="600">
-            <v-calendar class="text-center"  
-            ref="calendar"
-            :weekdays="weekday"
-            :type="type"
-            :events="events"
-            :event-overlap-mode="mode"
-            :event-overlap-threshold="30"
-            :event-color="getColor"
-            >
-
-            </v-calendar>
-        </v-sheet>
-      </v-card>
-      
+    <v-row>
+        <p class='text-h5'>My Timetable</p>  
+    </v-row>    
+    <v-row>
+        <v-col>
+            <v-card :loading="isLoading"> 
+                <v-sheet height="600">
+                    <v-calendar class="text-center"  
+                        ref="calendar"
+                        :weekdays="weekday"
+                        :type="type"
+                        :events="events"
+                        :event-overlap-mode="mode"
+                        :event-overlap-threshold="30"
+                        :event-color="getColor">
+                    </v-calendar>
+                </v-sheet>
+            </v-card>
+        </v-col>
+    </v-row>
   </v-container>
 </template>
 
@@ -61,7 +63,7 @@ export default {
             id,
             role
             });
-            this.events = result.data.courses;   
+            this.events = result.data.courses;  
             
             if(user.role === "student"){
             const registration_no = user.username;
@@ -69,6 +71,14 @@ export default {
                 registration_no,
             });
             this.courses = result.data.courses;
+            //console.log(this.courses)
+            // else{
+            //     const lecturer_id = user.username;
+            //     const result = await axios.post(process.env.VUE_APP_BACKEND_SERVER + "/api/student/lecturer_id/",{
+            //     lecturer_id,
+            // });
+            // this.courses = result.data.courses;
+            // console.log(this.courses)
             }
         }
     },

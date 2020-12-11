@@ -8,7 +8,7 @@
     </v-container>
     
     <Login v-if="!is_logged"></Login>    
-<br><br>
+    <br><br>
     <v-footer
       absolute
       class="font-weight-medium" color="#E0E0E0">

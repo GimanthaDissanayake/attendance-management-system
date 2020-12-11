@@ -5,7 +5,7 @@
             <v-card :loading="loading" elevation="24" outlined>
                 <v-img contain max-height="175" src="../assets/logo.png"></v-img>
                 <p class="text-h6 text-center">Attendance Management System</p>
-                <v-card-title>Sign In</v-card-title>
+                <v-card-title>Log in to access your Account</v-card-title>
                 <v-card-text>
                     <v-alert v-if="error" type="error">
                         {{ error }}
@@ -16,10 +16,13 @@
                     </v-form>
                 </v-card-text>
                  <v-card-actions>
-                    <v-spacer></v-spacer>
-                    <v-btn block class="primary" v-on:click="login">
-                        Sign in
-                    </v-btn>
+                     <v-row>
+                        <v-col>
+                            <v-btn block class="primary" v-on:click="login">
+                                Sign in
+                            </v-btn>
+                        </v-col>
+                     </v-row>                    
                 </v-card-actions>
             </v-card>
         </v-col>

@@ -6,9 +6,19 @@
         Attendance Management System
       </v-toolbar-title>
        <v-spacer></v-spacer>
-        <v-btn v-show="user.role!='admin'" class="mx-2" color="#DBB2FF" fab small>
+        
+
+      <v-badge
+          :content="badgeNum"
+          overlap
+          left
+          color="red"
+      >
+        <v-btn v-show="user.role!='admin'" class="mx-2" color="#DBB2FF" fab small @click="message">
           <v-icon small color="black">mdi-android-messages</v-icon>
         </v-btn>
+      </v-badge>
+
         <v-btn color="#DBB2FF" v-on:click="logout">
           <span class="black--text">Sign Out</span>
           <v-icon color="black" right>mdi-logout-variant</v-icon>
@@ -38,7 +48,8 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex';
+import axios from 'axios';
+import { mapGetters, mapMutations } from 'vuex';
 import { navBar } from "../data/data";
 export default {
   computed: {
@@ -46,7 +57,7 @@ export default {
       return this.$store.state.user;
     },
     checkDisabled(value){
-      value.items[4].access = ['student', this.$store.state.mahapola];
+      value.items[5].access = ['student', this.$store.state.mahapola];
       return false;
     }
   },
@@ -54,16 +65,45 @@ export default {
     return {
       drawer: true,
       items: navBar.headers,
+      badgeNum:'',
+      users:'',
     }
   },
   methods: {
+    ...mapGetters(['getUser']),
     ...mapMutations(["removeToken"]),
+    async setBadge(){
+      this.users = this.getUser();
+      //console.log(this.users)
+
+      const userId = this.user.username;
+      console.log(userId)
+       const result = await axios.post(process.env.VUE_APP_BACKEND_SERVER + "/api/alert/badge/",{
+       userId
+       });
+    
+         this.badgeNum = result.data.alert.length;
+         console.log(this.badgeNum)
+      //this.badgeNum = result.data.alert
+      
+     
+
+    },
     logout() {
+      this.$router.push("/");
       this.removeToken();
     },
+    message() {
+      this.$router.push("./viewAlerts");
+    },
   },
-  mounted(){
-    //console.log(this.user);
+  async mounted(){
+    try {
+        this.setBadge();
+        
+      } catch(err) {
+        console.log(err.toString());
+      }
   }
 }
 </script>
