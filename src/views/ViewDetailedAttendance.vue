@@ -73,6 +73,19 @@
                             </v-row>                    
                         </v-col>
                     </v-row>
+                    <v-row>
+                        <v-spacer></v-spacer>
+                        <v-spacer></v-spacer>
+                        <v-col v-show="showAlert">
+                            <v-btn
+                                class="primary"
+                                dark
+                                @click="sendAlert">
+                                <v-icon left>mdi-message-alert</v-icon>   
+                                <span class="white--text"> Send Alert</span>                                
+                            </v-btn>
+                        </v-col>                        
+                    </v-row>
                 </v-container>
                 <v-container>
                     <v-row align="center" justify="center">
@@ -107,6 +120,7 @@ import { viewDetailedAttendance } from "../data/data";
 export default {
     data() {
         return{
+            showAlert: false,
             course: [],
             student:[],
             headers:viewDetailedAttendance.headers,
@@ -114,12 +128,12 @@ export default {
         }
     },
     methods: {
-        ...mapGetters(["getCourse"],["getUser"]),
+        ...mapGetters(["getCourse","getUser","getStudent"]),
         getColor(status){
             if(status == 'present') return 'green'
             else return 'red'
         },
-        async getStudent(registration_no){
+        async getAStudent(registration_no){
             return await axios.post(process.env.VUE_APP_BACKEND_SERVER + "/api/student/registration_no/",{
             registration_no,
             })
@@ -133,11 +147,21 @@ export default {
         async setData(){
             this.course = this.getCourse();
             const co_id = this.course.co_id;
-            const student_id = this.$store.state.user.username;
-            //console.log(co_id);
-            if(this.$store.state.user.role === "student")
-                await this.getStudent(student_id);
+            let student_id = null;
 
+            if(this.$store.state.selectedStudent){
+                this.showAlert = true;
+                const student = this.getStudent();
+                student_id = student.registration_no;
+                await this.getAStudent(student_id);
+                this.$store.state.selectedStudent = false;
+            }
+            else {
+                student_id = this.$store.state.user.username;
+                //console.log(co_id);
+                if(this.$store.state.user.role === "student")
+                    await this.getAStudent(student_id);                
+            }
             await axios.post(process.env.VUE_APP_BACKEND_SERVER + "/api/student/attendance/", {
                 student_id,
                 co_id
@@ -160,6 +184,17 @@ export default {
             .catch(err => {
                 console.log(err);
             });
+        },
+        sendAlert(student){
+            // this.setStudent({
+            //     registration_no: student.registration_no,
+            //     name: student.student_name,
+            //     //level: student.level,
+            //     mentor_name: student.lecturer_name,
+            //     mentor_id: student.mentor_id
+            // });
+            //console.log(student.lecturer_name);
+            this.$router.push("/sendAlert");
         }
     }, 
     async created() {

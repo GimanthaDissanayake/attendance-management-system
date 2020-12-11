@@ -43,7 +43,7 @@
                 <v-text-field
                   v-model="search"
                   label="Search"
-                  placeholder="Enter Course Code or Course Title to search"
+                  placeholder="Enter Course Code or Course Title to Search"
                   append-icon="mdi-magnify"
                   outlined
                   clearable
@@ -52,23 +52,24 @@
               </v-col>
             </v-row>       
           </v-card-title>
-
-          <v-data-table
-            loading="isLoading"
-            :headers="headers"
-            :items="filteredCourses"
-            :items-per-page="10"
-            :search="search"
-            v-on:click:row="selectCourse"
-            class="elevation-1">
-            <template v-slot:item.attendance_percentage="{ item }">
-                <v-chip
-                :color="getColor(item.attendance_percentage)"
-                dark>
-                    {{ item.attendance_percentage }}
-                </v-chip>
-            </template>
-          </v-data-table>
+          <v-card-text>
+            <v-data-table
+              loading="isLoading"
+              :headers="headers"
+              :items="filteredCourses"
+              :items-per-page="10"
+              :search="search"
+              v-on:click:row="selectCourse"
+              class="elevation-1">
+              <template v-slot:item.attendance_percentage="{ item }">
+                  <v-chip
+                  :color="getColor(item.attendance_percentage)"
+                  dark>
+                      {{ item.attendance_percentage }}
+                  </v-chip>
+              </template>
+            </v-data-table>
+          </v-card-text>          
         </v-card>  
       </v-col>
       
@@ -99,7 +100,7 @@ import { viewCourses } from "../data/data";
     },
     methods: {
       ...mapMutations(["setCourse"]),   
-      ...mapGetters(["getToken", "getUser"]),
+      ...mapGetters(["getToken", "getUser", "getStudent"]),
       getColor(percentage){
         if(percentage > 80) return 'green'
         else if(percentage == 80) return 'orange'
@@ -108,7 +109,17 @@ import { viewCourses } from "../data/data";
       async getCourses() {
         const token = this.getToken();
         const user = this.getUser();  
-        if(user.role === "student"){
+        const student = this.getStudent();
+
+        if(this.$store.state.selectedStudent){
+          const registration_no = student.registration_no;
+          const result = await axios.post(process.env.VUE_APP_BACKEND_SERVER + "/api/student/courses/",{
+            registration_no,
+          });
+          this.courses = result.data.courses;
+        }
+        else {
+          if(user.role === "student"){
           const registration_no = user.username;
           const result = await axios.post(process.env.VUE_APP_BACKEND_SERVER + "/api/student/courses/",{
             registration_no,
@@ -127,6 +138,8 @@ import { viewCourses } from "../data/data";
           this.years = [...new Set(y)];
           this.showYear = true;          
         }
+        }
+        
       },
       filterYears(selected){
         if(selected!=null){
@@ -174,10 +187,16 @@ import { viewCourses } from "../data/data";
           percentage: course.attendance_percentage,
           year: course.year
         });
-        if(this.getUser().role === "student")
+        if(this.$store.state.selectedStudent){
           this.$router.push("/viewDetailedAttendance");
-        else  
-          this.$router.push("/viewDetailedCourse");
+        }
+        else{
+          if(this.getUser().role === "student")
+            this.$router.push("/viewDetailedAttendance");
+          else  
+            this.$router.push("/viewDetailedCourse");
+        }
+        
       }
     },
     async mounted(){

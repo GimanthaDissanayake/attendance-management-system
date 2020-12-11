@@ -30,7 +30,9 @@ export const store = new Vuex.Store({
             level: null,
             mentor_name: null,
             mentor_id: null,
+            degree_program: null
         },
+        selectedStudent: false,
         alertNo: false,
     },
     getters: {
