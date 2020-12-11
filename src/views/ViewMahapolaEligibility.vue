@@ -1,14 +1,16 @@
 <template>
   <v-container>
+    <v-row>
       <p class='text-h5'>View Mahapola Eligibility</p> 
-      <v-container>
+    </v-row>
+    <v-row>
+      <v-col>
+        <v-container>
         <v-container v-if="eligibility">
           <p class='text-h6'>You are eligibile to receive mahapola for the time period from {{start_date}} to {{end_date}}</p> 
         </v-container>
-
         <v-container v-if="!eligibility">
           <p class='text-h6 error--text'>You are not eligibile to receive mahapola for the time period from {{start_date}} to {{end_date}} because of your low attendance for below subjects</p>
-
           <v-data-table
           :headers="headers"
           :items="courses"
@@ -23,7 +25,9 @@
             </template>
           </v-data-table> 
         </v-container>
-      </v-container>      
+      </v-container> 
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 
