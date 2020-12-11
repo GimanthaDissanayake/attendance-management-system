@@ -352,7 +352,7 @@ courses: [
 export const viewMentorGroups = {
   headers: [
     { text: 'Registration Number', align: 'start',  value: 'registration_no'},
-    { text: 'Student Name', value: 'name'},
+    { text: 'Student Name', value: 'student_name'},
 ],
 students: [
     {

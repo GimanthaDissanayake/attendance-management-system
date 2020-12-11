@@ -59,6 +59,8 @@
 </template>
 
 <script>
+import axios from 'axios';
+import { mapGetters, mapMutations } from "vuex";
 import { viewMentorGroups } from "../data/data";
   export default {
     data () {
@@ -68,12 +70,14 @@ import { viewMentorGroups } from "../data/data";
         filteredStudents: null,
         selectedLevel: '',
         headers: viewMentorGroups.headers,
-        students: viewMentorGroups.students,
+        students: [],
         levels: viewMentorGroups.levels,
        
       }
     },
     methods: {
+       ...mapMutations(["setStudent"]),   
+      ...mapGetters(["getToken", "getUser"]),
       filterLevels(selected) {
         if(selected!=null){
           this.selectedLevel = selected;
@@ -86,10 +90,28 @@ import { viewMentorGroups } from "../data/data";
       },
       resetDisplayed(){
         this.filteredStudents = this.students.filter(student => student.level === this.selectedLevel)
+      },
+      async getStudents() {
+        const token = this.getToken();
+        const user = this.getUser();        
+        const mentor_id = user.username;
+        const result = await axios.post(process.env.VUE_APP_BACKEND_SERVER + "/api/student/mentor/",{
+          mentor_id,
+        });
+        //console.log(result);
+        this.students = result.data.students;
+        console.log(this.students);
       }
     },
-    beforeMount(){
-      this.resetStudents()
+    async mounted(){
+      try {
+        this.getStudents().then(() => {
+        this.resetStudents();
+        //this.isLoading = false;
+        });
+      } catch(err) {
+        console.log(err.toString());
+      }
     }
   }
 </script>
