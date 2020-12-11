@@ -35,7 +35,8 @@
                             <p>Attendance Percentage :</p>
                         </v-col>
                         <v-col>
-                            <v-chip>{{percentage+'%'}}</v-chip>
+                            <v-chip v-if="!isNaN(percentage)">{{percentage+'%'}}</v-chip>
+                            <v-chip v-if="isNaN(percentage)">{{0+'%'}}</v-chip>
                         </v-col>
                         <v-spacer></v-spacer>
                     </v-row>

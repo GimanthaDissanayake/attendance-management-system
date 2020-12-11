@@ -11,7 +11,7 @@
             <v-expansion-panel
               v-for="alert in alert"
               :key="alert.lecturer_id">
-                <v-expansion-panel-header>
+                <v-expansion-panel-header @click="MouseEvent">
                   <v-list two-line>
                     <v-list-item>
                       <v-list-item-content>
@@ -82,6 +82,16 @@
           //console.log(result.data);
          
       },
+      MouseEvent(event){
+        // const userId = this.user.username;
+        // console.log(userId)
+        // const result = await axios.post(process.env.VUE_APP_BACKEND_SERVER + "/api/alert/badge/",{
+        //     userId
+        // });
+    
+        //  this.badgeNum = result.data.alert.length;
+         console.log(event.lecturer_id)
+      }
     },
     async mounted(){
       try {

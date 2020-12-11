@@ -54,18 +54,12 @@
                                     <template v-slot:item.actions="{ item }">            
                                         <v-btn
                                             small
-                                            @click="deleteItem(item)">
+                                            @click="sendAlert(item)">
                                             <v-icon>mdi-message-alert</v-icon>
                                             Send Alert      
                                         </v-btn>
                                     </template>
-                                    <template>            
-                                        <v-btn
-                                            small>
-                                                <v-icon>mdi-delete</v-icon>
-                                                Send Alert      
-                                        </v-btn>            
-                                    </template>
+                                   
                                 </v-data-table>
                             </v-card-text>                            
                         </v-card>
@@ -80,7 +74,7 @@
 <script>
 import { viewRegisteredStudents } from '../data/data';
 import axios from 'axios';
-import { mapGetters } from "vuex";
+import { mapGetters, mapMutations } from "vuex";
 export default {
     data() {
         return {
@@ -96,6 +90,7 @@ export default {
     },
     methods: {
         ...mapGetters(["getCourse"]),
+        ...mapMutations(['setStudent']),
         
         getColor(percentage){
             if(percentage < 80) return 'red'
@@ -118,12 +113,23 @@ export default {
              })
              .then(async result => {
                 this.student = result.data.students;
-                console.log(result);
+                //console.log(result);
                // this.date_time = attendanceData.date_time;               
             })
             .catch(err => {
                 console.log(err);
             });
+        },
+        sendAlert(student){
+            this.setStudent({
+                registration_no: student.registration_no,
+                name: student.student_name,
+                //level: student.level,
+                mentor_name: student.lecturer_name,
+                mentor_id: student.mentor_id
+            });
+            //console.log(student.lecturer_name);
+            this.$router.push("/sendAlert");
         }
     },
     async created() {
