@@ -121,7 +121,10 @@ export default {
             
         },
          sendbtn(){
-            if(this.receiver === 'mentor')
+            if(this.message == ''){
+                alert("Message cannot be empty !!!");
+            }else{
+                if(this.receiver === 'mentor')
             {
                 this.id = this.student.mentor_id;
             }    
@@ -156,6 +159,7 @@ export default {
                 this.snackbarText = 'Alert sending Failed!';
                 console.log(err);
             })
+            }
         }    
     },
     async mounted(){
