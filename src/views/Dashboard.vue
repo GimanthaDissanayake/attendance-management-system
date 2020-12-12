@@ -411,6 +411,9 @@ export default {
         formatToPrice(value) {
             return ` ${value.toFixed(0)}`;
         },
+        setHODCounts() {
+            this.isHOD=true;
+        },
         DisplayLiveDateTime(timeStamp) {
             timeStamp = new Date(timeStamp);
             this.year = timeStamp.getFullYear();

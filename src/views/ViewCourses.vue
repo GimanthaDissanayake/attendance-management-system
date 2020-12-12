@@ -71,10 +71,8 @@
             </v-data-table>
           </v-card-text>          
         </v-card>  
-      </v-col>
-      
-    </v-row>
-      
+      </v-col>      
+    </v-row>      
   </v-container>
 </template>
 
