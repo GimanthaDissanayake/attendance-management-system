@@ -1,12 +1,13 @@
 export const navBar = {
     headers: [
         { title: 'Dashboard', icon: 'mdi-view-dashboard', path: '/', access: ['all','yes']},
-        { title: 'Mark Attendance', icon: 'mdi-account-arrow-right', path: '/markAttendance', access: ['lecturer','mentor','dh','yes']},
-        { title: 'My Courses', icon: 'mdi-school', path: '/viewCourses', access: ['student','lecturer','mentor','dh','yes']},
-        { title: 'Mentor Groups', icon: 'mdi-account-supervisor', path: '/viewMentorGroups', access: ['mentor','dh','yes']},
-        { title: 'View Timetable', icon: 'mdi-timetable', path: '/timetable', access: ['student','lecturer','mentor','yes']},
+        { title: 'Mark Attendance', icon: 'mdi-account-arrow-right', path: '/markAttendance', access: ['lecturer','mentor','hod','yes']},
+        { title: 'My Courses', icon: 'mdi-school', path: '/viewCourses', access: ['student','lecturer','mentor','hod','yes']},
+        { title: 'Mentor Groups', icon: 'mdi-account-supervisor', path: '/viewMentorGroups', access: ['mentor','hod','yes']},
+        { title: 'View Timetable', icon: 'mdi-timetable', path: '/timetable', access: ['student','lecturer','mentor','hod','yes']},
         { title: 'Mahapola Eligibility', icon: 'mdi-cash', path: '/viewMahapolaEligibility', access: ['student','yes']},
-        { title: 'View Students', icon: 'mdi-account', path: '/viewAllStudents', access: ['dh','yes']},
+        { title: 'View All Students', icon: 'mdi-account', path: '/viewAllStudents', access: ['hod','yes']},
+        { title: 'View All Courses', icon: 'mdi-school-outline', path: '/viewAllCourses', access: ['hod','yes']},
         { title: 'Register Students', icon: 'mdi-account', path: '/RegisterUsers', access: ['admin','yes']},
         { title: 'Mahapola Duration', icon: 'mdi-calendar-edit', path: '/setMahapolaDuration', access: ['admin','yes']},
     ]
@@ -120,39 +121,14 @@ export const timetable = {
 export const viewAllStudents = {
   headers: [
     { text: 'Registration Number', align: 'start',  value: 'registration_no'},
-    { text: 'Name', value: 'name'},
-],
-students: [
-    {
-        registration_no: 'SC/2017/10030',
-        name: 'Heshan Jayasinghe',
-        level: 'Level 3',
-        degree: 'BCS'
-    },
-    {
-        registration_no: 'SC/2017/10031',
-        name: 'Gimantha Dissanayake',
-        level: 'Level 3',
-        degree: 'BCS'
-    },
-    {
-        registration_no: 'SC/2017/10032',
-        name: 'Ramesh Shanilka',
-        level: 'Level 2',
-        degree: 'BCS'
-    },
-    {
-        registration_no: 'SC/2017/10033',
-        name: 'Dinuka Heshan',
-        level: 'Level 1',
-        degree: 'BSC'
-    },
+    { text: 'Name', value: 'student_name'},
+    { text: 'Receiving Mahapola?', value: 'hasMahapola'},
 ],
 levels: [
     'Level 1', 'Level 2', 'Level 3'
 ],
 degrees: [
-    'BSC', 'BCS'
+    'Bachelor of Science', 'Bachelor of Computer Science'
 ],
 };
 

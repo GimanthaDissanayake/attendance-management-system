@@ -191,6 +191,54 @@
                     </v-sheet>
                 </v-container>
             </v-col>
+            <v-col cols=2 v-show="isHOD">
+                <v-container>
+                    <v-sheet
+                    elevation="5"
+                    rounded
+                    width=100
+                    height=100
+                    class="pt-2 pl-2 pr-2">
+                        <v-icon large color="primary">mdi-school</v-icon>
+                        <v-row no-gutters align=start>
+                            <v-tooltip bottom>
+                                <template v-slot:activator="{ on, attrs }">
+                                    <v-col class="primary--text" style="font-size:40px" align=right
+                                    v-bind="attrs"
+                                    v-on="on">
+                                        {{TotalCoursesCount}}
+                                    </v-col>
+                                </template>
+                                <span>Total Courses Department Offers</span>
+                            </v-tooltip>                            
+                        </v-row>
+                    </v-sheet>
+                </v-container>
+            </v-col>
+            <v-col cols=2 v-show="isHOD">
+                <v-container>
+                    <v-sheet
+                    elevation="5"
+                    rounded
+                    width=100
+                    height=100
+                    class="pt-2 pl-2 pr-2">
+                        <v-icon large color="green">mdi-calendar-check-outline</v-icon>
+                        <v-row no-gutters align=start>
+                            <v-tooltip bottom>
+                                <template v-slot:activator="{ on, attrs }">
+                                    <v-col class="green--text" style="font-size:40px" align=right
+                                    v-bind="attrs"
+                                    v-on="on">
+                                        {{TotalWorkedDays}}
+                                    </v-col>
+                                </template>
+                                <span>Total Days Department Worked</span>
+                            </v-tooltip>                            
+                        </v-row>
+                    </v-sheet>
+                </v-container>
+            </v-col>
       </v-row>
       </v-container>
   </v-container>
@@ -222,6 +270,9 @@ export default {
             TotalConducted: 0,
             isMentor: false,
             TotalMentoringStudents: 0,
+            isHOD: false,
+            TotalCoursesCount: 0,
+            TotalWorkedDays: 0,
         }
     },
     methods: {
@@ -241,6 +292,7 @@ export default {
             else if(user.role==='hod'){
                 this.setLecturerCounts();
                 this.setMentorCounts();
+                this.setHODCounts();
             }
         },
         setStudentCounts() {
@@ -251,6 +303,9 @@ export default {
         },
         setMentorCounts() {
             this.isMentor=true;
+        },
+        setHODCounts() {
+            this.isHOD=true;
         },
         DisplayLiveDateTime(timeStamp) {
             timeStamp = new Date(timeStamp);
