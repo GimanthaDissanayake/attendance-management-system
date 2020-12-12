@@ -37,6 +37,15 @@
                                     <v-col class="primary--text" style="font-size:40px" align=right
                                     v-bind="attrs"
                                     v-on="on">
+                                    <!-- <number
+                                        ref="number1"
+                                        :from="0"
+                                        :to="1000"
+                                        :format="theFormat"
+                                        :duration="5"
+                                        :delay="2"
+                                        easing="Power1.easeOut"/> -->
+
                                         {{RegisteredCoursesCount}}
                                     </v-col>
                                 </template>
@@ -246,6 +255,8 @@
 
 <script>
 import { mapGetters } from "vuex";
+import axios from 'axios';
+import VueNumber from 'vue-number-animation'
 export default {
     data() {
         return {
@@ -295,8 +306,36 @@ export default {
                 this.setHODCounts();
             }
         },
-        setStudentCounts() {
+        async setStudentCounts() {
             this.isStudent=true;
+            const user = this.getUser();
+            const username = user.username;
+
+            //total registered courses
+            const r1 = await axios.post(process.env.VUE_APP_BACKEND_SERVER + "/api/student/registered_student/",{
+                username
+            });
+            this.RegisteredCoursesCount = r1.data.count[0][0].count;
+            
+            //total lecture days
+            const r2 = await axios.post(process.env.VUE_APP_BACKEND_SERVER + "/api/student/lecturer_days/",{
+                username
+            });
+            this.TotalLecturesHeldCount = r2.data.count[0][0].count;
+
+            //total present days
+            const r3 = await axios.post(process.env.VUE_APP_BACKEND_SERVER + "/api/student/present_days/",{
+                username
+            });
+            this.ToalLecturesPresentCount = r3.data.count[0][0].count;
+
+            //total absent days
+            const r4 = await axios.post(process.env.VUE_APP_BACKEND_SERVER + "/api/student/absent_days/",{
+                username
+            });
+            console.log(r4.data)
+            this.TotalLectureAbsentCount = r4.data.count[0][0].count;
+
         },
         setLecturerCounts() {
             this.isLecturer=true;
