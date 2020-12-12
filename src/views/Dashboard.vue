@@ -37,16 +37,11 @@
                                     <v-col class="primary--text" style="font-size:40px" align=right
                                     v-bind="attrs"
                                     v-on="on">
-                                    <!-- <number
-                                        ref="number1"
-                                        :from="0"
-                                        :to="1000"
-                                        :format="theFormat"
-                                        :duration="5"
-                                        :delay="2"
-                                        easing="Power1.easeOut"/> -->
-
-                                        {{RegisteredCoursesCount}}
+                                        <animated-number
+                                            :value="RegisteredCoursesCount"
+                                            :formatValue="formatToPrice"
+                                            :duration="2000"
+                                        />
                                     </v-col>
                                 </template>
                                 <span>Total Registered Courses Count</span>
@@ -71,7 +66,11 @@
                                     <v-col class="primary--text" style="font-size:40px" align=right
                                     v-bind="attrs"
                                     v-on="on">
-                                        {{TotalLecturesHeldCount}}
+                                        <animated-number
+                                            :value="TotalLecturesHeldCount"
+                                            :formatValue="formatToPrice"
+                                            :duration="2000"
+                                        />
                                     </v-col>
                                 </template>
                                 <span>Total Lectures Count</span>
@@ -95,7 +94,11 @@
                                     <v-col class="green--text" style="font-size:40px" align=right
                                     v-bind="attrs"
                                     v-on="on">
-                                        {{ToalLecturesPresentCount}}
+                                        <animated-number
+                                            :value="ToalLecturesPresentCount"
+                                            :formatValue="formatToPrice"
+                                            :duration="2000"
+                                        />
                                     </v-col>
                                 </template>
                                 <span>Total Present Lectures Count</span>
@@ -119,7 +122,11 @@
                                     <v-col class="error--text" style="font-size:40px" align=right
                                     v-bind="attrs"
                                     v-on="on">
-                                        {{TotalLectureAbsentCount}}
+                                        <animated-number
+                                            :value="TotalLectureAbsentCount"
+                                            :formatValue="formatToPrice"
+                                            :duration="2000"
+                                        />
                                     </v-col>
                                 </template>
                                 <span>Total Absent Lectures Count</span>
@@ -143,7 +150,11 @@
                                     <v-col class="primary--text" style="font-size:40px" align=right
                                     v-bind="attrs"
                                     v-on="on">
-                                        {{TotalCoursesTeaching}}
+                                        <animated-number
+                                            :value="TotalCoursesTeaching"
+                                            :formatValue="formatToPrice"
+                                            :duration="2000"
+                                        />
                                     </v-col>
                                 </template>
                                 <span>Total Courses Conducting</span>
@@ -167,7 +178,11 @@
                                     <v-col class="green--text" style="font-size:40px" align=right
                                     v-bind="attrs"
                                     v-on="on">
-                                        {{TotalConducted}}
+                                        <animated-number
+                                            :value="TotalConducted"
+                                            :formatValue="formatToPrice"
+                                            :duration="2000"
+                                        />
                                     </v-col>
                                 </template>
                                 <span>Total Conducted Lectures</span>
@@ -191,7 +206,11 @@
                                     <v-col class="primary--text" style="font-size:40px" align=right
                                     v-bind="attrs"
                                     v-on="on">
-                                        {{TotalMentoringStudents}}
+                                        <animated-number
+                                            :value="TotalMentoringStudents"
+                                            :formatValue="formatToPrice"
+                                            :duration="2000"
+                                        />
                                     </v-col>
                                 </template>
                                 <span>Total Mentoring Students</span>
@@ -200,7 +219,63 @@
                     </v-sheet>
                 </v-container>
             </v-col>
-      </v-row>
+            <v-col cols=2 v-show="isHOD">
+                <v-container>
+                    <v-sheet
+                    elevation="5"
+                    rounded
+                    width=100
+                    height=100
+                    class="pt-2 pl-2 pr-2">
+                        <v-icon large color="secondary">mdi-bookshelf</v-icon>
+                        <v-row no-gutters align=start>
+                            <v-tooltip bottom>
+                                <template v-slot:activator="{ on, attrs }">
+                                    <v-col class="secondary--text" style="font-size:40px" align=right
+                                    v-bind="attrs"
+                                    v-on="on">
+                                        <animated-number
+                                            :value="TotalDepartmentCoursesCount"
+                                            :formatValue="formatToPrice"
+                                            :duration="2000"
+                                        />
+                                    </v-col>
+                                </template>
+                                <span>Total Courses Offered By The Department</span>
+                            </v-tooltip>                            
+                        </v-row>
+                    </v-sheet>
+                </v-container>
+            </v-col>
+            <v-col cols=2 v-show="isHOD">
+                <v-container>
+                    <v-sheet
+                    elevation="5"
+                    rounded
+                    width=100
+                    height=100
+                    class="pt-2 pl-2 pr-2">
+                        <v-icon large color="error">mdi-calendar-multiselect</v-icon>
+                        <v-row no-gutters align=start>
+                            <v-tooltip bottom>
+                                <template v-slot:activator="{ on, attrs }">
+                                    <v-col class="error--text" style="font-size:40px" align=right
+                                    v-bind="attrs"
+                                    v-on="on">
+                                        <animated-number
+                                            :value="TotalDepartmentDaysCount"
+                                            :formatValue="formatToPrice"
+                                            :duration="2000"
+                                        />
+                                    </v-col>
+                                </template>
+                                <span>Total Work Days Of The Department</span>
+                            </v-tooltip>                            
+                        </v-row>
+                    </v-sheet>
+                </v-container>
+            </v-col>
+        </v-row>
       </v-container>
   </v-container>
 </template>
@@ -208,8 +283,11 @@
 <script>
 import { mapGetters } from "vuex";
 import axios from 'axios';
-import VueNumber from 'vue-number-animation'
+import AnimatedNumber from "animated-number-vue";
 export default {
+    components: {
+        AnimatedNumber
+    },
     data() {
         return {
             name: '',
@@ -233,6 +311,8 @@ export default {
             TotalConducted: 0,
             isMentor: false,
             TotalMentoringStudents: 0,
+            TotalDepartmentCoursesCount: 0,
+            TotalDepartmentDaysCount: 0,
         }
     },
     methods: {
@@ -252,6 +332,7 @@ export default {
             else if(user.role==='hod'){
                 this.setLecturerCounts();
                 this.setMentorCounts();
+                this.setDepartmentHeadCounts();
             }
         },
         async setStudentCounts() {
@@ -281,15 +362,54 @@ export default {
             const r4 = await axios.post(process.env.VUE_APP_BACKEND_SERVER + "/api/student/absent_days/",{
                 username
             });
-            console.log(r4.data)
             this.TotalLectureAbsentCount = r4.data.count[0][0].count;
-
         },
-        setLecturerCounts() {
+        async setLecturerCounts() {
             this.isLecturer=true;
+            const user = this.getUser();
+            const username = user.username;
+
+            //total absent days
+            const r1 = await axios.post(process.env.VUE_APP_BACKEND_SERVER + "/api/student/total_courses/",{
+                username
+            });
+            this.TotalCoursesTeaching = r1.data.count[0][0].count;
+
+            const r2 = await axios.post(process.env.VUE_APP_BACKEND_SERVER + "/api/student/total_conducted/",{
+                username
+            });
+            this.TotalConducted = r2.data.count[0][0].count;
         },
-        setMentorCounts() {
+        async setMentorCounts() {
             this.isMentor=true;
+            this.isLecturer=true;
+            const user = this.getUser();
+            const username = user.username;
+            //total absent days
+            const r1 = await axios.post(process.env.VUE_APP_BACKEND_SERVER + "/api/student/total_mentoring/",{
+                username
+            });
+            this.TotalMentoringStudents = r1.data.count[0][0].count;
+        },
+        async setDepartmentHeadCounts() {
+            this.isHOD=true;
+            this.isLecturer=true;
+            const user = this.getUser();
+            const username = user.username;
+            
+            const r1 = await axios.post(process.env.VUE_APP_BACKEND_SERVER + "/api/student/total_dep_courses/",{
+                username
+            });
+            this.TotalDepartmentCoursesCount = r1.data.count[0][0].count;
+
+            const r2 = await axios.post(process.env.VUE_APP_BACKEND_SERVER + "/api/student/total_dep_days/",{
+                username
+            });
+            this.TotalDepartmentDaysCount = r2.data.count[0][0].count;
+        
+        },
+        formatToPrice(value) {
+            return ` ${value.toFixed(0)}`;
         },
         DisplayLiveDateTime(timeStamp) {
             timeStamp = new Date(timeStamp);
