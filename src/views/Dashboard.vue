@@ -119,6 +119,78 @@
                     </v-sheet>
                 </v-container>
             </v-col>
+            <v-col cols=2 v-show="isLecturer">
+                <v-container>
+                    <v-sheet
+                    elevation="5"
+                    rounded
+                    width=100
+                    height=100
+                    class="pt-2 pl-2 pr-2">
+                        <v-icon large color="primary">mdi-school-outline</v-icon>
+                        <v-row no-gutters align=start>
+                            <v-tooltip bottom>
+                                <template v-slot:activator="{ on, attrs }">
+                                    <v-col class="primary--text" style="font-size:40px" align=right
+                                    v-bind="attrs"
+                                    v-on="on">
+                                        {{TotalCoursesTeaching}}
+                                    </v-col>
+                                </template>
+                                <span>Total Courses Conducting</span>
+                            </v-tooltip>                            
+                        </v-row>
+                    </v-sheet>
+                </v-container>
+            </v-col>
+            <v-col cols=2 v-show="isLecturer">
+                <v-container>
+                    <v-sheet
+                    elevation="5"
+                    rounded
+                    width=100
+                    height=100
+                    class="pt-2 pl-2 pr-2">
+                        <v-icon large color="green">mdi-calendar-check</v-icon>
+                        <v-row no-gutters align=start>
+                            <v-tooltip bottom>
+                                <template v-slot:activator="{ on, attrs }">
+                                    <v-col class="green--text" style="font-size:40px" align=right
+                                    v-bind="attrs"
+                                    v-on="on">
+                                        {{TotalConducted}}
+                                    </v-col>
+                                </template>
+                                <span>Total Conducted Lectures</span>
+                            </v-tooltip>                            
+                        </v-row>
+                    </v-sheet>
+                </v-container>
+            </v-col>
+            <v-col cols=2 v-show="isMentor">
+                <v-container>
+                    <v-sheet
+                    elevation="5"
+                    rounded
+                    width=100
+                    height=100
+                    class="pt-2 pl-2 pr-2">
+                        <v-icon large color="primary">mdi-account-group</v-icon>
+                        <v-row no-gutters align=start>
+                            <v-tooltip bottom>
+                                <template v-slot:activator="{ on, attrs }">
+                                    <v-col class="primary--text" style="font-size:40px" align=right
+                                    v-bind="attrs"
+                                    v-on="on">
+                                        {{TotalMentoringStudents}}
+                                    </v-col>
+                                </template>
+                                <span>Total Mentoring Students</span>
+                            </v-tooltip>                            
+                        </v-row>
+                    </v-sheet>
+                </v-container>
+            </v-col>
       </v-row>
       </v-container>
   </v-container>
@@ -145,6 +217,11 @@ export default {
             TotalLecturesHeldCount: 0,
             ToalLecturesPresentCount: 0,
             TotalLectureAbsentCount: 0,
+            isLecturer: false,
+            TotalCoursesTeaching: 0,
+            TotalConducted: 0,
+            isMentor: false,
+            TotalMentoringStudents: 0,
         }
     },
     methods: {
@@ -155,10 +232,25 @@ export default {
             this.name = user.name;
             if(user.role==='student')
                 this.setStudentCounts();
-            
+            else if(user.role==='lecturer')
+                this.setLecturerCounts();
+            else if(user.role==='mentor'){
+                this.setLecturerCounts();
+                this.setMentorCounts();
+            }
+            else if(user.role==='hod'){
+                this.setLecturerCounts();
+                this.setMentorCounts();
+            }
         },
         setStudentCounts() {
             this.isStudent=true;
+        },
+        setLecturerCounts() {
+            this.isLecturer=true;
+        },
+        setMentorCounts() {
+            this.isMentor=true;
         },
         DisplayLiveDateTime(timeStamp) {
             timeStamp = new Date(timeStamp);
