@@ -153,7 +153,7 @@ export default {
                    
                     this.snackbarText = 'There was an error send alert!';
                 }
-                setTimeout( () => this.$router.push({ path: '/viewRegisteredStudents'}), 2000);
+                setTimeout( () => this.$router.push({ path: '/'}), 1000);
             })
             .catch(err => {
                 this.snackbarText = 'Alert sending Failed!';
