@@ -155,7 +155,7 @@ import { registerUsers } from "../data/data";
       ...mapGetters(["getToken"]),
       async getStudents() {
         const token = this.getToken();
-        const result = await axios.get(process.env.VUE_APP_BACKEND_SERVER + "/api/student/");
+        const result = await axios.get(process.env.VUE_APP_BACKEND_SERVER + "/api/student/everyone/");
         this.students = result.data.students;
       },
       selectStudent(student) {
