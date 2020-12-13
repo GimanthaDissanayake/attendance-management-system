@@ -79,12 +79,10 @@ export default {
    async setBadge(){
       this.users = this.getUser();
       const userId = this.user.username;
-      console.log(userId)
        const result = await axios.post(process.env.VUE_APP_BACKEND_SERVER + "/api/alert/badge/",{
        userId
        });
          this.badgeNum = result.data.alert.length;
-         console.log(this.badgeNum)
     },
     logout() {
       this.$router.push("/");
