@@ -130,6 +130,10 @@ import { viewCourses } from "../data/data";
             lecturer_id,
           });
           this.courses = result.data.courses;
+          this.courses = this.courses.map(c => {
+                c.attendance_percentage = (c.attendance_percentage).toFixed(2);
+                return c;
+            })
           let y = await this.courses.map(c => {
             return c.year;
           })
