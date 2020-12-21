@@ -212,6 +212,7 @@ export const viewCourses = {
   headers: [
     { text: 'COURSE CODE', align: 'start',  value: 'course_code'},
     { text: 'COURSE TITLE', value: 'course_title'},
+    {text:'YEAR',value:'year'},
     { text: 'TYPE', value: 'type'},
     { text: 'ATTENDANCE PERCENTAGE', value:'attendance_percentage'},
 ],
