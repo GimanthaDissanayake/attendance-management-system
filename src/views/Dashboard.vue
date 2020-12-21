@@ -313,6 +313,7 @@ export default {
             TotalMentoringStudents: 0,
             TotalDepartmentCoursesCount: 0,
             TotalDepartmentDaysCount: 0,
+            isHOD: false,
         }
     },
     methods: {
