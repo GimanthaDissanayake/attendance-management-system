@@ -90,8 +90,14 @@ export default {
          this.badgeNum = result.data.alert.length;
     },
     logout() {
-      this.$router.push("/");
-      this.removeToken();
+      if(this.$router.history.current.name === "dashboard")
+        this.removeToken();
+      else{
+        this.$router.push("/");
+        this.removeToken();
+      }
+        
+      
     },
     message() {
       this.$router.push("./viewAlerts");

@@ -4,7 +4,7 @@
           <v-col>
               <v-card shaped elevation=5>
                   <v-card-title class="pl-md-10 display-1">
-                      Welcome Back, <span class="pl-md-3 font-weight-light">{{name}}</span>
+                      <span class="pl-md-3 font-weight-light">{{name}}, logged in as {{role}}</span>
                   </v-card-title>
                   <v-card-text>
                       <v-row>
@@ -291,6 +291,7 @@ export default {
     data() {
         return {
             name: '',
+            role: '',
             currentDate : '',
             // currentTime: '',
             months: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
@@ -322,6 +323,7 @@ export default {
             const user = this.getUser();
             const token = this.getToken();
             this.name = user.name;
+            this.role = user.role;
             if(user.role==='student')
                 this.setStudentCounts();
             else if(user.role==='lecturer')
