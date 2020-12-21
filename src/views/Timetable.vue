@@ -14,7 +14,8 @@
                         :events="events"
                         :event-overlap-mode="mode"
                         :event-overlap-threshold="30"
-                        :event-color="getColor">
+                        :event-color="getColor"
+                        @click:event="selectCourse">
                     </v-calendar>
                 </v-sheet>
             </v-card>
@@ -39,6 +40,7 @@ export default {
         }
     },
     methods: {
+        ...mapMutations(["setCourse"]),
         ...mapGetters(["getToken", "getUser"]),
         getColor(event) {   
             const user = this.getUser();  
@@ -80,7 +82,25 @@ export default {
             // this.courses = result.data.courses;
             // console.log(this.courses)
             }
-        }
+        },
+        selectCourse(course){
+            course = course.event;
+            this.setCourse({
+                co_id: course.co_id,
+                type: course.type,
+                course_code: course.course_code,
+                course_title: course.course_title,
+                level: course.level,
+                semester: course.semester,
+                percentage: course.attendance_percentage,
+                year: course.year
+            });
+            
+            if(this.getUser().role === "student")
+                this.$router.push("/viewDetailedAttendance");
+            else  
+                this.$router.push("/viewDetailedCourse");
+      }
     },
     mounted() {
         this.$refs.calendar.scrollToTime('08:00');   

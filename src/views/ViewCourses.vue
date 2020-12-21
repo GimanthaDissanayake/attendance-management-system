@@ -197,8 +197,7 @@ import { viewCourses } from "../data/data";
             this.$router.push("/viewDetailedAttendance");
           else  
             this.$router.push("/viewDetailedCourse");
-        }
-        
+        }        
       }
     },
     async mounted(){
