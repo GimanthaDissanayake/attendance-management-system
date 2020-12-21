@@ -29,9 +29,13 @@
         </v-btn>
     </v-app-bar>
       <v-navigation-drawer app clipped fill-height v-model="drawer">
-        <v-img src="../assets/logo.png"></v-img>
-        <v-list nav dense>
-          <v-list-item color="primary"
+        <v-container class="pa-md-10 mx-lg-auto">
+          <v-img src="../assets/logo.png"></v-img>
+        </v-container>
+        
+        <v-list nav >
+          <v-list-item 
+            color="primary"
             v-for="item in items"
             v-bind:key="item.title"
             link
@@ -43,7 +47,8 @@
                 <v-icon>{{ item.icon }}</v-icon>
               </v-list-item-icon>
               <v-list-item-content>
-                <v-list-item-title>{{ item.title }}</v-list-item-title>
+                <v-list-item-title 
+                class="title">{{ item.title }}</v-list-item-title>
               </v-list-item-content>
           </v-list-item>
         </v-list>
