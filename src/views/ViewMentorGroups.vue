@@ -86,7 +86,6 @@ import { viewMentorGroups } from "../data/data";
         const result = await axios.post(process.env.VUE_APP_BACKEND_SERVER + "/api/student/mentor/",{
           mentor_id,
         });
-        console.log(user);
         this.students = result.data.students;
         //console.log(this.students);
       },
