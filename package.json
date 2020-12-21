@@ -10,8 +10,10 @@
     "prepublishOnly": "publish-please guard"
   },
   "dependencies": {
+    "animated-number-vue": "^1.0.0",
     "axios": "^0.21.0",
     "vue": "^2.6.11",
+    "vue-number-animation": "^1.0.5",
     "vue-router": "^3.0.1",
     "vue-web-cam": "^1.9.0",
     "vue2-timepicker": "^1.1.5",

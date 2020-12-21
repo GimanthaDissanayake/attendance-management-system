@@ -102,6 +102,8 @@ export default {
              })
 
         },
+        pad(str){ str = str.toString(); return "00".substring(0, 2-str.length) + str; },
+
         async setDate(){
             this.course2 = this.getCourse();
             const co_id = this.course.co_id;
@@ -111,10 +113,12 @@ export default {
              })
              .then(async result => {
                 const attendanceData = result.data.attendance;
-                // console.log(attendanceData);
+                //console.log(attendanceData);
                 this.date_time = attendanceData.date_time;
                 const newDates = attendanceData.map((attendanceDetail) => {
-                    attendanceDetail.date = attendanceDetail.date_time.split('T')[0];            
+                    let date = new Date(attendanceDetail.date_time);
+                    let utcdatestring = date.getUTCFullYear() + "-" + this.pad(date.getUTCMonth() + 1) + "-" + this.pad(date.getUTCDate()+1);
+                    attendanceDetail.date = utcdatestring;            
                     return attendanceDetail;
                 })
                 return await newDates;                

@@ -45,9 +45,7 @@
                             <v-col cols="12" sm="8" md="8">
                                 <v-card>
                                     <v-data-table
-                                        v-model="search"
                                         loading="isLoading"
-                                        :search="search"
                                         :headers="headers"
                                         :items="students"
                                         :items-per-page="5" >
@@ -107,7 +105,6 @@ export default {
              .then(async result => {
                 const newResult = result.data.attendance;
                 this.total = newResult.length;
-            
                 const changedStatus = newResult.map((attendanceDetail) => {
                     if(attendanceDetail.status === 1){
                         attendanceDetail.status = 'present'

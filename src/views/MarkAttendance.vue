@@ -386,11 +386,10 @@ export default {
         //select a course going on at current time
         const mappedCourses = [];
         await returnedCourses.forEach(c => {
-          const st = c.start_time.split('T')[1].split(':')[0];
-          const et = c.end_time.split('T')[1].split(':')[0];
+          const st = parseInt(c.start_time.split('T')[1].split(':')[0]);
+          const et = parseInt(c.end_time.split('T')[1].split(':')[0]);
           if(currentHour>=st && currentHour<et) {
-            this.start_time = 
-            this.mappedCourses.push(c);
+            mappedCourses.push(c);
           }
         });
         if(mappedCourses.length > 0)
@@ -428,7 +427,11 @@ export default {
         //     this.courses = mappedCourses;
         //   }          
         // }
-      } 
+      }else if(returnedCourses.length == 0){
+        this.courses = this.v_select_course_codes
+        this.startTime = this.courses[0].start_time.split('T')[1].split(':')[0]+':'+'00';
+        this.endTime = this.courses[0].end_time.split('T')[1].split(':')[0]+':'+'00';
+      }
 
       //stepper 3
       // get registered student list for current course
