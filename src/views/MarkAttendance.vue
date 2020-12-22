@@ -680,6 +680,7 @@ export default {
         this.snackbar = true;
         if(result.data.message==='success'){
           this.snackbarText = 'Attendance Marked Successfully!';
+          this.absentStudents = [];
           this.e1 = 1;
         }
         else{
