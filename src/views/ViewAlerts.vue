@@ -6,7 +6,7 @@
     <v-row>
       <v-col>
         <v-card>
-          <v-btn
+          <!-- <v-btn
             @click="readAllBtn"
             color="blue-grey"
             class="ma-2 white--text"
@@ -18,12 +18,15 @@
             >
              mdi-comment-eye
             </v-icon>
-          </v-btn>
+          </v-btn> -->
           <v-subheader v-if="alertNew.length > 0" >New Messages</v-subheader>
           <v-expansion-panels>
             <v-expansion-panel
               v-for="alert in alertNew"
-              :key="alert.lecturer_id">
+              :key="alert.lecturer_id"
+               @click="panelClick(alert)"
+              
+              >
                 <v-expansion-panel-header color="#F8F9F9">
                   <v-card class="d-flex mb-6" flat style="background-color:#F8F9F9">
                     <v-card style="background-color:#F8F9F9" flat><strong>{{alert.lecturer_name}}</strong></v-card>
@@ -39,7 +42,9 @@
           <v-expansion-panels>
             <v-expansion-panel
               v-for="alert in alertOld"
-              :key="alert.lecturer_id">
+              :key="alert.lecturer_id"
+             
+              >
                 <v-expansion-panel-header>
                   <v-card class="d-flex mb-6" flat>
                     <v-card flat><strong>{{alert.lecturer_name}}</strong></v-card>
@@ -67,6 +72,7 @@
         drawer: null,
         alertOld:[],
         alertNew:[],
+        timer:'',
       }
     },
     methods: {
@@ -99,13 +105,13 @@
           receiver_id,
         })
         .then(async result => {
-              const alertData = result.data.alert;
-              const newAlert = alertData.map((alertDetail) => {
-                  alertDetail.date = alertDetail.date_time.split('T')[0];
-                  alertDetail.msg = alertDetail.message.substring(0,4);
-                  return alertDetail;
-              })
-              return await newAlert;                
+          const alertData = result.data.alert;
+          const newAlert = alertData.map((alertDetail) => {
+              alertDetail.date = alertDetail.date_time.split('T')[0];
+              alertDetail.msg = alertDetail.message.substring(0,4);
+              return alertDetail;
+          })
+          return await newAlert;                
         })
         .then(nd => {
           this.alertNew = nd; 
@@ -114,12 +120,13 @@
           console.log(err);
         });
       },
-      async readAllBtn(){
+      async panelClick(item){
         const user = this.getUser();
         const username = user.username;
-        this.$root.$refs.A.resetBadge();
+        const alert_id = item.alert_id;
+        
         await axios.post(process.env.VUE_APP_BACKEND_SERVER + "/api/alert/reset_read/",{
-          username
+          username,alert_id
         })
          try {
         this.setMessage1();
@@ -127,7 +134,7 @@
         } catch(err) {
           console.log(err.toString());
         }
-      }
+      },
     },
     async mounted(){
       try {
@@ -136,6 +143,9 @@
       } catch(err) {
         console.log(err.toString());
       }
-    }
+    },
+    created() {
+      this.timer = setInterval(this.setMessage2, 5000)
+    }, 
   }
 </script>

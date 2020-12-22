@@ -76,6 +76,7 @@ export default {
       items: navBar.headers,
       badgeNum:'',
       users:'',
+      timer:'',
     }
   },
   methods: {
@@ -96,26 +97,25 @@ export default {
         this.$router.push("/");
         this.removeToken();
       }
-        
-      
     },
     message() {
       this.$router.push("./viewAlerts");
     },
-    resetBadge() {
-      this.badgeNum = 0;
-    }
+    // resetBadge() {
+    //   this.setBadge = 0;
+    // },
   },
   async mounted(){
     try {
-        this.setBadge();   
+        this.setBadge();
       } catch(err) {
         console.log(err.toString());
       }
   },
   created() {
-        this.$root.$refs.A = this;
-    },
+    //this.setBadge();
+    this.timer = setInterval(this.setBadge, 5000)
+    //this.$root.$refs.A = this;
+  }, 
 }
 </script>
-

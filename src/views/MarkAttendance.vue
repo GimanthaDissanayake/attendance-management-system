@@ -304,14 +304,12 @@
 import axios from 'axios';
 import { mapGetters } from "vuex";
 import { markAttendance } from "../data/data";
-// import VueTimepicker from 'vue2-timepicker/src/vue-timepicker.vue'
 import { WebCam } from "vue-web-cam";
 
 export default {
   name: "App",
   components: {
     "vue-web-cam": WebCam,
-    // VueTimepicker,
   },
   data(){
     return{
@@ -542,9 +540,6 @@ export default {
     //stepper 2 camera methods
     onCapture() {  
       this.img = this.$refs.webcam.capture();
-      //console.log(this.$refs.webcam.loadCameras());
-      // console.log(this.img);
-      //var img; // get imagedata from POST request 
     },
     onCameras(cameras) {
       this.devices = cameras;
@@ -552,12 +547,10 @@ export default {
     capture(){
       this.$refs.webcam.start();
       this.img = this.$refs.webcam.capture();
-      // console.log(this.img);
     },
     onCameraChange(deviceId) {
       this.deviceId = deviceId;
       this.camera = deviceId;
-      console.log("On Camera Change Event", deviceId);
     },
     b64toBlob(b64Data, contentType, sliceSize) {
         contentType = contentType || '';
@@ -690,7 +683,6 @@ export default {
           this.e1 = 1;
         }
         else{
-          console.log(result.data.message);
           this.snackbarText = 'There was an error Marking Attendance!';
         }
         this.isLoading = false;
