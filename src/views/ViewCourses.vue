@@ -159,9 +159,13 @@ import { viewCourses } from "../data/data";
         }        
       },
       filterSemesters(selected) {
-        if(selected!=null)
-          this.filteredCourses = this.courses.filter(course => course.semester === selected && course.level === this.selectedLevel && course.year === this.selectedYear)
-      },
+        if(selected!=null){
+          if(this.selectedYear!='')
+            this.filteredCourses = this.courses.filter(course => course.semester === selected && course.level === this.selectedLevel && course.year === this.selectedYear)
+          else
+            this.filteredCourses = this.courses.filter(course => course.semester === selected && course.level === this.selectedLevel)
+        }
+          },
       resetYear() {
         this.resetDisplayed();
         this.resetCourses();
