@@ -2,9 +2,9 @@
   <nav fill-height>
     <v-app-bar flat app dark class="primary">
       <v-app-bar-nav-icon @click.stop="drawer=!drawer"></v-app-bar-nav-icon>      
-      <v-toolbar-title>
+      <!-- <v-toolbar-title>
         Attendance Management System
-      </v-toolbar-title>
+      </v-toolbar-title> -->
        <v-spacer></v-spacer>
       <v-badge
           v-show="user.role!='admin'"
@@ -28,31 +28,37 @@
           <v-icon color="black" right>mdi-logout-variant</v-icon>
         </v-btn>
     </v-app-bar>
-      <v-navigation-drawer app clipped fill-height v-model="drawer">
-        <v-container class="pa-md-10 mx-lg-auto">
+    <v-navigation-drawer app  fill-height v-model="drawer">
+      <v-container class="px-md-5 mx-lg-auto">
+        <v-row class="px-md-8 mx-lg-auto">
           <v-img src="../assets/logo.png"></v-img>
-        </v-container>
-        
-        <v-list nav >
-          <v-list-item 
-            color="primary"
-            v-for="item in items"
-            v-bind:key="item.title"
-            link
-            router
-            :disabled="checkDisabled"
-            :to="item.path"
-            v-show="item.access.includes('all') || (item.access.includes(user.role) && item.access.includes('yes'))">
-              <v-list-item-icon>
-                <v-icon>{{ item.icon }}</v-icon>
-              </v-list-item-icon>
-              <v-list-item-content>
-                <v-list-item-title 
-                class="title">{{ item.title }}</v-list-item-title>
-              </v-list-item-content>
-          </v-list-item>
-        </v-list>
-      </v-navigation-drawer>
+        </v-row>
+        <v-row>
+          <span class="px-md-3 text-body-2 text-center">Attendance Management System</span>
+        </v-row>
+      </v-container>
+      
+      
+      <v-list nav dense>
+        <v-list-item 
+          color="primary"
+          v-for="item in items"
+          v-bind:key="item.title"
+          link
+          router
+          :disabled="checkDisabled"
+          :to="item.path"
+          v-show="item.access.includes('all') || (item.access.includes(user.role) && item.access.includes('yes'))">
+            <v-list-item-icon>
+              <v-icon>{{ item.icon }}</v-icon>
+            </v-list-item-icon>
+            <v-list-item-content>
+              <v-list-item-title 
+              class="subtitle-2">{{ item.title }}</v-list-item-title>
+            </v-list-item-content>
+        </v-list-item>
+      </v-list>
+    </v-navigation-drawer>
   </nav>  
 </template>
 

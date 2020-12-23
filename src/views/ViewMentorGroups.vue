@@ -8,7 +8,7 @@
         <v-card>
           <v-card-title>
             <v-row>
-              <v-col>
+              <v-col cols="4">
                 <v-select
                   :items="levels"
                   label="Select Level"
