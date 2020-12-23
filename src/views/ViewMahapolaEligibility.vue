@@ -10,7 +10,7 @@
           <p class='text-h6'>You are eligibile to receive mahapola for the time period from {{start_date}} to {{end_date}}</p> 
         </v-container>
         <v-container v-if="!eligibility">
-          <p class='text-h6 error--text'>You are not eligibile to receive mahapola for the time period from {{start_date}} to {{end_date}} because of your low attendance for below subjects</p>
+          <p class='text-h6 error--text'>You are not eligibile to receive mahapola for the time period from {{start_date}} to {{end_date}} because of the low attendance for below courses</p>
           <v-data-table
           :headers="headers"
           :items="courses"

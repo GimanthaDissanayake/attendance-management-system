@@ -111,8 +111,8 @@ export default {
             this.setStudent({
             registration_no: student.registration_no,
             name: student.student_name,
-            mentor_name: user.name,
-            mentor_id: user.mentor_id,
+            mentor_name: student.lecturer_name,
+            mentor_id: student.mentor_id,
             degree_program: student.degree_name
             });
             this.$store.state.selectedStudent = true;

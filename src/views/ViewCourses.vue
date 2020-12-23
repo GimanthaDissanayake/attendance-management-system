@@ -8,7 +8,7 @@
         <v-card>
           <v-card-title>
             <v-row cols=12>
-              <v-col cols=2 v-show="showYear">
+              <v-col cols=3 v-show="showYear">
                 <v-select
                   :items="years"
                   label="Select Year"
@@ -18,7 +18,7 @@
                   v-on:click:clear="resetYear">
                 </v-select>
               </v-col>
-              <v-col cols=2>
+              <v-col cols=3>
                 <v-select
                   :items="levels"
                   label="Select Level"
@@ -28,7 +28,7 @@
                   v-on:click:clear="resetCourses">
                 </v-select>
               </v-col>
-              <v-col cols=2>
+              <v-col cols=3>
                 <v-select
                   :items="semesters"
                   label="Select Semester"
@@ -43,7 +43,7 @@
                 <v-text-field
                   v-model="search"
                   label="Search"
-                  placeholder="Enter Course Code or Course Title to Search"
+                  placeholder="Search"
                   append-icon="mdi-magnify"
                   outlined
                   clearable
@@ -57,7 +57,7 @@
               loading="isLoading"
               :headers="headers"
               :items="filteredCourses"
-              :items-per-page="10"
+              :items-per-page="5"
               :search="search"
               v-on:click:row="selectCourse"
               class="elevation-1">
@@ -159,9 +159,13 @@ import { viewCourses } from "../data/data";
         }        
       },
       filterSemesters(selected) {
-        if(selected!=null)
-          this.filteredCourses = this.courses.filter(course => course.semester === selected && course.level === this.selectedLevel && course.year === this.selectedYear)
-      },
+        if(selected!=null){
+          if(this.selectedYear!='')
+            this.filteredCourses = this.courses.filter(course => course.semester === selected && course.level === this.selectedLevel && course.year === this.selectedYear)
+          else
+            this.filteredCourses = this.courses.filter(course => course.semester === selected && course.level === this.selectedLevel)
+        }
+          },
       resetYear() {
         this.resetDisplayed();
         this.resetCourses();
@@ -197,8 +201,7 @@ import { viewCourses } from "../data/data";
             this.$router.push("/viewDetailedAttendance");
           else  
             this.$router.push("/viewDetailedCourse");
-        }
-        
+        }        
       }
     },
     async mounted(){

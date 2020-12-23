@@ -110,24 +110,22 @@
             <v-stepper-content step="2">
               <v-container>
                 <v-progress-linear v-if="isLoading"
-                color="primary"
-                indeterminate
-                rounded
-                height="6"
+                  color="primary"
+                  indeterminate
+                  rounded
+                  height="6"
                 ></v-progress-linear>
-                <!-- <v-row>
-                  <v-select
-                  :items="devices.deviceId"
-                    label="Select Camera Device"></v-select>
-                </v-row> -->
+                
                 <v-row align="center" justify="center">
                   <v-col 
                     cols="12"
                     sm="6">
                     <vue-web-cam
                       ref="webcam"
-                      :device-id="deviceId"  
+                      :device-id="deviceId"
+                      @error="onError"
                       @cameras="onCameras"
+                      @camera-change="onCameraChange"
                     />
                       <!--before@cameras @error="onError" -->
                       <!--afterdevice-id @stopped="onStopped" -->
@@ -138,6 +136,26 @@
                     cols="12"
                     sm="6">
                       <v-img :src="img"></v-img>
+                  </v-col>
+                </v-row>
+                <v-row align="center">
+                  <v-col cols="3">
+                    <v-subheader>
+                      Select Camera
+                    </v-subheader>
+                  </v-col>
+                  <v-col cols="3">
+                    <select
+                      v-model="camera"
+                    >
+                    <option
+                      v-for="device in devices"
+                      :key="device.deviceId"
+                      :value="device.deviceId"
+                    >
+                      <h6>{{ device.label }}</h6>
+                    </option>
+                    </select>
                   </v-col>
                 </v-row>
                 <v-row  align="center" justify="center">
@@ -286,14 +304,12 @@
 import axios from 'axios';
 import { mapGetters } from "vuex";
 import { markAttendance } from "../data/data";
-// import VueTimepicker from 'vue2-timepicker/src/vue-timepicker.vue'
 import { WebCam } from "vue-web-cam";
 
 export default {
   name: "App",
   components: {
     "vue-web-cam": WebCam,
-    // VueTimepicker,
   },
   data(){
     return{
@@ -338,8 +354,30 @@ export default {
       //stepper 2 props
       img: null,
       deviceId: '',
-      devices: [],      
+      devices: [],  
+      camera:'',    
     }
+  },
+  watch: {
+    //stepper 3
+    dialog (val) {
+      val || this.close()
+    },
+    dialogDelete (val) {
+      val || this.closeDelete()
+    },
+    // stepper 2 methods
+     camera: function(id) {
+            this.deviceId = id;
+        },
+    devices: function() {
+      // Once we have a list select the first one
+      const [first, ...tail] = this.devices;
+      if (first) {
+        this.camera = first.deviceId;
+        this.deviceId = first.deviceId;
+      }
+    }      
   },
   methods: {
     ...mapGetters(["getToken", "getUser"]),
@@ -502,9 +540,6 @@ export default {
     //stepper 2 camera methods
     onCapture() {  
       this.img = this.$refs.webcam.capture();
-      //console.log(this.$refs.webcam.loadCameras());
-      // console.log(this.img);
-      //var img; // get imagedata from POST request 
     },
     onCameras(cameras) {
       this.devices = cameras;
@@ -512,7 +547,10 @@ export default {
     capture(){
       this.$refs.webcam.start();
       this.img = this.$refs.webcam.capture();
-      // console.log(this.img);
+    },
+    onCameraChange(deviceId) {
+      this.deviceId = deviceId;
+      this.camera = deviceId;
     },
     b64toBlob(b64Data, contentType, sliceSize) {
         contentType = contentType || '';
@@ -642,10 +680,10 @@ export default {
         this.snackbar = true;
         if(result.data.message==='success'){
           this.snackbarText = 'Attendance Marked Successfully!';
+          this.absentStudents = [];
           this.e1 = 1;
         }
         else{
-          console.log(result.data.message);
           this.snackbarText = 'There was an error Marking Attendance!';
         }
         this.isLoading = false;
@@ -657,24 +695,7 @@ export default {
       })
     }
   },
-  watch: {
-    //stepper 3
-    dialog (val) {
-      val || this.close()
-    },
-    dialogDelete (val) {
-      val || this.closeDelete()
-    },
-    // stepper 2 memthods
-    devices: function() {
-      // Once we have a list select the first one
-      const [first, ...tail] = this.devices;
-      if (first) {
-        this.camera = first.deviceId;
-        this.deviceId = first.deviceId;
-      }
-    }      
-  },
+  
   async created(){
     try{
       await this.setData();

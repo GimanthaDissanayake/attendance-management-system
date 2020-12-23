@@ -5,22 +5,23 @@
       </v-row>
       <v-row>
         <v-col>
-            <v-card class="mx-4 mb-4 text-body-2">
-                <v-container>
+            <v-card class="text-body-2">
+                <v-container class="px-md-6">
                     <v-row align="center" justify="center">
-                        <v-col cols="6" sm="4" md="4">
+                        <v-col>
                             <v-row>
-                                <v-col cols="5" sm="4" md="4">
+                                <v-col>
                                     Student Name :
                                 </v-col>
+                                <v-spacer></v-spacer>
                                 <v-col>
                                     <v-chip>{{student.student_name}}</v-chip>
                                 </v-col>
                             </v-row>                    
                         </v-col>
-                        <v-col cols="6" sm="4" md="4">
+                        <v-col>
                             <v-row>
-                                <v-col cols="5" sm="4" md="4">
+                                <v-col>
                                     Registration No :
                                 </v-col>
                                 <v-col>
@@ -30,9 +31,9 @@
                         </v-col>
                     </v-row>
                     <v-row align="center" justify="center">
-                        <v-col cols="6" sm="4" md="4">
+                        <v-col>
                             <v-row>
-                                <v-col cols="5" sm="4" md="4">
+                                <v-col>
                                     Degree Program :
                                 </v-col>
                                 <v-col>
@@ -40,9 +41,9 @@
                                 </v-col>
                             </v-row>                    
                         </v-col>
-                        <v-col cols="6" sm="4" md="4">
+                        <v-col>
                             <v-row>
-                                <v-col cols="5" sm="4" md="4">
+                                <v-col>
                                     Course Code :
                                 </v-col>
                                 <v-col>
@@ -52,19 +53,20 @@
                         </v-col>
                     </v-row>
                     <v-row align="center" justify="center">
-                        <v-col cols="6" sm="4" md="4">
+                        <v-col>
                             <v-row>
-                                <v-col cols="5" sm="4" md="4">
+                                <v-col>
                                     Course Title :
                                 </v-col>
+                                <v-spacer></v-spacer>
                                 <v-col>
                                     <v-chip>{{course.course_title}}</v-chip>
                                 </v-col>
                             </v-row>                    
                         </v-col>
-                        <v-col cols="6" sm="4" md="4">
+                        <v-col>
                             <v-row>
-                                <v-col cols="5" sm="4" md="4">
+                                <v-col>
                                     Attendance Percentage :
                                 </v-col>
                                 <v-col>

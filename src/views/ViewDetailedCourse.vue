@@ -70,6 +70,7 @@
 import axios from 'axios';
 import { mapGetters , mapMutations } from "vuex";
 import { viewDetailedCourse } from "../data/data";
+import moment from 'moment';
 export default {
     data() {
         return {
@@ -116,9 +117,11 @@ export default {
                 //console.log(attendanceData);
                 this.date_time = attendanceData.date_time;
                 const newDates = attendanceData.map((attendanceDetail) => {
-                    let date = new Date(attendanceDetail.date_time);
-                    let utcdatestring = date.getUTCFullYear() + "-" + this.pad(date.getUTCMonth() + 1) + "-" + this.pad(date.getUTCDate()+1);
-                    attendanceDetail.date = utcdatestring;            
+                    // let date = new Date(attendanceDetail.date_time);
+                    let date = moment(attendanceDetail.date_time).format('YYYY-MM-DD');
+                    //console.log(date2);
+                    //let utcdatestring = date.getUTCFullYear() + "-" + this.pad(date.getUTCMonth() + 1) + "-" + this.pad(date.getUTCDate()+1);
+                    attendanceDetail.date = date;            
                     return attendanceDetail;
                 })
                 return await newDates;                
