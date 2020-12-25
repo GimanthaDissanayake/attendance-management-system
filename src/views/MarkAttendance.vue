@@ -123,7 +123,7 @@
                     <vue-web-cam
                       ref="webcam"
                       :device-id="deviceId"
-                      @error="onError"
+                      
                       @cameras="onCameras"
                       @camera-change="onCameraChange"
                     />
@@ -144,15 +144,16 @@
                       Select Camera
                     </v-subheader>
                   </v-col>
-                  <v-col cols="3">
+                  <v-col cols="3" >
                     <!-- <v-select
-                      v-model="camera"
-                      :items="device"
-                      label="Standard"
-                      item-text="devices.deviceId"
-                      item.value="devices.deviceId"
+                      v-model="camera"   
+                      :items="devices"
+                      label="Optional"
+                      item-text="label"
+                      item.value="deviceId"
                       placeholder="Select camera"
-                    /> -->
+                    > 
+                    </v-select> -->
                     <select
                       v-model="camera"
                     >
@@ -394,7 +395,7 @@ export default {
       const token = this.getToken();
       const user = this.getUser();    
       const lecturer_id = user.username;
-      
+       
       //stepper 1
       //auto fill form date
       // const result = await axios.post(process.env.VUE_APP_BACKEND_SERVER + "/api/course/course_time/",{

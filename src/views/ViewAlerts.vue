@@ -29,7 +29,7 @@
           <v-expansion-panels>
             <v-expansion-panel
               v-for="alert in alertOld"
-              :key="alert.lecturer_id"
+              :key="alert.alert_id"
              
               >
                 <v-expansion-panel-header>
