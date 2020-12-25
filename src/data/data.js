@@ -1,6 +1,6 @@
 export const navBar = {
     headers: [
-        { title: 'Dashboard', icon: 'mdi-view-dashboard', path: '/', access: ['all','yes']},
+        // { title: 'Dashboard', icon: 'mdi-view-dashboard', path: '/', access: ['all','yes']},
         { title: 'Mark Attendance', icon: 'mdi-account-arrow-right', path: '/markAttendance', access: ['lecturer','mentor','hod','yes']},
         { title: 'My Courses', icon: 'mdi-school', path: '/viewCourses', access: ['student','lecturer','mentor','hod','yes']},
         { title: 'Mentor Groups', icon: 'mdi-account-supervisor', path: '/viewMentorGroups', access: ['mentor','hod','yes']},
