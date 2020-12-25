@@ -145,6 +145,14 @@
                     </v-subheader>
                   </v-col>
                   <v-col cols="3">
+                    <!-- <v-select
+                      v-model="camera"
+                      :items="device"
+                      label="Standard"
+                      item-text="devices.deviceId"
+                      item.value="devices.deviceId"
+                      placeholder="Select camera"
+                    /> -->
                     <select
                       v-model="camera"
                     >
@@ -517,6 +525,9 @@ export default {
       this.isLoading = false;
       this.e1 = 2;
     },
+    // changeCourseCode(item){
+    //   console.log(item)
+    // },
     addUnregisteredStudents(){
       if(this.addUnreg != '')
         this.recognizedStudents.push(this.addUnreg);

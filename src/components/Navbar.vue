@@ -6,6 +6,7 @@
         Attendance Management System
       </v-toolbar-title> -->
        <v-spacer></v-spacer>
+       <span class="nameTxt d-none d-sm-flex">{{user.name }}</span><v-spacer></v-spacer><span class="roleTxt d-none d-sm-flex">logged in as {{ user.role}}</span>
       <v-badge
           v-show="user.role!='admin'"
           :content="badgeNum"
@@ -125,3 +126,15 @@ export default {
   }, 
 }
 </script>
+
+<style scoped>
+  .nameTxt{
+    font-family: 'Concert One', cursive;
+    font-size: 30px;
+  }
+  .roleTxt{
+    font-family: 'Concert One', cursive;
+    font-size: 18px;
+  
+  }
+</style>

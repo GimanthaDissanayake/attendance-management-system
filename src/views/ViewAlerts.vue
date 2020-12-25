@@ -6,19 +6,6 @@
     <v-row>
       <v-col>
         <v-card>
-          <!-- <v-btn
-            @click="readAllBtn"
-            color="blue-grey"
-            class="ma-2 white--text"
-          >
-            Mark All As Read
-            <v-icon
-              right
-              dark
-            >
-             mdi-comment-eye
-            </v-icon>
-          </v-btn> -->
           <v-subheader v-if="alertNew.length > 0" >New Messages</v-subheader>
           <v-expansion-panels>
             <v-expansion-panel
