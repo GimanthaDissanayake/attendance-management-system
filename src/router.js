@@ -17,7 +17,8 @@ import ViewStudentDetails from './views/ViewStudentDetails.vue'
 import ViewAttendanceSheet from './views/ViewAttendanceSheet.vue'
 import SendAlert from './views/SendAlert.vue'
 import ViewAllStudents from './views/ViewAllStudents.vue'
-
+import Dashboard from './views/Dashboard.vue'
+import ViewAllCourses from './views/ViewAllCourses.vue'
 
 
 Vue.use(Router)
@@ -27,9 +28,19 @@ export default new Router({
   base: process.env.BASE_URL,
   routes: [
     {
+      path: '/',
+      name: 'dashboard',
+      component: Dashboard
+    },
+    {
       path: '/ViewCourses',
       name: 'viewcourses',
       component: ViewCourses
+    },
+    {
+      path: '/ViewAllCourses',
+      name: 'viewallcourses',
+      component: ViewAllCourses
     },
     {
       path: '/Timetable',

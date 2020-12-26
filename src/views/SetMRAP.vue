@@ -13,8 +13,7 @@
         </v-text-field>
       </v-col>
       <v-col xs="12" md="4">
-        <v-btn
-        >
+        <v-btn>
           Set
         </v-btn>
       </v-col>
