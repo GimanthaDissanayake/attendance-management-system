@@ -20,9 +20,9 @@
               </v-card>
           </v-col>
       </v-row>
-      <v-container>
-          <v-row justify="center">
-            <v-col cols=2 v-show="isStudent">
+      <!-- <v-container>
+          <v-row justify="center"> -->
+            <!-- <v-col cols=2 v-show="isStudent">
                 <v-container>
                     <v-sheet
                     elevation="5"
@@ -50,8 +50,8 @@
                         <v-spacer></v-spacer>
                     </v-sheet>
                 </v-container>                
-            </v-col>
-            <v-col cols=2 v-show="isStudent">
+            </v-col> -->
+            <!-- <v-col cols=2 v-show="isStudent">
                 <v-container>
                     <v-sheet
                     elevation="5"
@@ -78,8 +78,8 @@
                         </v-row>
                     </v-sheet>
                 </v-container>
-            </v-col>
-            <v-col cols=2 v-show="isStudent">
+            </v-col> -->
+            <!-- <v-col cols=2 v-show="isStudent">
                 <v-container>
                     <v-sheet
                     elevation="5"
@@ -134,8 +134,8 @@
                         </v-row>
                     </v-sheet>
                 </v-container>
-            </v-col>
-            <v-col cols=2 v-show="isLecturer">
+            </v-col> -->
+            <!-- <v-col cols=2 v-show="isLecturer">
                 <v-container>
                     <v-sheet
                     elevation="5"
@@ -190,8 +190,8 @@
                         </v-row>
                     </v-sheet>
                 </v-container>
-            </v-col>
-            <v-col cols=2 v-show="isMentor">
+            </v-col> -->
+            <!-- <v-col cols=2 v-show="isMentor">
                 <v-container>
                     <v-sheet
                     elevation="5"
@@ -218,8 +218,8 @@
                         </v-row>
                     </v-sheet>
                 </v-container>
-            </v-col>
-            <v-col cols=2 v-show="isHOD">
+            </v-col> -->
+            <!-- <v-col cols=2 v-show="isHOD">
                 <v-container>
                     <v-sheet
                     elevation="5"
@@ -274,19 +274,19 @@
                         </v-row>
                     </v-sheet>
                 </v-container>
-            </v-col>
-        </v-row>
-      </v-container>
+            </v-col> -->
+        <!-- </v-row>
+      </v-container> -->
   </v-container>
 </template>
 
 <script>
 import { mapGetters } from "vuex";
 import axios from 'axios';
-import AnimatedNumber from "animated-number-vue";
+// import AnimatedNumber from "animated-number-vue";
 export default {
     components: {
-        AnimatedNumber
+        // AnimatedNumber
     },
     data() {
         return {
@@ -302,19 +302,19 @@ export default {
             date:'',
             // hh:'',
             // mm:'',
-            isStudent: false,
-            RegisteredCoursesCount: 0,
-            TotalLecturesHeldCount: 0,
-            ToalLecturesPresentCount: 0,
-            TotalLectureAbsentCount: 0,
-            isLecturer: false,
-            TotalCoursesTeaching: 0,
-            TotalConducted: 0,
-            isMentor: false,
-            TotalMentoringStudents: 0,
-            TotalDepartmentCoursesCount: 0,
-            TotalDepartmentDaysCount: 0,
-            isHOD: false,
+            // isStudent: false,
+            // RegisteredCoursesCount: 0,
+            // TotalLecturesHeldCount: 0,
+            // ToalLecturesPresentCount: 0,
+            // TotalLectureAbsentCount: 0,
+            // isLecturer: false,
+            // TotalCoursesTeaching: 0,
+            // TotalConducted: 0,
+            // isMentor: false,
+            // TotalMentoringStudents: 0,
+            // TotalDepartmentCoursesCount: 0,
+            // TotalDepartmentDaysCount: 0,
+            // isHOD: false,
         }
     },
     methods: {
@@ -325,98 +325,103 @@ export default {
             this.name = user.name;
             this.role = user.role;
             if(user.role==='student')
-                this.setStudentCounts();
-            else if(user.role==='lecturer')
-                this.setLecturerCounts();
-            else if(user.role==='mentor'){
-                this.setLecturerCounts();
-                this.setMentorCounts();
-            }
+                this.$router.push("./viewCourses");
+            else if(user.role==='admin')
+                this.$router.push("./registerUsers");
+            // else if(user.role==='lecturer')
+            //     this.setLecturerCounts();
+            // else if(user.role==='mentor'){
+            //     this.setLecturerCounts();
+            //     this.setMentorCounts();
+            // }
             else if(user.role==='hod'){
-                this.setLecturerCounts();
-                this.setMentorCounts();
-                this.setDepartmentHeadCounts();
+                this.$router.push("./viewAllStudents");
+                // this.setLecturerCounts();
+                // this.setMentorCounts();
+                // this.setDepartmentHeadCounts();
             }
+            else    
+                this.$router.push("./markAttendance");
         },
-        async setStudentCounts() {
-            this.isStudent=true;
-            const user = this.getUser();
-            const username = user.username;
+        // async setStudentCounts() {
+        //     this.isStudent=true;
+        //     const user = this.getUser();
+        //     const username = user.username;
 
-            //total registered courses
-            const r1 = await axios.post(process.env.VUE_APP_BACKEND_SERVER + "/api/student/registered_student/",{
-                username
-            });
-            this.RegisteredCoursesCount = r1.data.count[0][0].count;
+        //     // //total registered courses
+        //     // const r1 = await axios.post(process.env.VUE_APP_BACKEND_SERVER + "/api/student/registered_student/",{
+        //     //     username
+        //     // });
+        //     // this.RegisteredCoursesCount = r1.data.count[0][0].count;
             
-            //total lecture days
-            const r2 = await axios.post(process.env.VUE_APP_BACKEND_SERVER + "/api/student/lecturer_days/",{
-                username
-            });
-            this.TotalLecturesHeldCount = r2.data.count[0][0].count;
+        //     // //total lecture days
+        //     // const r2 = await axios.post(process.env.VUE_APP_BACKEND_SERVER + "/api/student/lecturer_days/",{
+        //     //     username
+        //     // });
+        //     // this.TotalLecturesHeldCount = r2.data.count[0][0].count;
 
-            //total present days
-            const r3 = await axios.post(process.env.VUE_APP_BACKEND_SERVER + "/api/student/present_days/",{
-                username
-            });
-            this.ToalLecturesPresentCount = r3.data.count[0][0].count;
+        //     // //total present days
+        //     // const r3 = await axios.post(process.env.VUE_APP_BACKEND_SERVER + "/api/student/present_days/",{
+        //     //     username
+        //     // });
+        //     // this.ToalLecturesPresentCount = r3.data.count[0][0].count;
 
-            //total absent days
-            const r4 = await axios.post(process.env.VUE_APP_BACKEND_SERVER + "/api/student/absent_days/",{
-                username
-            });
-            this.TotalLectureAbsentCount = r4.data.count[0][0].count;
-        },
-        async setLecturerCounts() {
-            this.isLecturer=true;
-            const user = this.getUser();
-            const username = user.username;
+        //     // //total absent days
+        //     // const r4 = await axios.post(process.env.VUE_APP_BACKEND_SERVER + "/api/student/absent_days/",{
+        //     //     username
+        //     // });
+        //     // this.TotalLectureAbsentCount = r4.data.count[0][0].count;
+        // },
+        // async setLecturerCounts() {
+        //     this.isLecturer=true;
+        //     const user = this.getUser();
+        //     const username = user.username;
 
-            //total absent days
-            const r1 = await axios.post(process.env.VUE_APP_BACKEND_SERVER + "/api/student/total_courses/",{
-                username
-            });
-            this.TotalCoursesTeaching = r1.data.count[0][0].count;
+        //     //total absent days
+        //     const r1 = await axios.post(process.env.VUE_APP_BACKEND_SERVER + "/api/student/total_courses/",{
+        //         username
+        //     });
+        //     this.TotalCoursesTeaching = r1.data.count[0][0].count;
 
-            const r2 = await axios.post(process.env.VUE_APP_BACKEND_SERVER + "/api/student/total_conducted/",{
-                username
-            });
-            this.TotalConducted = r2.data.count[0][0].count;
-        },
-        async setMentorCounts() {
-            this.isMentor=true;
-            this.isLecturer=true;
-            const user = this.getUser();
-            const username = user.username;
-            //total absent days
-            const r1 = await axios.post(process.env.VUE_APP_BACKEND_SERVER + "/api/student/total_mentoring/",{
-                username
-            });
-            this.TotalMentoringStudents = r1.data.count[0][0].count;
-        },
-        async setDepartmentHeadCounts() {
-            this.isHOD=true;
-            this.isLecturer=true;
-            const user = this.getUser();
-            const username = user.username;
+        //     const r2 = await axios.post(process.env.VUE_APP_BACKEND_SERVER + "/api/student/total_conducted/",{
+        //         username
+        //     });
+        //     this.TotalConducted = r2.data.count[0][0].count;
+        // },
+        // async setMentorCounts() {
+        //     this.isMentor=true;
+        //     this.isLecturer=true;
+        //     const user = this.getUser();
+        //     const username = user.username;
+        //     //total absent days
+        //     const r1 = await axios.post(process.env.VUE_APP_BACKEND_SERVER + "/api/student/total_mentoring/",{
+        //         username
+        //     });
+        //     this.TotalMentoringStudents = r1.data.count[0][0].count;
+        // },
+        // async setDepartmentHeadCounts() {
+        //     this.isHOD=true;
+        //     this.isLecturer=true;
+        //     const user = this.getUser();
+        //     const username = user.username;
             
-            const r1 = await axios.post(process.env.VUE_APP_BACKEND_SERVER + "/api/student/total_dep_courses/",{
-                username
-            });
-            this.TotalDepartmentCoursesCount = r1.data.count[0][0].count;
+        //     const r1 = await axios.post(process.env.VUE_APP_BACKEND_SERVER + "/api/student/total_dep_courses/",{
+        //         username
+        //     });
+        //     this.TotalDepartmentCoursesCount = r1.data.count[0][0].count;
 
-            const r2 = await axios.post(process.env.VUE_APP_BACKEND_SERVER + "/api/student/total_dep_days/",{
-                username
-            });
-            this.TotalDepartmentDaysCount = r2.data.count[0][0].count;
+        //     const r2 = await axios.post(process.env.VUE_APP_BACKEND_SERVER + "/api/student/total_dep_days/",{
+        //         username
+        //     });
+        //     this.TotalDepartmentDaysCount = r2.data.count[0][0].count;
         
-        },
-        formatToPrice(value) {
-            return ` ${value.toFixed(0)}`;
-        },
-        setHODCounts() {
-            this.isHOD=true;
-        },
+        // },
+        // formatToPrice(value) {
+        //     return ` ${value.toFixed(0)}`;
+        // },
+        // setHODCounts() {
+        //     this.isHOD=true;
+        // },
         DisplayLiveDateTime(timeStamp) {
             timeStamp = new Date(timeStamp);
             this.year = timeStamp.getFullYear();
