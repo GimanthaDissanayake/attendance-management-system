@@ -23,7 +23,7 @@
             <v-stepper-content step="1">
               <v-container>
                 <v-row align="center" justify="center">
-                  <v-col cols="12" sm="8" md="8">
+                  <v-col>
                     <v-card>
                       <v-card-title>
                         <v-text-field
@@ -40,6 +40,9 @@
                         :headers="headers"
                         :items="students"
                         :search="search"
+                        :sort-by="['status']"
+                        :loading="isLoading"
+                        loading-text="Loading... Please wait"
                         :items-per-page="10" 
                         v-on:click:row="selectStudent">
                       </v-data-table>
@@ -154,9 +157,22 @@ import { registerUsers } from "../data/data";
     methods: {
       ...mapGetters(["getToken"]),
       async getStudents() {
+        this.isLoading = true;
         const token = this.getToken();
-        const result = await axios.get(process.env.VUE_APP_BACKEND_SERVER + "/api/student/everyone/");
-        this.students = result.data.students;
+        const allStudents = await axios.get(process.env.VUE_APP_BACKEND_SERVER + "/api/student/everyone/");
+
+        const registeredStudents = await axios.get(process.env.VUE_APP_FLASK_SERVER + "/registered");
+
+        allStudents.data.students.forEach(student => {
+          if(registeredStudents.data.id_list.includes(student.registration_no))
+            student.status = 'Registered';
+          else
+            student.status = 'Not Registered';
+        });
+
+        this.students = allStudents.data.students;
+
+        this.isLoading = false;
       },
       selectStudent(student) {
         this.student = {
@@ -190,7 +206,6 @@ import { registerUsers } from "../data/data";
           }
           else {
             this.snackbarText = 'There was a Problem Saving the Image!';
-            console.log(result)
           }
           this.isLoading = false;
         }).catch(err => {

@@ -7,12 +7,11 @@
             <v-col>
                 <v-card>
                     <br>
-                    <v-row>
-                        <v-spacer></v-spacer>
-                        <v-col>
+                    <v-row class="px-md-10">
+                        <v-col md="2">
                             <p>Course Code :</p>
                         </v-col>
-                        <v-col>
+                        <v-col md="3" align="center">
                             <v-chip>{{course.course_code}}</v-chip>
                         </v-col>
                         <v-col>
@@ -21,14 +20,12 @@
                         <v-col>
                             <v-chip>{{course.course_title}}</v-chip>
                         </v-col>
-                        <v-spacer></v-spacer>
                     </v-row>
-                    <v-row>
-                        <v-spacer></v-spacer>
-                        <v-col>
+                    <v-row class="px-md-10">
+                        <v-col md="2">
                             <p>Date :</p>
                         </v-col>
-                        <v-col>
+                        <v-col md="3" align="center">
                             <v-chip>{{selectedDate}}</v-chip>
                         </v-col>
                         <v-col>
@@ -38,11 +35,10 @@
                             <v-chip v-if="!isNaN(percentage)">{{percentage+'%'}}</v-chip>
                             <v-chip v-if="isNaN(percentage)">{{0+'%'}}</v-chip>
                         </v-col>
-                        <v-spacer></v-spacer>
                     </v-row>
                     <v-card-text>
                         <v-row align="center" justify="center">
-                            <v-col cols="12" sm="8" md="8">
+                            <v-col cols="12" sm="8" md="10">
                                 <v-card>
                                     <v-data-table
                                         loading="isLoading"

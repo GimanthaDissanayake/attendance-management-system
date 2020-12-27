@@ -33,6 +33,7 @@ export const registerUsers = {
     headers: [
         { text: 'Registration No', value: 'registration_no' },
         { text: 'Name', value: 'student_name' },
+        { text: 'Status', value: 'status' },
       ],
 };
 
@@ -121,6 +122,7 @@ export const timetable = {
 export const viewAllStudents = {
   headers: [
     { text: 'Registration Number', align: 'start',  value: 'registration_no'},
+    { text: 'Level', value: 'level'},
     { text: 'Name', value: 'student_name'},
     { text: 'Receiving Mahapola?', value: 'hasMahapola'},
 ],
@@ -214,7 +216,7 @@ export const viewCourses = {
     { text: 'COURSE TITLE', value: 'course_title'},
     {text:'YEAR',value:'year'},
     { text: 'TYPE', value: 'type'},
-    { text: 'ATTENDANCE PERCENTAGE', value:'attendance_percentage'},
+    { text: 'ATTENDANCE PERCENTAGE (%)', value:'attendance_percentage'},
 ],
 levels: [
   'Level 1', 'Level 2', 'Level 3'
@@ -329,6 +331,7 @@ courses: [
 export const viewMentorGroups = {
   headers: [
     { text: 'Registration Number', align: 'start',  value: 'registration_no'},
+    { text: 'Level', value: 'level'},
     { text: 'Student Name', value: 'student_name'},
     { text: 'Receiving Mahapola?', value: 'hasMahapola'},
 ],
@@ -374,7 +377,7 @@ students: [
 headers: [
     { text: 'Registration Number', align: 'start',  value: 'registration_no'},
     { text: 'Name', value: 'student_name'},
-    { text: 'Attendance Percentage', value: 'percentage'},
+    { text: 'Attendance Percentage (%)', value: 'percentage'},
     { text: 'Send alert', value:'actions'}
 ]
 }

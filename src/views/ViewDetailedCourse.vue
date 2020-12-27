@@ -19,7 +19,7 @@
                             <p>Attendance Percentage :</p>
                         </v-col>
                         <v-col>
-                            <v-chip>{{course.percentage}}</v-chip>
+                            <v-chip>{{course.percentage}}%</v-chip>
                         </v-col>
                     </v-row>
                     <v-row>
@@ -40,13 +40,14 @@
                     <v-row>
                         <v-spacer></v-spacer>
                         <v-spacer></v-spacer>
-                        <v-col>
+                        <v-col md="3">
                             <v-btn 
                                 class="primary"
                                 @click="regbtn">
                                     view Registered Students
                             </v-btn>   
                         </v-col>
+                        <v-spacer></v-spacer>
                     </v-row>                        
                     <v-row align="center" justify="center">
                         <v-col cols="12" sm="8" md="8">

@@ -25,7 +25,7 @@
                     <v-spacer></v-spacer>
                 </v-row>
                 <v-row align="center" justify="center">
-                    <v-col cols="12" sm="8" md="8">
+                    <v-col cols="12" sm="8" md="10">
                         <v-card>
                             <v-card-title>
                                 <v-text-field

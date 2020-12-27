@@ -8,7 +8,7 @@
                 <v-card>
                     <v-card-title class="font-weight-medium"> 
                         <v-row>
-                            <v-col cols="14" sm="7" md="7">
+                            <v-col cols="12" sm="7" md="9">
                                 <v-row>
                                     <v-col>
                                         <p>Student Registration Number :</p>

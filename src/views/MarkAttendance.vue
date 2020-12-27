@@ -57,6 +57,7 @@
                   </v-col>                
                   <v-col md3 xs12>
                     <v-select 
+                      disabled
                       :items="v_select_level"
                       item-text="" 
                       item-value=""
@@ -144,17 +145,23 @@
                       Select Camera
                     </v-subheader>
                   </v-col>
-                  <v-col cols="3" >
+                  <v-col cols="5" >
+                    <v-select
+                      v-model="camera"   
+                      :items="devices"
+                      item-text="label"
+                      item-value="deviceId"
+                    > 
                     <!-- <v-select
                       v-model="camera"   
                       :items="devices"
-                      label="Optional"
+                      :label="Optional"
                       item-text="label"
                       item.value="deviceId"
                       placeholder="Select camera"
-                    > 
-                    </v-select> -->
-                    <select
+                    >  -->
+                    </v-select>
+                    <!-- <select
                       v-model="camera"
                     >
                     <option
@@ -164,7 +171,7 @@
                     >
                       <h6>{{ device.label }}</h6>
                     </option>
-                    </select>
+                    </select> -->
                   </v-col>
                 </v-row>
                 <v-row  align="center" justify="center">
@@ -233,7 +240,7 @@
                           </v-dialog>
                           <v-dialog v-model="dialogDelete" max-width="500px">
                             <v-card>
-                              <v-card-title class="headline">Are you sure you want to delete this item?</v-card-title>
+                              <v-card-title>Are you sure you want to remove this student?</v-card-title>
                               <v-card-actions>
                                 <v-spacer></v-spacer>
                                   <v-btn color="blue darken-1" text @click="closeDelete">Cancel</v-btn>
@@ -294,7 +301,7 @@
     
     <v-snackbar
     v-model="snackbar"
-    :timeout="2000">
+    :timeout="5000">
       {{ snackbarText }}
       <template v-slot:action="{ attrs }">
         <v-btn
@@ -347,6 +354,7 @@ export default {
       selectedType: null,
       selectedCourseCode: null,
       selectedLevel: null,
+      selectedCourse: null,
       courses: [{
         co_id: "",
         course_code: "",
@@ -514,6 +522,7 @@ export default {
 
     },
     async setRegisteredStudentData(){
+      console.log(this.devices);
       this.isLoading = true;
       // get registered student list for current course
       const course_code = this.selectedCourseCode || this.courses[0].course_code;
@@ -536,6 +545,7 @@ export default {
     },
     //stepper 1 on change methods
     changedType(event) {
+      console.log(event);
       if(event == 'Theory'){
         this.selectedType = 'theory';
       }else if(event == 'Practical'){
@@ -547,6 +557,10 @@ export default {
       this.selectedLevel = event;
     },
     changedCourseCode(event){
+      this.courses.forEach(course => {
+        if(course.course_code === event)
+          this.selectedCourse = course;
+      })
       this.selectedCourseCode = event;
     },
     //stepper 2 camera methods
