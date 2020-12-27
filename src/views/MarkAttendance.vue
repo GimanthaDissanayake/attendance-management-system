@@ -522,7 +522,7 @@ export default {
 
     },
     async setRegisteredStudentData(){
-      console.log(this.devices);
+      // console.log(this.devices);
       this.isLoading = true;
       // get registered student list for current course
       const course_code = this.selectedCourseCode || this.courses[0].course_code;
@@ -545,7 +545,7 @@ export default {
     },
     //stepper 1 on change methods
     changedType(event) {
-      console.log(event);
+      // console.log(event);
       if(event == 'Theory'){
         this.selectedType = 'theory';
       }else if(event == 'Practical'){
