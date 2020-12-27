@@ -220,7 +220,7 @@ export default {
         });
         this.TotalLectureAbsentCount = r4.data.count[0][0].count;
       }
-      else if(this.role === 'lecturer') {
+      else if(this.role === 'lecturer' || 'mentor') {
         //////// TO SET Lecturer COUNTERS ////////
         this.isLecturer = true;
 
