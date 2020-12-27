@@ -220,7 +220,7 @@ export default {
         });
         this.TotalLectureAbsentCount = r4.data.count[0][0].count;
       }
-      else if(this.role === 'lecturer' || 'mentor') {
+      else if(this.role === 'lecturer') {
         //////// TO SET Lecturer COUNTERS ////////
         this.isLecturer = true;
 
@@ -235,21 +235,21 @@ export default {
         });
         this.TotalConducted = r2.data.count[0][0].count;
       }
-      // else if(this.role === 'mentor') {
-      //   //////// TO SET Lecturer COUNTERS ////////
-      //   this.isLecturer = true;
+      else if(this.role === 'mentor') {
+        //////// TO SET Lecturer COUNTERS ////////
+        this.isLecturer = true;
 
-      //   //total course units conducting current year
-      //   const r1 = await axios.post(process.env.VUE_APP_BACKEND_SERVER + "/api/student/total_courses/",{
-      //       username
-      //   });
-      //   this.TotalCoursesTeaching = r1.data.count[0][0].count;
-      //   //total conducted lecture sessions
-      //   const r2 = await axios.post(process.env.VUE_APP_BACKEND_SERVER + "/api/student/total_conducted/",{
-      //       username
-      //   });
-      //   this.TotalConducted = r2.data.count[0][0].count;
-      // }
+        //total course units conducting current year
+        const r1 = await axios.post(process.env.VUE_APP_BACKEND_SERVER + "/api/student/total_courses/",{
+            username
+        });
+        this.TotalCoursesTeaching = r1.data.count[0][0].count;
+        //total conducted lecture sessions
+        const r2 = await axios.post(process.env.VUE_APP_BACKEND_SERVER + "/api/student/total_conducted/",{
+            username
+        });
+        this.TotalConducted = r2.data.count[0][0].count;
+      }
       else if(this.role === 'hod') {
         //////// TO SET Lecturer COUNTERS ////////
         this.isLecturer = true;
@@ -267,7 +267,6 @@ export default {
 
         //////// TO SET HOD COUNTERS ////////
         this.isHOD = true;
-        
         //total courses offered by department
         const r3 = await axios.post(process.env.VUE_APP_BACKEND_SERVER + "/api/student/total_dep_courses/",{
           username
