@@ -203,6 +203,7 @@ import { registerUsers } from "../data/data";
             this.e1 = 1;
             this.image = null;
             this.imageFile = null;
+            this.$router.push("/registerUsers");
           }
           else {
             this.snackbarText = 'There was a Problem Saving the Image!';

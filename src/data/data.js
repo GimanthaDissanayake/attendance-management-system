@@ -8,7 +8,7 @@ export const navBar = {
         { title: 'Mahapola Eligibility', icon: 'mdi-cash', path: '/viewMahapolaEligibility', access: ['student','yes']},
         { title: 'View All Students', icon: 'mdi-account', path: '/viewAllStudents', access: ['hod','yes']},
         { title: 'View All Courses', icon: 'mdi-school-outline', path: '/viewAllCourses', access: ['hod','yes']},
-        { title: 'Register Students', icon: 'mdi-account', path: '/RegisterUsers', access: ['admin','yes']},
+        { title: 'Register Students', icon: 'mdi-account', path: '/registerUsers', access: ['admin','yes']},
         { title: 'Mahapola Duration', icon: 'mdi-calendar-edit', path: '/setMahapolaDuration', access: ['admin','yes']},
     ]
 };

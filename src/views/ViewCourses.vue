@@ -127,7 +127,7 @@ import { viewCourses } from "../data/data";
           const result = await axios.post(process.env.VUE_APP_BACKEND_SERVER + "/api/student/courses/",{
             registration_no,
           });
-          //console.log(result.data);
+          console.log(result.data.courses);
           this.courses = result.data.courses;
         } else if (user.role != "admin") {
           const lecturer_id = user.username;
