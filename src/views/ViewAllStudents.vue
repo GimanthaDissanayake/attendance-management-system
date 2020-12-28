@@ -1,7 +1,7 @@
 <template>
   <v-container>
       <v-row>
-        <p class='text-h5'>View All Students</p>  
+        <p class='text-h5'>All Students</p>  
       </v-row> 
     <v-row>
         <v-col>

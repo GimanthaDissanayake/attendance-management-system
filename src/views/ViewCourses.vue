@@ -1,7 +1,8 @@
 <template>
   <v-container>
     <v-row>
-      <p class='text-h5'>My Courses</p>  
+      <p class='text-h5' v-if="!notStudent">My Courses</p>  
+      <p class='text-h5' v-if="notStudent">{{student}}'s' Courses</p> 
     </v-row>    
     <v-row>
       <v-col>
@@ -83,6 +84,8 @@ import { viewCourses } from "../data/data";
   export default {
     data () {
       return {
+        notStudent: false,
+        student: '',
         showYear: false,
         isLoading: true,
         search: '',
@@ -110,6 +113,8 @@ import { viewCourses } from "../data/data";
         const student = this.getStudent();
 
         if(this.$store.state.selectedStudent){
+          this.notStudent = true;
+          this.student = student.registration_no;
           const registration_no = student.registration_no;
           const result = await axios.post(process.env.VUE_APP_BACKEND_SERVER + "/api/student/courses/",{
             registration_no,
