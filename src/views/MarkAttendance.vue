@@ -412,10 +412,9 @@ export default {
       //console.log(result);
       //stepper 3
       // get courses list of the current lecturer
-      const res = await axios.post(process.env.VUE_APP_BACKEND_SERVER + "/api/course/lecturer_id/",{
+      const res = await axios.post(process.env.VUE_APP_BACKEND_SERVER + "/api/course/lecturer_id_current/",{
           lecturer_id,
       });
-
       //course codes conduct by current lecturer
       this.v_select_course_codes = res.data.courses;
 

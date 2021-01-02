@@ -57,6 +57,8 @@
               loading="isLoading"
               :headers="headers"
               :items="filteredCourses"
+              sort-by="year"
+              :sort-desc="[true]"
               :items-per-page="10"
               :search="search"
               v-on:click:row="selectCourse"
@@ -175,7 +177,6 @@ import { viewCourses } from "../data/data";
     },
     async mounted(){
         try {
-            console.log('hello');
             this.getCourses().then(() => {
             this.resetYear();
             this.isLoading = false;

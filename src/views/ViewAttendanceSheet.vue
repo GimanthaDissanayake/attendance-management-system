@@ -116,7 +116,7 @@ export default {
             .then(ns => {
                 this.students = ns;
                 //count attendance percentage
-                this.percentage = (this.count/this.total)*100;
+                this.percentage = ((this.count/this.total)*100).toFixed(2);
             })
             .catch(err => {
                 console.log(err);

@@ -63,6 +63,7 @@
 
 <script>
 import axios from 'axios';
+import moment from 'moment';
 export default {
   data () {
     return {
@@ -103,10 +104,15 @@ export default {
     }
   },
   created() {
-    this.start_min = this.formatDate(new Date(new Date().getFullYear(), new Date().getMonth() - 1, 1));
-    this.start_max = this.formatDate(new Date(new Date().getFullYear(), new Date().getMonth() + 1, 0));
-    this.end_min = this.formatDate(new Date(new Date().getFullYear(), new Date().getMonth(), 1));    
-    this.end_max = this.formatDate(new Date(new Date().getFullYear(), new Date().getMonth() + 2, 0));
+    // console.log(moment(new Date).startOf('month').format('YYYY-MM-DD'));
+    // this.start_min = this.formatDate(new Date(new Date().getFullYear(), new Date().getMonth() - 1, 1));
+    this.start_min = moment(new Date).startOf('month').format('YYYY-MM-DD');
+    this.start_max = moment(new Date).endOf('month').format('YYYY-MM-DD');
+    this.end_min = this.start_min;
+    this.end_max = moment(this.start_max).add(1,'month').format('YYYY-MM-DD');
+    // this.start_max = this.formatDate(new Date(new Date().getFullYear(), new Date().getMonth() + 1, 0));
+    // this.end_min = this.formatDate(new Date(new Date().getFullYear(), new Date().getMonth(), 1));    
+    // this.end_max = this.formatDate(new Date(new Date().getFullYear(), new Date().getMonth() + 2, 0));
   }
 }
 </script>

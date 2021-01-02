@@ -58,6 +58,8 @@
               loading="isLoading"
               :headers="headers"
               :items="filteredCourses"
+              sort-by="year"
+              :sort-desc="[true]"
               :items-per-page="5"
               :search="search"
               v-on:click:row="selectCourse"
@@ -127,7 +129,7 @@ import { viewCourses } from "../data/data";
           const result = await axios.post(process.env.VUE_APP_BACKEND_SERVER + "/api/student/courses/",{
             registration_no,
           });
-          console.log(result.data.courses);
+          // console.log(result.data.courses);
           this.courses = result.data.courses;
         } else if (user.role != "admin") {
           const lecturer_id = user.username;
