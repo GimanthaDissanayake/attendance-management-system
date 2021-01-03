@@ -279,7 +279,7 @@
                   </v-col>
                   <v-col>
                     <v-btn
-                    @click="e1=2">
+                    @click="backButton">
                       Previous
                     </v-btn>
                   </v-col>
@@ -414,7 +414,11 @@ export default {
       // get courses list of the current lecturer
       const res = await axios.post(process.env.VUE_APP_BACKEND_SERVER + "/api/course/lecturer_id_current/",{
           lecturer_id,
-      });
+      },{
+            headers: {
+              'Authorization' : 'Bearer ' + token
+            }
+          });
       //course codes conduct by current lecturer
       this.v_select_course_codes = res.data.courses;
 
@@ -521,13 +525,18 @@ export default {
 
     },
     async setRegisteredStudentData(){
+      const token = this.getToken();
       // console.log(this.devices);
       this.isLoading = true;
       // get registered student list for current course
       const course_code = this.selectedCourseCode || this.courses[0].course_code;
       const registeredStudentResult = await axios.post(process.env.VUE_APP_BACKEND_SERVER + "/api/student/course_code/",{
           course_code,
-      });
+      },{
+            headers: {
+              'Authorization' : 'Bearer ' + token
+            }
+          });
       //console.log(registeredStudentResult);
       //return registered students
       this.registeredStudents = registeredStudentResult.data.students;
@@ -681,7 +690,12 @@ export default {
         this.editedIndex = -1
       })
     },
+    backButton() {
+      this.absentStudents = [];
+      this.e1=2;
+    },
     async uploadAttendance () {
+      const token = this.getToken();
       this.isLoading = true;
       const course_code = this.selectedCourseCode || this.courses[0].course_code;
       const type = this.selectedType || this.courses[0].type;
@@ -700,7 +714,11 @@ export default {
       type,
       registration_nos,
       absent_ids
-      })
+      },{
+            headers: {
+              'Authorization' : 'Bearer ' + token
+            }
+          })
       .then(result => {
         this.snackbar = true;
         if(result.data.message==='success'){

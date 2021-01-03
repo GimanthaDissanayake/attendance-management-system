@@ -97,6 +97,7 @@ import { mapGetters} from "vuex";
 export default {
     data () {
         return {  
+            token: '',
             student: [],
             course:[],
             receiver: 'student',
@@ -113,7 +114,7 @@ export default {
         ...mapGetters(["getCourse"]),
         ...mapGetters(["getUser"]),
         async setData() {
-            const token = this.getToken();
+            this.token = this.getToken();
             this.student = this.getStudent();
             this.course = this.getCourse();
             this.user = this.getUser();
@@ -141,7 +142,11 @@ export default {
                 userId,
                 receiver,
                 username
-            })
+            },{
+            headers: {
+              'Authorization' : 'Bearer ' + this.token
+            }
+          })
             .then(result => {
                
                 this.snackbar = true;

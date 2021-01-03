@@ -64,14 +64,22 @@ export default {
             const result = await axios.post(process.env.VUE_APP_BACKEND_SERVER + "/api/course/timetable/",{
             id,
             role
-            });
+            },{
+            headers: {
+              'Authorization' : 'Bearer ' + token
+            }
+        });
             this.events = result.data.courses;  
             
             if(user.role === "student"){
             const registration_no = user.username;
             const result = await axios.post(process.env.VUE_APP_BACKEND_SERVER + "/api/student/courses/",{
                 registration_no,
-            });
+            },{
+            headers: {
+              'Authorization' : 'Bearer ' + token
+            }
+        });
             this.courses = result.data.courses;
             //console.log(this.courses)
             // else{

@@ -159,7 +159,11 @@ import { registerUsers } from "../data/data";
       async getStudents() {
         this.isLoading = true;
         const token = this.getToken();
-        const allStudents = await axios.get(process.env.VUE_APP_BACKEND_SERVER + "/api/student/everyone/");
+        const allStudents = await axios.get(process.env.VUE_APP_BACKEND_SERVER + "/api/student/everyone/",{
+            headers: {
+              'Authorization' : 'Bearer ' + token
+            }
+          });
 
         const registeredStudents = await axios.get(process.env.VUE_APP_FLASK_SERVER + "/registered");
 

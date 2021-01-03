@@ -64,6 +64,7 @@
 <script>
 import axios from 'axios';
 import moment from 'moment';
+import { mapGetters} from "vuex";
 export default {
   data () {
     return {
@@ -79,6 +80,7 @@ export default {
     }
   },
   methods: {
+    ...mapGetters(["getToken"]),
     formatDate(date) {
       var [month, date, year] = date.toLocaleDateString().split('/')
       if(date<10)
@@ -86,12 +88,17 @@ export default {
       return `${year}-${month}-${date}`;
     },
     async setDate() {
+      const token = this.getToken();
       let start_date = this.start_date;
       let end_date = this.end_date;
       await axios.post(process.env.VUE_APP_BACKEND_SERVER + "/api/admin/mahapola/",{
         start_date,
         end_date
-      }).then(result => {
+      },{
+            headers: {
+              'Authorization' : 'Bearer ' + token
+            }
+        }).then(result => {
         if(result.status==200) {
           this.text='Mahapola Duration Successfully Set !';
           this.snackbar = true;

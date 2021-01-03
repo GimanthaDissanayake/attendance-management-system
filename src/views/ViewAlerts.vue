@@ -70,6 +70,10 @@
         const receiver_id = user.username;
         return await axios.post(process.env.VUE_APP_BACKEND_SERVER + "/api/alert/receiver_id_Old/",{
           receiver_id,
+        },{
+            headers: {
+              'Authorization' : 'Bearer ' + token
+            }
         })
         .then(async result => {
           const alertData = result.data.alert;
@@ -90,6 +94,10 @@
         const receiver_id = user.username;
         return await axios.post(process.env.VUE_APP_BACKEND_SERVER + "/api/alert/receiver_id_New/",{
           receiver_id,
+        },{
+            headers: {
+              'Authorization' : 'Bearer ' + token
+            }
         })
         .then(async result => {
           const alertData = result.data.alert;
@@ -108,12 +116,17 @@
         });
       },
       async panelClick(item){
+        const token = this.getToken();
         const user = this.getUser();
         const username = user.username;
         const alert_id = item.alert_id;
         
         await axios.post(process.env.VUE_APP_BACKEND_SERVER + "/api/alert/reset_read/",{
           username,alert_id
+        },{
+            headers: {
+              'Authorization' : 'Bearer ' + token
+            }
         })
          try {
         this.setMessage1();

@@ -120,6 +120,10 @@ import { viewCourses } from "../data/data";
           const registration_no = student.registration_no;
           const result = await axios.post(process.env.VUE_APP_BACKEND_SERVER + "/api/student/courses/",{
             registration_no,
+          },{
+            headers: {
+              'Authorization' : 'Bearer ' + token
+            }
           });
           this.courses = result.data.courses;
         }
@@ -128,6 +132,10 @@ import { viewCourses } from "../data/data";
           const registration_no = user.username;
           const result = await axios.post(process.env.VUE_APP_BACKEND_SERVER + "/api/student/courses/",{
             registration_no,
+          },{
+            headers: {
+              'Authorization' : 'Bearer ' + token
+            }
           });
           // console.log(result.data.courses);
           this.courses = result.data.courses;
