@@ -88,9 +88,15 @@ export default {
         ...mapMutations(["setSelectedDate"]),
         async setReg(){
             this.course = this.getCourse();
+            // console.log(this.course);
+            //this.course.percentage = this.course.percentage.toFixed(2);
+            // this.course = this.course.map(c => {
+            //     c.percentage = (c.attendance_percentage).toFixed(2);
+            //     return c;
+            // })
             const course_code = this.course.course_code;
             const co_id = this.course.co_id;
-            //console.log(this.course)
+            // console.log(this.course);
             return await axios.post(process.env.VUE_APP_BACKEND_SERVER + "/api/student/course_code/",{
              course_code,
              })

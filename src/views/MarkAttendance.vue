@@ -216,7 +216,7 @@
                   </v-col>
                   <v-spacer></v-spacer>
                   <v-col>
-                    Attendance percentage : {{ (presentStudents / registeredStudentsLength ) * 100  }} %
+                    Attendance percentage : {{ ((presentStudents / registeredStudentsLength ) * 100).toFixed(2)  }} %
                   </v-col> 
                 </v-row>
                 <br>
@@ -301,7 +301,7 @@
     
     <v-snackbar
     v-model="snackbar"
-    :timeout="5000">
+    :timeout="10000">
       {{ snackbarText }}
       <template v-slot:action="{ attrs }">
         <v-btn
